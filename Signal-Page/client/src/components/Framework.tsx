@@ -65,7 +65,7 @@ export function Framework() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
-              className="group p-8 bg-background rounded-xl border border-border hover:border-primary/20 hover:shadow-xl hover:shadow-black/5 transition-all duration-300"
+              className="group p-8 bg-background rounded-xl border border-border hover:border-primary/20 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-300"
             >
               <div className="flex items-start justify-between mb-6">
                 <div className="w-12 h-12 bg-white rounded-lg border border-black/5 flex items-center justify-center shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
