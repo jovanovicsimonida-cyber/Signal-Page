@@ -1,0 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Design Palette: 
+     Background: #EBEAE8 (Light Beige/Gray)
+     Text: #1A1A1A (Black)
+     Accent: #333333 (Dark Gray)
+  */
+  
+  --font-body: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+
+  --background: 40 5% 92%;      /* #EBEAE8 - Light beige/gray background */
+  --foreground: 0 0% 10%;       /* #1A1A1A - Nearly black text */
+  
+  --primary: 0 0% 20%;          /* #333333 - Dark accent for buttons/highlights */
+  --primary-foreground: 40 5% 92%; /* Matches background for contrast */
+  
+  --secondary: 0 0% 100%;       /* White for cards */
+  --secondary-foreground: 0 0% 10%;
+  
+  --muted: 40 5% 85%;           /* Slightly darker beige for borders/dividers */
+  --muted-foreground: 0 0% 40%;
+  
+  --accent: 0 0% 15%;           /* Even darker gray for hover states */
+  --accent-foreground: 40 5% 92%;
+  
+  --destructive: 0 84% 60%;
+  --destructive-foreground: 0 0% 98%;
+
+  --border: 0 0% 85%;
+  --input: 0 0% 90%;
+  --ring: 0 0% 20%;
+
+  --radius: 0.25rem;
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground antialiased selection:bg-primary selection:text-primary-foreground;
+    font-family: var(--font-body);
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-display);
+    @apply tracking-tight font-medium;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-background;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-primary/20 rounded-full hover:bg-primary/40 transition-colors;
+}
+
+/* Utility for text balance */
+.text-balance {
+  text-wrap: balance;
+}
