@@ -1,15 +1,21 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { insertContactSchema, type InsertContact } from "@shared/routes";
-import { useCreateContact } from "@/hooks/use-contact";
+import { z } from "zod";
+import { useCreateContact, type ContactFormData } from "@/hooks/use-contact";
 import { Loader2, Send } from "lucide-react";
 import { motion } from "framer-motion";
 
+const contactFormSchema = z.object({
+  name: z.string().min(1, "Name is required"),
+  email: z.string().email("Invalid email address"),
+  message: z.string().min(1, "Message is required"),
+});
+
 export function ContactForm() {
   const mutation = useCreateContact();
-  
-  const form = useForm<InsertContact>({
-    resolver: zodResolver(insertContactSchema),
+
+  const form = useForm<ContactFormData>({
+    resolver: zodResolver(contactFormSchema),
     defaultValues: {
       name: "",
       email: "",
@@ -17,7 +23,7 @@ export function ContactForm() {
     },
   });
 
-  const onSubmit = (data: InsertContact) => {
+  const onSubmit = (data: ContactFormData) => {
     mutation.mutate(data, {
       onSuccess: () => {
         form.reset();
