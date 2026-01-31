@@ -57,9 +57,12 @@ export function Solution() {
               No more guessing why trials don't convert.{" "}
               No more rewriting onboarding every quarter hoping something sticks.
             </p>
-            <p>
-              Instead → a system that knows where each user is, what they need next, and when to step in.
-            </p>
+            <div className="flex items-start gap-4 p-5 bg-white rounded-xl border border-border">
+              <ArrowRight className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+              <p className="text-foreground font-sans">
+                Instead → a system that knows where each user is, what they need next, and when to step in.
+              </p>
+            </div>
             <p className="text-2xl font-bold text-primary font-serif">
               That's what SIGNAL builds.
             </p>
