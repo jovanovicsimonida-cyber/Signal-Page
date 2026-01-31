@@ -53,15 +53,6 @@ export function Hero() {
           </motion.div>
 
         </div>
-
-        <motion.p
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.6, delay: 0.6 }}
-          className="mt-16 text-sm text-muted-foreground/60 font-sans italic"
-        >
-          That's what it should look like, but in reality...
-        </motion.p>
       </div>
     </section>
   );
