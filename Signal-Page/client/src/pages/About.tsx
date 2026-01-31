@@ -45,12 +45,17 @@ export default function About() {
               <p>
                 Your users are always switching from something.
               </p>
-              <p>
-                Sometimes it's a direct competitor. Sometimes it's spreadsheets, patchwork processes, or a half-broken internal workflow they've tolerated for too long. Either way, "trying your tool" only turns into "using your tool" when they believe the switch is worth it.
+              <p>Sometimes it's a direct competitor.</p>
+              <p>Sometimes it's spreadsheets, patchwork processes, or a half-broken internal workflow they've tolerated for too long.</p>
+              <p>Either way, "trying your tool" only turns into "using your tool" when they believe the switch is worth it.</p>
+              <p className="font-semibold text-foreground">
+                That switch has a cost.
               </p>
-              <p>
-                That switch has a cost. Time. Effort. Risk. Fear of messing something up. Fear of picking the wrong tool and having to switch again.
-              </p>
+              <p>Time.</p>
+              <p>Effort.</p>
+              <p>Risk.</p>
+              <p>Fear of messing something up.</p>
+              <p>Fear of picking the wrong tool and having to switch again.</p>
               <p>
                 So a trial-to-paid sequence can't just educate. It has to reduce switching friction.
               </p>
@@ -78,8 +83,11 @@ export default function About() {
               <p>
                 And once the path is clear, your lifecycle messaging gets simpler.
               </p>
+              <p className="text-xl font-semibold text-foreground">
+                That's also why you can't skip the audit.
+              </p>
               <p>
-                That's also why you can't skip the audit. Before we touch a single email, we need to understand what your product is actually being hired to do. What job users show up trying to complete, what "done" looks like to them, and what they need to see and do inside the trial to feel confident paying.
+                Before we touch a single email, we need to understand what your product is actually being hired to do. What job users show up trying to complete, what "done" looks like to them, and what they need to see and do inside the trial to feel confident paying.
               </p>
             </div>
           </motion.div>
