@@ -11,6 +11,10 @@ export function Problem() {
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
+          <p className="text-lg text-muted-foreground font-sans italic">
+            That's what it should look like, but in reality...
+          </p>
+
           <h2 className="text-3xl md:text-4xl font-bold text-primary">
             The signups are there. The upgrades aren't.
           </h2>
