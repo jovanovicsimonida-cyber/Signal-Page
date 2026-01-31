@@ -7,17 +7,7 @@ import profilePhoto from "@assets/website-image.png";
 
 export default function About() {
   const goToContact = () => {
-    window.location.assign("/");
-    // Wait for navigation, then scroll to contact
-    const checkAndScroll = () => {
-      const el = document.getElementById("contact");
-      if (el) {
-        el.scrollIntoView({ behavior: "smooth" });
-      } else {
-        setTimeout(checkAndScroll, 100);
-      }
-    };
-    setTimeout(checkAndScroll, 300);
+    window.location.href = "/#contact";
   };
 
   return (
