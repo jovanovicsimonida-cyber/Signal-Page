@@ -1,0 +1,38 @@
+# robots.txt for signallifecycle.com
+
+User-agent: *
+Allow: /
+
+# AI Crawlers — Welcome
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Anthropic-AI
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Cohere-AI
+Allow: /
+
+# Sitemap
+Sitemap: https://signallifecycle.com/sitemap.xml
+
+# LLMs
+# See https://signallifecycle.com/llms.txt for AI-readable site information

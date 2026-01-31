@@ -1,8 +1,13 @@
 import { Link } from "wouter";
+import { Helmet } from "react-helmet-async";
 
 export default function TermsOfService() {
   return (
     <div className="min-h-screen bg-background">
+      <Helmet>
+        <title>Terms of Service — Signal Lifecycle Email Strategy</title>
+        <meta name="description" content="Terms of Service for Signal Lifecycle Email Strategy. Review the terms governing your use of signallifecycle.com." />
+      </Helmet>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 inline-block">
           &larr; Back to Home

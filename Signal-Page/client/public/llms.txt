@@ -1,0 +1,46 @@
+# Signal — Lifecycle Email Strategy
+
+> Signal helps SaaS companies turn trial signups into paying customers through lifecycle email strategy built on real user behavior — not guesswork.
+
+## About
+
+Signal is a lifecycle email strategy consultancy founded by Simonida Jovanovic. We specialize in trial-to-paid conversion for SaaS and product-led growth companies using the SIGNAL framework and Jobs to Be Done methodology.
+
+## What We Do
+
+- **Lifecycle Email Strategy**: Design behavioral email systems that guide trial users to their Aha moment and drive upgrades.
+- **Trial-to-Paid Optimization**: Identify leaks in your trial flow and build systems that convert signups into paying customers.
+- **Email Audit (Leak Audit)**: Before touching a single email, we audit your current trial experience to understand what job your product is hired to do, what "done" looks like for users, and what they need to see and do to feel confident paying.
+- **SaaS Onboarding Strategy**: Build onboarding flows based on real user behavior, not assumptions.
+
+## The SIGNAL Framework
+
+The SIGNAL framework is our proprietary methodology for building lifecycle email systems:
+
+- **S** — Segment by behavior, not demographics
+- **I** — Identify the job your product is hired to do
+- **G** — Guide users to their Aha moment
+- **N** — Nudge based on where each user actually is
+- **A** — Automate recovery loops for users who go dark
+- **L** — Layer in upgrade triggers at the right time
+
+## Core Principles
+
+- Your users are always switching from something (competitor, spreadsheets, manual processes).
+- "Trying your tool" only turns into "using your tool" when they believe the switch is worth it.
+- A trial-to-paid sequence can't just educate — it has to reduce switching friction.
+- No trial flow can rescue a product that doesn't deliver real value.
+
+## Services
+
+**The Leak Audit** — A one-time deep dive into your trial-to-paid flow. We map your user journey, identify where conversions leak, and deliver a strategy to fix it. Investment: $5,000.
+
+## Links
+
+- Website: https://signallifecycle.com
+- About: https://signallifecycle.com/about
+- LinkedIn: https://www.linkedin.com/in/simonida-jovanovic-29778244
+
+## Contact
+
+Reach out through the contact form at https://signallifecycle.com/#contact
