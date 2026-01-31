@@ -24,22 +24,25 @@ export function Fit() {
           </h2>
 
           <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
-            <p>
-              You're running a SaaS or product-led company with a trial.
-              Users sign up. Some convert. Most don't. You're not totally sure why.
-            </p>
+            <div className="space-y-1">
+              <p>You're running a SaaS or product-led company with a trial.</p>
+              <p>Users sign up.</p>
+              <p>Some convert.</p>
+              <p>Most don't.</p>
+              <p>You're not totally sure why.</p>
+            </div>
 
-            <p>
-              Maybe you're post–Series A, trying to make revenue feel less random.
-              You've got a Day 1 / Day 3 / Day 7 drip running.
-              You don't know what's actually moving the needle.
-            </p>
+            <div className="space-y-1">
+              <p>Maybe you're post–Series A, trying to make revenue feel less random.</p>
+              <p>You've got a Day 1 / Day 3 / Day 7 drip running.</p>
+              <p>You don't know what's actually moving the needle.</p>
+            </div>
 
-            <p>
-              Or maybe you're further along, post–Series E, plenty of tools, plenty of data, but the flows feel stitched together.
-              Product, Growth, and Lifecycle have different definitions of "activation."
-              You're improving things, but it's slow and noisy.
-            </p>
+            <div className="space-y-1">
+              <p>Or maybe you're further along, post–Series E, plenty of tools, plenty of data, but the flows feel stitched together.</p>
+              <p>Product, Growth, and Lifecycle have different definitions of "activation."</p>
+              <p>You're improving things, but it's slow and noisy.</p>
+            </div>
 
             <p>
               Either way, same problem: <span className="text-foreground font-medium">users stall before they see value, and you don't have a system that catches them.</span>
