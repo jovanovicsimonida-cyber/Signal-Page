@@ -122,10 +122,7 @@ export function ContactForm() {
                   Sending...
                 </>
               ) : (
-                <>
-                  Let's talk
-                  <Send className="w-5 h-5" />
-                </>
+                "Let's talk"
               )}
             </button>
           </form>
