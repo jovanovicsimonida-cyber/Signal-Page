@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, User } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import profilePhoto from "@assets/website-image.png";
@@ -93,8 +93,13 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-primary p-8 md:p-12 rounded-2xl shadow-2xl"
+            className="bg-primary p-8 md:p-12 rounded-2xl shadow-2xl relative overflow-hidden group"
           >
+            <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
+              <User className="w-64 h-64 text-white" />
+            </div>
+
+            <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">What You Should Know About Me</h2>
 
             <div className="flex flex-col md:flex-row gap-8 mb-8">
@@ -142,11 +147,12 @@ export default function About() {
             <div className="mt-8">
               <button
                 onClick={goToContact}
-                className="px-8 py-4 bg-white text-primary rounded-sm font-semibold text-lg hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-300 inline-flex items-center gap-2 group lowercase"
+                className="px-8 py-4 bg-white text-primary rounded-sm font-semibold text-lg hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-300 inline-flex items-center gap-2 lowercase"
               >
                 start with the leak audit
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5" />
               </button>
+            </div>
             </div>
           </motion.div>
         </div>
