@@ -20,19 +20,19 @@ export function Problem() {
           </h2>
 
           <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
-            <p>
-              You've built something good.{" "}
-              People sign up.{" "}
-              They poke around.{" "}
-              Some of them even start getting value.
-            </p>
+            <div className="space-y-1">
+              <p>You've built something good.</p>
+              <p>People sign up.</p>
+              <p>They poke around.</p>
+              <p>Some of them even start getting value.</p>
+            </div>
 
-            <p>
-              And then... nothing.{" "}
-              Trial expires.{" "}
-              No upgrade.{" "}
-              <span className="text-foreground font-medium">Gone.</span>
-            </p>
+            <div className="space-y-1">
+              <p>And then... nothing.</p>
+              <p>Trial expires.</p>
+              <p>No upgrade.</p>
+              <p><span className="text-foreground font-medium">Gone.</span></p>
+            </div>
 
             <p>
               You're left staring at the dashboard wondering what went wrong.
@@ -46,11 +46,11 @@ export function Problem() {
               The user who connected their Stripe and imported real data gets the same Day 3 email as the one who logged in once and never came back.
             </p>
 
-            <p>
-              One of them is ready to buy.{" "}
-              The other forgot you exist.{" "}
-              And you're talking to both of them the same way.
-            </p>
+            <div className="space-y-1">
+              <p>One of them is ready to buy.</p>
+              <p>The other forgot you exist.</p>
+              <p>And you're talking to both of them the same way.</p>
+            </div>
 
             <p className="text-2xl font-bold text-primary font-serif">
               That's the leak.
