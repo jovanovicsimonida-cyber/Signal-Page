@@ -22,17 +22,17 @@ export function Navigation() {
           </div>
           
           <div className="hidden md:flex items-center gap-8">
-            <button 
+            <button
               onClick={() => document.getElementById('framework')?.scrollIntoView({ behavior: 'smooth' })}
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
             >
-              The Framework
+              Framework
             </button>
-            <button 
-              onClick={() => document.getElementById('offer')?.scrollIntoView({ behavior: 'smooth' })}
+            <button
+              onClick={() => document.getElementById('audit')?.scrollIntoView({ behavior: 'smooth' })}
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
             >
-              Services
+              Start Here
             </button>
             <button
               onClick={scrollToContact}

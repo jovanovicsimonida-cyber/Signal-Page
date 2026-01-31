@@ -5,43 +5,43 @@ const steps = [
   {
     letter: "S",
     title: "Segment",
-    subtitle: "Turn a messy user base into clear, actionable cohorts",
-    description: "I break them into real journeys you can act on: trial, onboarding, activated, dormant, churned. Identify where your users are in their journey.",
+    subtitle: "Your users aren't one group. Stop emailing them like they are.",
+    description: "Someone who finished onboarding and someone who never logged in again need completely different messages. Segmentation means knowing who's where, and building cohorts you can actually do something with.",
     icon: Target,
   },
   {
     letter: "I",
     title: "Interpret",
-    subtitle: "See what your users’ behavior is actually telling you",
-    description: "Instead of guessing why people drop off, we dig into product usage, engagement, and CRM data to spot friction points where good users stall.",
+    subtitle: "What are users telling you with their behavior?",
+    description: "Which actions lead to upgrades? Where do good users get stuck? Why do some people fly through onboarding while others stall on step two? This stage turns raw event data into something you can use.",
     icon: Search,
   },
   {
     letter: "G",
     title: "Generate",
-    subtitle: "Design flows that nudge users to the next meaningful action",
-    description: "Before a single email is written, we map the flow logic: triggers, entry/exit, and the exact path from “just signed up” to “paid and getting value.”",
+    subtitle: "Design the flow before you write the words.",
+    description: "What triggers the first email? What stops it from sending if they already upgraded? What happens if they stall on day four? Most teams skip this step, then wonder why their sequences feel duct-taped together.",
     icon: Network,
   },
   {
     letter: "N",
     title: "Nurture",
-    subtitle: "Build relationships, not just send sequences",
-    description: "A tone that sounds like you, not a template. A cadence that feels helpful, not pushy. Content that adds value, educates, and builds trust over time.",
+    subtitle: "Write like a human who wants them to succeed.",
+    description: "Your emails finally sound like they came from a person who actually uses the product, and wants the reader to get something out of it too.",
     icon: Heart,
   },
   {
     letter: "A",
     title: "Automate",
-    subtitle: "Let the right messages fire at the right moment",
-    description: "Behind the scenes, we handle rules, triggers, data sync, and deliverability hygiene so you’re not babysitting automations.",
+    subtitle: "Set the rules so the system runs itself.",
+    description: "Triggers, suppressions, cooldowns, \"stop if paid\" logic — handled. You shouldn't have to check whether emails are firing correctly. They just do.",
     icon: Zap,
   },
   {
     letter: "L",
     title: "Learn",
-    subtitle: "Keep lifting retention instead of guessing in the dark",
-    description: "Track activation, retention, and expansion for each cohort. Test new hypotheses and feed what works back into your segmentation and copy.",
+    subtitle: "Measure what matters and keep improving.",
+    description: "Which cohorts convert best? Which Reverb nudges actually bring users back? What's worth testing next? This is where the system stops being static and starts compounding.",
     icon: BarChart3,
   },
 ];
@@ -51,10 +51,10 @@ export function Framework() {
     <section id="framework" className="py-24 bg-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-16">
-          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-6">
-            The SIGNAL Framework
+          <h2 className="text-4xl md:text-5xl font-bold text-primary mb-4">
+            Six stages from signup to paid
           </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-sans">Stop guessing what to send next and build a lifecycle that systematically increases activation, retention, and LTV.</p>
+          <p className="text-lg text-muted-foreground max-w-2xl mx-auto font-sans">SIGNAL is the method behind the system.</p>
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -75,7 +75,7 @@ export function Framework() {
                   {step.letter}
                 </span>
               </div>
-              
+
               <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
                 {step.title}
               </h3>
@@ -94,8 +94,9 @@ export function Framework() {
           <div className="flex justify-center mb-8">
             <div className="w-px h-12 bg-gradient-to-b from-primary/30 to-transparent"></div>
           </div>
-          
+
           <div className="text-center mb-8">
+            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2">The save that fires before the trial dies</h3>
             <p className="text-sm font-bold uppercase tracking-widest text-primary/60 font-sans">
               SIGNAL builds the path. REVERB keeps users on it when they drift.
             </p>
@@ -113,7 +114,7 @@ export function Framework() {
             </div>
 
             <div className="relative z-10">
-              <div className="flex items-center gap-4 mb-8">
+              <div className="flex items-center gap-4 mb-4">
                 <div className="w-12 h-12 bg-white/10 rounded-lg flex items-center justify-center backdrop-blur-sm border border-white/20">
                   <RefreshCw className="w-6 h-6 text-white" />
                 </div>
@@ -122,31 +123,33 @@ export function Framework() {
                     REVERB Micro-Loops
                   </h3>
                   <p className="text-white/70 font-sans font-medium">
-                    Recover stalls before the trial dies.
+                    A set of micro-loops that fire when a user stalls, before the trial dies.
                   </p>
                 </div>
               </div>
+
+              <p className="text-white/60 font-sans text-sm mb-8">How it works:</p>
 
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-white/40 font-sans">Trigger</span>
-                    <p className="text-white font-medium">The stall signal (no key action, skipped step, repeated failure, low engagement).</p>
+                    <p className="text-white font-medium">A stall signal fires: no key action taken, skipped step, repeated failure, drop in engagement.</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-white/40 font-sans">Nudge</span>
-                    <p className="text-white font-medium">The next step in plain language.</p>
+                    <p className="text-white font-medium">The user gets the next step in plain language. No fluff.</p>
                   </div>
                 </div>
 
                 <div className="space-y-4">
                   <div className="flex flex-col gap-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-white/40 font-sans">Shortcut</span>
-                    <p className="text-white font-medium">Template, example, quick-start, or “do this in 2 minutes” path.</p>
+                    <p className="text-white font-medium">A template, example, quick-start guide, or "do this in 2 minutes" path reduces friction.</p>
                   </div>
                   <div className="flex flex-col gap-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-white/40 font-sans">Escalation</span>
-                    <p className="text-white font-medium">Reply-to get help, concierge assist, or book a quick call, only when needed.</p>
+                    <p className="text-white font-medium">If they're still stuck: reply-to support, concierge assist, or a quick call. Only when needed.</p>
                   </div>
                 </div>
 
@@ -154,7 +157,7 @@ export function Framework() {
                   <div className="flex flex-col gap-2">
                     <span className="text-xs font-bold uppercase tracking-widest text-white/40 font-sans">Result</span>
                     <p className="text-lg font-bold text-white leading-tight">
-                      Fewer silent trials, faster time-to-value, more upgrades without discounts.
+                      Fewer silent trials. Faster time-to-value. More upgrades without discounts.
                     </p>
                   </div>
                 </div>

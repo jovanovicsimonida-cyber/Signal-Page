@@ -8,7 +8,8 @@ import { motion } from "framer-motion";
 const contactFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid email address"),
-  message: z.string().min(1, "Message is required"),
+  conversionRate: z.string().min(1, "Please provide a rough estimate"),
+  espTool: z.string().min(1, "Please tell us what tool you use"),
 });
 
 export function ContactForm() {
@@ -19,7 +20,8 @@ export function ContactForm() {
     defaultValues: {
       name: "",
       email: "",
-      message: "",
+      conversionRate: "",
+      espTool: "",
     },
   });
 
@@ -32,23 +34,20 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-white">
+    <section id="contact" className="py-24 bg-[#EBEAE8]">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
-            Ready to optimize your lifecycle emails?
+            Interested in the Audit? Tell me a bit about your trial.
           </h2>
-          <p className="text-muted-foreground text-lg font-sans">
-            Tell us about your product and current email strategy.
-          </p>
         </div>
 
-        <motion.div 
+        <motion.div
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-background p-8 md:p-10 rounded-2xl shadow-xl shadow-black/5 border border-border"
+          className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-black/5 border border-border"
         >
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-2">
@@ -58,7 +57,7 @@ export function ContactForm() {
               <input
                 {...form.register("name")}
                 id="name"
-                className="w-full px-4 py-3 rounded-lg bg-white border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
                 placeholder="Jane Doe"
               />
               {form.formState.errors.name && (
@@ -74,7 +73,7 @@ export function ContactForm() {
                 {...form.register("email")}
                 id="email"
                 type="email"
-                className="w-full px-4 py-3 rounded-lg bg-white border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
                 placeholder="jane@company.com"
               />
               {form.formState.errors.email && (
@@ -83,18 +82,32 @@ export function ContactForm() {
             </div>
 
             <div className="space-y-2">
-              <label htmlFor="message" className="text-sm font-semibold text-foreground font-sans uppercase tracking-wider">
-                Message
+              <label htmlFor="conversionRate" className="text-sm font-semibold text-foreground font-sans uppercase tracking-wider">
+                What's your current trial-to-paid conversion rate?
               </label>
-              <textarea
-                {...form.register("message")}
-                id="message"
-                rows={5}
-                className="w-full px-4 py-3 rounded-lg bg-white border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans resize-none"
-                placeholder="Tell us about your project..."
+              <input
+                {...form.register("conversionRate")}
+                id="conversionRate"
+                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                placeholder="Rough estimate is fine"
               />
-              {form.formState.errors.message && (
-                <p className="text-sm text-destructive font-medium">{form.formState.errors.message.message}</p>
+              {form.formState.errors.conversionRate && (
+                <p className="text-sm text-destructive font-medium">{form.formState.errors.conversionRate.message}</p>
+              )}
+            </div>
+
+            <div className="space-y-2">
+              <label htmlFor="espTool" className="text-sm font-semibold text-foreground font-sans uppercase tracking-wider">
+                What ESP or automation tool are you using?
+              </label>
+              <input
+                {...form.register("espTool")}
+                id="espTool"
+                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                placeholder="e.g. Customer.io, HubSpot, Klaviyo"
+              />
+              {form.formState.errors.espTool && (
+                <p className="text-sm text-destructive font-medium">{form.formState.errors.espTool.message}</p>
               )}
             </div>
 
@@ -110,7 +123,7 @@ export function ContactForm() {
                 </>
               ) : (
                 <>
-                  Send Message
+                  Let's talk
                   <Send className="w-5 h-5" />
                 </>
               )}

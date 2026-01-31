@@ -1,12 +1,17 @@
 import { motion } from "framer-motion";
-import { Check, ArrowRight } from "lucide-react";
+import { Check, ArrowRight, ClipboardCheck, Users, MapPin, AlertTriangle } from "lucide-react";
 
-const features = [
-  "One core Trial-to-Paid sequence strategy",
-  "3–5 Reverb micro-cycles for engagement",
-  "Trigger map + timing rules definition",
-  "Comprehensive measurement plan",
-  "Copy templates and implementation guides",
+const deliverables = [
+  "A documented JTBD + Aha map",
+  "Stall points identified and prioritized",
+  "A clear picture of what to build next",
+];
+
+const sessionCovers = [
+  { icon: Users, text: "The core jobs your users hire your product for" },
+  { icon: MapPin, text: "The Aha moment for each job (in plain language and measurable events)" },
+  { icon: ArrowRight, text: "The value path from signup to paid" },
+  { icon: AlertTriangle, text: "Where users stall and why" },
 ];
 
 export function Offer() {
@@ -16,47 +21,67 @@ export function Offer() {
   };
 
   return (
-    <section id="offer" className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-      {/* Decorative background pattern */}
+    <section id="audit" className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
       <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
-        <svg width="400" height="400" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
-          <path fill="#FFFFFF" d="M44.7,-76.4C58.9,-69.2,71.8,-59.1,81.6,-46.6C91.4,-34.1,98.1,-19.2,95.8,-5.2C93.5,8.8,82.2,21.9,71.4,33.1C60.6,44.3,50.3,53.6,39.1,61.9C27.9,70.2,15.8,77.5,2.9,72.5C-10,67.5,-23.7,50.2,-36.4,36.5C-49.1,22.8,-60.8,12.7,-64.8,-0.1C-68.8,-12.9,-65.1,-28.4,-55.8,-40.8C-46.5,-53.2,-31.6,-62.5,-17.1,-65.4C-2.6,-68.3,11.5,-64.8,30.5,-83.6" transform="translate(100 100)" />
-        </svg>
+        <ClipboardCheck className="w-96 h-96 text-white" />
       </div>
+
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-          
+        {/* Intro text */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="max-w-3xl mb-16"
+        >
+          <p className="text-white/70 font-sans text-lg mb-4">Now you're thinking <span className="text-white italic">that's exactly what I need…</span></p>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+            Not so fast. First, we need to do an Audit.
+          </h2>
+          <p className="text-lg text-white/80 leading-relaxed font-sans mb-4">
+            Yeah, I know it's a weird way to sell a service. But here's the thing.
+          </p>
+          <p className="text-lg text-white/80 leading-relaxed font-sans mb-4">
+            Without understanding your product, your users, and what "value" actually looks like for them, any system is just a guess. And a guess with triggers attached is still a guess.
+          </p>
+          <p className="text-lg text-white/80 leading-relaxed font-sans">
+            The Audit means you get someone who shows up to the build knowing exactly what's broken. And you're not paying for something based on assumptions.
+          </p>
+        </motion.div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+          {/* Left side — description */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-              Trial-to-Paid Flow Build + Reverb
-            </h2>
-            <p className="text-lg text-white/80 mb-8 leading-relaxed font-sans font-light">Turn more trials into paying customers with a behavior-based email system I design and write for you.
+            <h3 className="text-2xl font-bold text-white mb-2">One session. Full clarity.</h3>
+            <p className="text-white/70 font-sans mb-8">A 60–90 minute working session with your team — Product, Sales, and CS in the room.</p>
 
-            Designed for SaaS and product-led companies that are done guessing. 
-            You get a full trial-to-paid engine: strategy, flows, and copy that respond to what your users actually do.</p>
-            
-            <div className="p-8 bg-white/5 backdrop-blur-sm rounded-xl border border-white/10">
-              <h3 className="text-xl font-bold text-white mb-4">Perfect For</h3>
-              <ul className="space-y-4">
-                {[
-                  "Lift trial-to-paid conversion without adding aggressive sales pressure",
-                  "Replace generic “Day 1 / Day 3 / Day 7” drips with behavior-driven nudges",
-                  "Build a system once and keep improving it, instead of rewriting launches every quarter"
-                ].map((item, idx) => (
-                  <li key={idx} className="flex items-start gap-3">
-                    <Check className="w-5 h-5 text-white/80 mt-0.5 flex-shrink-0" />
-                    <span className="text-white/70 font-sans">{item}</span>
-                  </li>
-                ))}
-              </ul>
+            <h4 className="text-sm font-bold uppercase tracking-widest text-white/40 font-sans mb-4">Together, we define:</h4>
+            <div className="space-y-4 mb-8">
+              {sessionCovers.map((item, idx) => (
+                <div key={idx} className="flex items-start gap-3">
+                  <div className="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center flex-shrink-0 mt-0.5">
+                    <item.icon className="w-4 h-4 text-white/70" />
+                  </div>
+                  <span className="text-white/80 font-sans">{item.text}</span>
+                </div>
+              ))}
             </div>
+
+            <p className="text-white/60 font-sans text-sm">
+              You can take the deliverables and implement yourself. Or continue to the Build phase where SIGNAL + Reverb kick in.
+            </p>
+            <p className="text-white/60 font-sans text-sm mt-2">
+              Timeline: Workshop + deliverable in 1–2 weeks
+            </p>
           </motion.div>
 
+          {/* Right side — white card */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -64,9 +89,13 @@ export function Offer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-background text-foreground p-8 md:p-10 rounded-2xl shadow-2xl"
           >
-            <h3 className="text-2xl font-bold mb-6">What's Included</h3>
+            <div className="flex items-baseline justify-between mb-6">
+              <h3 className="text-2xl font-bold">What You Walk Away With</h3>
+              <span className="text-2xl font-bold text-primary">$5,000</span>
+            </div>
+
             <ul className="space-y-4 mb-8">
-              {features.map((item, idx) => (
+              {deliverables.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
                     <Check className="w-3.5 h-3.5 text-primary" />
@@ -76,18 +105,21 @@ export function Offer() {
               ))}
             </ul>
 
-            <button 
+            <p className="text-sm text-muted-foreground font-sans mb-6">
+              You'll know exactly what's broken, why it's breaking, and what to fix first.
+            </p>
+
+            <button
               onClick={scrollToContact}
-              className="w-full bg-primary text-primary-foreground py-4 rounded-lg font-bold text-lg hover:bg-primary/90 hover:shadow-lg transition-all flex items-center justify-center gap-2 group"
+              className="w-full bg-primary text-primary-foreground py-4 rounded-lg font-bold text-lg hover:bg-primary/90 hover:shadow-lg hover:-translate-y-0.5 transition-all flex items-center justify-center gap-2 group"
             >
-              Get Started
+              Show me what's broken
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
             <p className="text-center text-sm text-muted-foreground mt-4 font-sans">
-              Limited spots available for Q2
+              One-time investment
             </p>
           </motion.div>
-
         </div>
       </div>
     </section>
