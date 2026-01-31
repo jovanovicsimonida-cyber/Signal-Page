@@ -1,11 +1,15 @@
+import { useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, User } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import profilePhoto from "@assets/website-image.png";
 
 export default function About() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const goToContact = () => {
     window.location.href = "/#contact";
   };
@@ -25,6 +29,9 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-8">
+              The Job That Comes First
+            </h1>
             <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
               <p>
                 I've tested a lot of great tools with trial experiences that made upgrading harder than it needed to be.
@@ -55,21 +62,12 @@ export default function About() {
               <p>
                 So a trial-to-paid sequence can't just educate. It has to reduce switching friction.
               </p>
-              <p>It has to help users do three things quickly:</p>
-              <ul className="space-y-2 pl-1">
-                <li className="flex items-start gap-3">
-                  <span className="text-primary font-bold mt-0.5">1.</span>
-                  <span>See the job your tool helps them complete</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-primary font-bold mt-0.5">2.</span>
-                  <span>Get a win that feels like progress fast</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="text-primary font-bold mt-0.5">3.</span>
-                  <span>Trust that moving over is worth the time and effort</span>
-                </li>
-              </ul>
+              <div className="border-l-4 border-primary/30 pl-6 py-4 space-y-3 bg-white/50 rounded-r-lg">
+                <p className="font-medium text-foreground">It has to help users do three things quickly:</p>
+                <p><span className="text-primary font-bold">1.</span> See the job your tool helps them complete</p>
+                <p><span className="text-primary font-bold">2.</span> Get a win that feels like progress fast</p>
+                <p><span className="text-primary font-bold">3.</span> Trust that moving over is worth the time and effort</p>
+              </div>
               <p>
                 That's where Jobs to Be Done comes in.
               </p>
@@ -95,8 +93,13 @@ export default function About() {
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-primary p-8 md:p-12 rounded-2xl shadow-2xl"
+            className="bg-primary p-8 md:p-12 rounded-2xl shadow-2xl relative overflow-hidden group"
           >
+            <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
+              <User className="w-64 h-64 text-white" />
+            </div>
+
+            <div className="relative z-10">
             <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">What You Should Know About Me</h2>
 
             <div className="flex flex-col md:flex-row gap-8 mb-8">
@@ -144,11 +147,12 @@ export default function About() {
             <div className="mt-8">
               <button
                 onClick={goToContact}
-                className="px-8 py-4 bg-white text-primary rounded-sm font-semibold text-lg hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-300 inline-flex items-center gap-2 group lowercase"
+                className="px-8 py-4 bg-white text-primary rounded-sm font-semibold text-lg hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-300 inline-flex items-center gap-2 lowercase"
               >
                 start with the leak audit
-                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+                <ArrowRight className="w-5 h-5" />
               </button>
+            </div>
             </div>
           </motion.div>
         </div>
