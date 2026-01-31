@@ -1,3 +1,4 @@
+import { useEffect } from "react";
 import { Link } from "wouter";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -6,6 +7,9 @@ import { Footer } from "@/components/Footer";
 import profilePhoto from "@assets/website-image.png";
 
 export default function About() {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const goToContact = () => {
     window.location.href = "/#contact";
   };
