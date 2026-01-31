@@ -25,6 +25,9 @@ export default function About() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
           >
+            <h1 className="text-3xl md:text-4xl font-bold text-primary mb-8">
+              The Job That Comes First
+            </h1>
             <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
               <p>
                 I've tested a lot of great tools with trial experiences that made upgrading harder than it needed to be.
