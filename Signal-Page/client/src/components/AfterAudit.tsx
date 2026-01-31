@@ -46,11 +46,10 @@ export function AfterAudit() {
             transition={{ duration: 0.5 }}
             className="group bg-white p-8 md:p-10 rounded-2xl border border-border shadow-xl shadow-black/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
-            <div className="flex items-start justify-between mb-6">
+            <div className="mb-6">
               <div className="w-12 h-12 bg-background rounded-lg border border-black/5 flex items-center justify-center shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <PenTool className="w-6 h-6" />
               </div>
-              <span className="text-sm font-bold text-muted-foreground font-sans uppercase tracking-wider">Scoped after Audit</span>
             </div>
 
             <h3 className="text-2xl font-bold text-foreground mb-2">Build</h3>
@@ -78,11 +77,10 @@ export function AfterAudit() {
             transition={{ duration: 0.5, delay: 0.1 }}
             className="group bg-white p-8 md:p-10 rounded-2xl border border-border shadow-xl shadow-black/5 hover:shadow-2xl hover:-translate-y-1 transition-all duration-300"
           >
-            <div className="flex items-start justify-between mb-6">
+            <div className="mb-6">
               <div className="w-12 h-12 bg-background rounded-lg border border-black/5 flex items-center justify-center shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                 <Rocket className="w-6 h-6" />
               </div>
-              <span className="text-sm font-bold text-muted-foreground font-sans uppercase tracking-wider">Scoped after Audit</span>
             </div>
 
             <h3 className="text-2xl font-bold text-foreground mb-2">Build + Implement</h3>
