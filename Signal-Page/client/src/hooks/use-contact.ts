@@ -4,7 +4,8 @@ import { useToast } from "@/hooks/use-toast";
 export interface ContactFormData {
   name: string;
   email: string;
-  message: string;
+  conversionRate: string;
+  espTool: string;
 }
 
 export function useCreateContact() {
