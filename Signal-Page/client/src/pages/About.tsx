@@ -35,16 +35,12 @@ export default function About() {
               <p>
                 Other times, I didn't. Not because the tool was bad, but because I never reached the moment where the value felt obvious.
               </p>
-              <p>Some things are always true:</p>
-              <p>
-                No trial flow can rescue a product that doesn't deliver real value.
-              </p>
-              <p>
-                Some users will convert no matter what, because they showed up with a job to get done.
-              </p>
-              <p>
-                Your users are always switching from something.
-              </p>
+              <div className="border-l-4 border-primary/30 pl-6 py-4 space-y-3 bg-white/50 rounded-r-lg">
+                <p className="font-medium text-foreground">Some things are always true:</p>
+                <p>No trial flow can rescue a product that doesn't deliver real value.</p>
+                <p>Some users will convert no matter what, because they showed up with a job to get done.</p>
+                <p>Your users are always switching from something.</p>
+              </div>
               <p>Sometimes it's a direct competitor.</p>
               <p>Sometimes it's spreadsheets, patchwork processes, or a half-broken internal workflow they've tolerated for too long.</p>
               <p>Either way, "trying your tool" only turns into "using your tool" when they believe the switch is worth it.</p>
