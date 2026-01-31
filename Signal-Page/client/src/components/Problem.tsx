@@ -11,7 +11,7 @@ export function Problem() {
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
-          <p className="text-lg text-muted-foreground font-sans italic">
+          <p className="text-xl text-muted-foreground font-sans">
             That's what it should look like, but in reality...
           </p>
 
