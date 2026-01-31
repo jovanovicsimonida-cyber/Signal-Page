@@ -79,6 +79,9 @@ export function Offer() {
             <p className="text-white/60 font-sans text-sm mt-2">
               Timeline: Workshop + deliverable in 1–2 weeks
             </p>
+            <p className="text-white/60 font-sans text-sm mt-2">
+              One-time investment: $5,000
+            </p>
           </motion.div>
 
           {/* Right side — white card */}
@@ -89,9 +92,8 @@ export function Offer() {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="bg-background text-foreground p-8 md:p-10 rounded-2xl shadow-2xl"
           >
-            <div className="flex items-baseline justify-between mb-6">
+            <div className="mb-6">
               <h3 className="text-2xl font-bold">What You Walk Away With</h3>
-              <span className="text-2xl font-bold text-primary">$5,000</span>
             </div>
 
             <ul className="space-y-4 mb-8">
@@ -116,9 +118,6 @@ export function Offer() {
               Show me what's broken
               <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
             </button>
-            <p className="text-center text-sm text-muted-foreground mt-4 font-sans">
-              One-time investment
-            </p>
           </motion.div>
         </div>
       </div>
