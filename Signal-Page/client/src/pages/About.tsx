@@ -6,25 +6,34 @@ import { Footer } from "@/components/Footer";
 import profilePhoto from "@assets/website-image.png";
 
 export default function About() {
-  const goToAudit = () => {
-    window.location.href = "/#contact";
+  const goToContact = () => {
+    window.location.assign("/");
+    // Wait for navigation, then scroll to contact
+    const checkAndScroll = () => {
+      const el = document.getElementById("contact");
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+      } else {
+        setTimeout(checkAndScroll, 100);
+      }
+    };
+    setTimeout(checkAndScroll, 300);
   };
 
   return (
     <div className="min-h-screen bg-[#EBEAE8] text-foreground flex flex-col">
       <Navigation />
       <main className="flex-grow pt-32 pb-24">
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Philosophy text — narrower container */}
+        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors mb-12 inline-block font-sans">
             &larr; Back to Home
           </Link>
 
-          {/* Philosophy / approach section */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="mb-16"
           >
             <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
               <p>
@@ -84,15 +93,17 @@ export default function About() {
               </p>
             </div>
           </motion.div>
+        </div>
 
-          {/* What You Should Know About Me — card */}
+        {/* What You Should Know About Me — dark card, full width */}
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-white p-8 md:p-10 rounded-2xl border border-border shadow-xl shadow-black/5 mb-12"
+            className="bg-primary p-8 md:p-12 rounded-2xl shadow-2xl"
           >
-            <h2 className="text-2xl font-bold text-foreground mb-8">What You Should Know About Me</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">What You Should Know About Me</h2>
 
             <div className="flex flex-col md:flex-row gap-8 mb-8">
               {/* Photo inside the card */}
@@ -100,14 +111,14 @@ export default function About() {
                 <img
                   src={profilePhoto}
                   alt="Simonida Jovanovic"
-                  className="w-48 h-60 object-cover rounded-lg shadow-lg"
+                  className="w-48 h-60 object-cover rounded-lg"
                 />
               </div>
 
               {/* Bio text */}
-              <div className="space-y-4 text-muted-foreground font-sans leading-relaxed">
+              <div className="space-y-4 text-white/80 font-sans leading-relaxed">
                 <p>
-                  I'm a strong believer in the saying: <em>"A jack of all trades is a master of none, but oftentimes better than a master of one."</em>
+                  I'm a strong believer in the saying: <em className="text-white">"A jack of all trades is a master of none, but oftentimes better than a master of one."</em>
                 </p>
                 <p>
                   Because I studied fine art, then spent the next 15 years in digital marketing, doing everything from design, creating digital assets, landing pages, content, copy, even video scripting, with all the unglamorous parts like iteration, testing, and crying a lot.
@@ -118,7 +129,7 @@ export default function About() {
               </div>
             </div>
 
-            <div className="space-y-4 text-muted-foreground font-sans leading-relaxed">
+            <div className="space-y-4 text-white/80 font-sans leading-relaxed">
               <p>
                 Today I focus on trial-to-paid because it's the highest-leverage part of the customer journey, and I love to nerd out about people's behaviour + less crying.
               </p>
@@ -128,29 +139,23 @@ export default function About() {
               <p>
                 Also, I live with a cat who believes all keyboards belong to her.
               </p>
-              <p className="font-mono text-sm text-muted-foreground/60">
+              <p className="font-mono text-sm text-white/40">
                 ;si[ awr[\v ir p
               </p>
-              <p className="text-muted-foreground/80 italic">
+              <p className="text-white/60 italic">
                 She thinks you should
               </p>
             </div>
-          </motion.div>
 
-          {/* CTA */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.3 }}
-            className="text-center"
-          >
-            <button
-              onClick={goToAudit}
-              className="px-8 py-4 bg-primary text-primary-foreground rounded-sm font-semibold text-lg shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 inline-flex items-center gap-2 group"
-            >
-              Start With the Leak Audit
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
-            </button>
+            <div className="mt-8">
+              <button
+                onClick={goToContact}
+                className="px-8 py-4 bg-white text-primary rounded-sm font-semibold text-lg hover:bg-white/90 hover:-translate-y-0.5 transition-all duration-300 inline-flex items-center gap-2 group lowercase"
+              >
+                start with the leak audit
+                <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </div>
           </motion.div>
         </div>
       </main>
