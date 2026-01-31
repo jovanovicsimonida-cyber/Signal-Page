@@ -35,6 +35,12 @@ export function Navigation() {
               Start Here
             </button>
             <button
+              onClick={() => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' })}
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
+            >
+              About
+            </button>
+            <button
               onClick={scrollToContact}
               className="bg-primary text-primary-foreground px-6 py-2.5 rounded-sm text-sm font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-black/5 hover:-translate-y-0.5"
             >

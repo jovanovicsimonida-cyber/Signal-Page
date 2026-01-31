@@ -6,6 +6,7 @@ import { Framework } from "@/components/Framework";
 import { Offer } from "@/components/Offer";
 import { AfterAudit } from "@/components/AfterAudit";
 import { Fit } from "@/components/Fit";
+import { AboutMe } from "@/components/AboutMe";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 
@@ -21,6 +22,7 @@ export default function Home() {
         <Offer />
         <AfterAudit />
         <Fit />
+        <AboutMe />
         <ContactForm />
       </main>
       <Footer />
