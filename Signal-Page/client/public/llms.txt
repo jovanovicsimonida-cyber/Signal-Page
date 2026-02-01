@@ -35,6 +35,14 @@ The SIGNAL framework is our proprietary methodology for building lifecycle email
 
 **The Leak Audit** — A one-time deep dive into your trial-to-paid flow. We map your user journey, identify where conversions leak, and deliver a strategy to fix it. Investment: $5,000.
 
+## Content (Markdown)
+
+For clean, readable versions of each page:
+
+- Homepage: https://signallifecycle.com/llm/home.md
+- About: https://signallifecycle.com/llm/about.md
+- Services: https://signallifecycle.com/llm/services.md
+
 ## Links
 
 - Website: https://signallifecycle.com
