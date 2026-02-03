@@ -6,6 +6,7 @@ import { ArrowRight, User } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
 import profilePhoto from "@assets/website-image.png";
+import catPhoto from "@assets/Ljubica.jpeg";
 
 export default function About() {
   useEffect(() => {
@@ -141,22 +142,31 @@ export default function About() {
               </div>
             </div>
 
-            <div className="space-y-4 text-white/80 font-sans leading-relaxed">
-              <p>
-                Today I focus on trial-to-paid because it's the highest-leverage part of the customer journey, and I love to nerd out about people's behaviour + less crying.
-              </p>
-              <p>
-                That also means I'm selective with clients because this only works when there's real value to unlock. If we're not a match, I'll tell you right away.
-              </p>
-              <p>
-                Also, I live with a cat who believes all keyboards belong to her.
-              </p>
-              <p className="font-mono text-sm text-white/40">
-                ;si[ awr[\v ir p
-              </p>
-              <p className="text-white/60 italic">
-                She thinks you should
-              </p>
+            <div className="flex flex-col md:flex-row gap-8">
+              <div className="space-y-4 text-white/80 font-sans leading-relaxed flex-1">
+                <p>
+                  Today I focus on trial-to-paid because it's the highest-leverage part of the customer journey, and I love to nerd out about people's behaviour + less crying.
+                </p>
+                <p>
+                  That also means I'm selective with clients because this only works when there's real value to unlock. If we're not a match, I'll tell you right away.
+                </p>
+                <p>
+                  Also, I live with a cat who believes all keyboards belong to her.
+                </p>
+                <p className="font-mono text-sm text-white/40">
+                  ";si[ awr[\v ir p"
+                </p>
+                <p className="text-white/60 italic">
+                  She thinks you should
+                </p>
+              </div>
+              <div className="flex-shrink-0 mx-auto md:mx-0">
+                <img
+                  src={catPhoto}
+                  alt="Ljubica the cat"
+                  className="w-48 h-60 object-cover rounded-lg"
+                />
+              </div>
             </div>
 
             <div className="mt-8">
