@@ -2,11 +2,6 @@ import logo from "@assets/Signal_logo_(1)_1767386612521.png";
 import { motion } from "framer-motion";
 
 export function Hero() {
-  const scrollToContact = () => {
-    const contactSection = document.getElementById('contact');
-    contactSection?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-[#EBEAE8]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -23,16 +18,7 @@ export function Hero() {
                 Lifecycle Email Strategy
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-wide text-balance text-primary">Your trial-to-paid flow finally converts.</h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">Users reach value. Upgrades happen. Your team stops guessing why some convert and most don't.</p>
-            </div>
-
-            <div className="flex justify-center lg:justify-start">
-              <button
-                onClick={scrollToContact}
-                className="px-8 py-4 bg-primary text-primary-foreground rounded-sm font-semibold text-lg shadow-xl shadow-primary/20 hover:shadow-2xl hover:shadow-primary/30 hover:-translate-y-1 transition-all duration-300 w-full sm:w-auto"
-              >
-                I want to fix my trial leak
-              </button>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">Users hit their Aha moment. Upgrades follow. The guesswork stops.</p>
             </div>
           </motion.div>
 
