@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 import { Check, UserCheck } from "lucide-react";
 
 const readinessChecks = [
-  "Your ESP can trigger emails based on in-app events (not just time delays)",
-  "You can name 3–5 actions that tend to predict whether someone pays",
-  "You can connect a product user to an email address",
-  "You can pull trial starts, trial ends, and conversions by week",
+  "You're the one who gets asked \"why aren't more trials converting?\", and you don't have a clear answer",
+  "You've tweaked the emails, adjusted the timing, rewritten the CTAs. The numbers barely moved.",
+  "You know the data's there, somewhere, but you don't have time to dig through it and build a system from scratch",
+  "You're tired of duct-taping flows together and hoping this quarter's version works better than last quarter's",
+  "You want to hand someone the problem and get back a system, not a slide deck",
 ];
 
 export function Fit() {
@@ -74,11 +75,11 @@ export function Fit() {
 
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Still here? Here's how to know if you're ready.
+              Here's how to know if you're ready.
             </h3>
-            <p className="text-white/60 font-sans mb-8">You're probably a fit if:</p>
+            <p className="text-white/60 font-sans mb-8">You're a fit if:</p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4">
               {readinessChecks.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center mt-0.5">
@@ -88,11 +89,6 @@ export function Fit() {
                 </div>
               ))}
             </div>
-
-            <p className="text-white/60 font-sans">
-              If you're not sure on one or two of these, we can figure that out on a call.
-              Fill out the form, and we'll get in contact.
-            </p>
           </div>
         </motion.div>
       </div>
