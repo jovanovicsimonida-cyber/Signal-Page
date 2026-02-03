@@ -153,11 +153,8 @@ export default function About() {
                 <p>
                   Also, I live with a cat who believes all keyboards belong to her.
                 </p>
-                <p className="font-mono text-sm text-white/40">
-                  ";si[ awr[\v ir p"
-                </p>
-                <p className="text-white/60 italic">
-                  She thinks you should
+                <p>
+                  She thinks you should:
                 </p>
               </div>
               <div className="flex-shrink-0 mx-auto md:mx-0">
@@ -166,6 +163,9 @@ export default function About() {
                   alt="Ljubica the cat"
                   className="w-48 h-60 object-cover rounded-lg"
                 />
+                <p className="font-mono text-sm text-white/80 mt-2">
+                  ";si[ awr[\v ir p"
+                </p>
               </div>
             </div>
 
