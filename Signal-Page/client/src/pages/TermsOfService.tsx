@@ -7,6 +7,13 @@ export default function TermsOfService() {
       <Helmet>
         <title>Terms of Service — Signal Lifecycle Email Strategy</title>
         <meta name="description" content="Terms of Service for Signal Lifecycle Email Strategy. Review the terms governing your use of signallifecycle.com." />
+        <link rel="canonical" href="https://signallifecycle.com/terms" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content="Terms of Service — Signal Lifecycle Email Strategy" />
+        <meta property="og:description" content="Terms of Service for Signal Lifecycle Email Strategy. Review the terms governing your use of signallifecycle.com." />
+        <meta property="og:url" content="https://signallifecycle.com/terms" />
+        <meta name="twitter:card" content="summary" />
+        <meta name="twitter:title" content="Terms of Service — Signal Lifecycle Email Strategy" />
       </Helmet>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 inline-block">

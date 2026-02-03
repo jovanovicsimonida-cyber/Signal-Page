@@ -20,9 +20,16 @@ export default function About() {
       <Helmet>
         <title>About — Signal Lifecycle Email Strategy</title>
         <meta name="description" content="Meet Simonida Jovanovic, founder of Signal. Learn about the Jobs to Be Done methodology behind our lifecycle email strategy for SaaS trial-to-paid conversion." />
+        <link rel="canonical" href="https://signallifecycle.com/about" />
+        <meta property="og:type" content="website" />
         <meta property="og:title" content="About — Signal Lifecycle Email Strategy" />
         <meta property="og:description" content="Meet Simonida Jovanovic, founder of Signal. Learn about the Jobs to Be Done methodology behind our lifecycle email strategy." />
         <meta property="og:url" content="https://signallifecycle.com/about" />
+        <meta property="og:image" content="https://signallifecycle.com/og-image.png" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About — Signal Lifecycle Email Strategy" />
+        <meta name="twitter:description" content="Meet Simonida Jovanovic, founder of Signal. Learn about the Jobs to Be Done methodology behind our lifecycle email strategy." />
+        <meta name="twitter:image" content="https://signallifecycle.com/og-image.png" />
       </Helmet>
       <Navigation />
       <main className="flex-grow pt-32 pb-24">
