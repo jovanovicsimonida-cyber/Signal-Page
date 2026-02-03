@@ -22,7 +22,7 @@ export function Hero() {
               <span className="inline-block px-3 py-1 bg-black/5 rounded-full text-xs font-bold tracking-wider uppercase text-primary/80 font-sans">
                 Lifecycle Email Strategy
               </span>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] text-balance text-primary">Your trial-to-paid flow finally does what it was supposed to do.</h1>
+              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-wide text-balance text-primary">Your trial-to-paid flow finally converts.</h1>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">Users reach value. Upgrades happen. Your team stops guessing why some convert and most don't.</p>
             </div>
 
