@@ -11,49 +11,39 @@ export function Problem() {
           transition={{ duration: 0.6 }}
           className="space-y-8"
         >
-          <p className="text-xl text-muted-foreground font-sans">
-            That's what it should look like, but in reality...
-          </p>
-
-          <h2 className="text-3xl md:text-4xl font-bold text-primary">
-            The signups are there. The upgrades aren't.
-          </h2>
-
           <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
             <div className="space-y-1">
-              <p>You've built something good.</p>
-              <p>People sign up.</p>
-              <p>They poke around.</p>
-              <p>Some of them even start getting value.</p>
-            </div>
-
-            <div className="space-y-1">
-              <p>And then... nothing.</p>
-              <p>Trial expires.</p>
-              <p>No upgrade.</p>
-              <p><span className="text-foreground font-medium">Gone.</span></p>
+              <p>Users sign up.</p>
+              <p>Some convert.</p>
+              <p>Most don't.</p>
+              <p><span className="text-foreground font-medium">You're not sure why.</span></p>
             </div>
 
             <p>
-              You're left staring at the dashboard wondering what went wrong.
-            </p>
-
-            <p>
-              Here's what's probably happening — <span className="text-foreground font-medium">you're treating everyone the same.</span>
-            </p>
-
-            <p>
-              The user who connected their Stripe and imported real data gets the same Day 3 email as the one who logged in once and never came back.
+              You've got emails going out (Day 1, Day 3, Day 7), but you can't point to what's actually working.
             </p>
 
             <div className="space-y-1">
-              <p>One of them is ready to buy.</p>
-              <p>The other forgot you exist.</p>
-              <p>And you're talking to both of them the same way.</p>
+              <p>Your team keeps rewriting onboarding hoping something sticks.</p>
+              <p>It never really does.</p>
             </div>
+
+            <div className="space-y-1">
+              <p>Product says activation means one thing.</p>
+              <p>Growth says another.</p>
+              <p><span className="text-foreground font-medium">No one's measuring the same thing.</span></p>
+            </div>
+
+            <p>
+              You've got data, but it's not telling you where users drop off — or how to catch them when they do.
+            </p>
+
+            <p>
+              Users stall before they see value, and you don't have a system that catches them.
+            </p>
 
             <p className="text-2xl font-bold text-primary font-serif">
-              That's the leak.
+              The leak stays open.
             </p>
           </div>
         </motion.div>
