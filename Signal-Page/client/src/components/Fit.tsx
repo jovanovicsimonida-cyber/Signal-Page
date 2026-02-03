@@ -2,10 +2,11 @@ import { motion } from "framer-motion";
 import { Check, UserCheck } from "lucide-react";
 
 const readinessChecks = [
-  "Your ESP can trigger emails based on in-app events (not just time delays)",
-  "You can name 3–5 actions that tend to predict whether someone pays",
-  "You can connect a product user to an email address",
-  "You can pull trial starts, trial ends, and conversions by week",
+  "You're the one who gets asked \"why aren't more trials converting?\", and you don't have a clear answer",
+  "You've tweaked the emails, adjusted the timing, rewritten the CTAs. The numbers barely moved.",
+  "You know the data's there, somewhere, but you don't have time to dig through it and build a system from scratch",
+  "You're tired of duct-taping flows together and hoping this quarter's version works better than last quarter's",
+  "You want to hand someone the problem and get back a system, not a slide deck",
 ];
 
 export function Fit() {
@@ -25,30 +26,38 @@ export function Fit() {
 
           <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
             <div className="space-y-1">
-              <p>You're running a SaaS or product-led company with a trial.</p>
               <p>Users sign up.</p>
               <p>Some convert.</p>
               <p>Most don't.</p>
-              <p>You're not totally sure why.</p>
-            </div>
-
-            <div className="space-y-1">
-              <p>Maybe you're post–Series A, trying to make revenue feel less random.</p>
-              <p>You've got a Day 1 / Day 3 / Day 7 drip running.</p>
-              <p>You don't know what's actually moving the needle.</p>
-            </div>
-
-            <div className="space-y-1">
-              <p>Or maybe you're further along, post–Series E, plenty of tools, plenty of data, but the flows feel stitched together.</p>
-              <p>Product, Growth, and Lifecycle have different definitions of "activation."</p>
-              <p>You're improving things, but it's slow and noisy.</p>
+              <p><span className="text-foreground font-medium">You're not sure why.</span></p>
             </div>
 
             <p>
-              Either way, same problem: <span className="text-foreground font-medium">users stall before they see value, and you don't have a system that catches them.</span>
+              You've got emails going out (Day 1, Day 3, Day 7), but you can't point to what's actually working.
             </p>
 
-            <p>If that sounds familiar, keep reading.</p>
+            <div className="space-y-1">
+              <p>Your team keeps rewriting onboarding hoping something sticks.</p>
+              <p>It never really does.</p>
+            </div>
+
+            <div className="space-y-1">
+              <p>Product says activation means one thing.</p>
+              <p>Growth says another.</p>
+              <p><span className="text-foreground font-medium">No one's measuring the same thing.</span></p>
+            </div>
+
+            <p>
+              You've got data, but it's not telling you where users drop off — or how to catch them when they do.
+            </p>
+
+            <p>
+              Users stall before they see value, and you don't have a system that catches them.
+            </p>
+
+            <p className="text-2xl font-bold text-primary font-serif">
+              The leak stays open.
+            </p>
           </div>
         </motion.div>
 
@@ -66,11 +75,11 @@ export function Fit() {
 
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Still here? Here's how to know if you're ready.
+              Here's how to know if you're ready.
             </h3>
-            <p className="text-white/60 font-sans mb-8">You're probably a fit if:</p>
+            <p className="text-white/60 font-sans mb-8">You're a fit if:</p>
 
-            <div className="space-y-4 mb-8">
+            <div className="space-y-4">
               {readinessChecks.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center mt-0.5">
@@ -80,11 +89,6 @@ export function Fit() {
                 </div>
               ))}
             </div>
-
-            <p className="text-white/60 font-sans">
-              If you're not sure on one or two of these, we can figure that out on a call.
-              Fill out the form, and we'll get in contact.
-            </p>
           </div>
         </motion.div>
       </div>
