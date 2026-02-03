@@ -25,30 +25,38 @@ export function Fit() {
 
           <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
             <div className="space-y-1">
-              <p>You're running a SaaS or product-led company with a trial.</p>
               <p>Users sign up.</p>
               <p>Some convert.</p>
               <p>Most don't.</p>
-              <p>You're not totally sure why.</p>
-            </div>
-
-            <div className="space-y-1">
-              <p>Maybe you're post–Series A, trying to make revenue feel less random.</p>
-              <p>You've got a Day 1 / Day 3 / Day 7 drip running.</p>
-              <p>You don't know what's actually moving the needle.</p>
-            </div>
-
-            <div className="space-y-1">
-              <p>Or maybe you're further along, post–Series E, plenty of tools, plenty of data, but the flows feel stitched together.</p>
-              <p>Product, Growth, and Lifecycle have different definitions of "activation."</p>
-              <p>You're improving things, but it's slow and noisy.</p>
+              <p><span className="text-foreground font-medium">You're not sure why.</span></p>
             </div>
 
             <p>
-              Either way, same problem: <span className="text-foreground font-medium">users stall before they see value, and you don't have a system that catches them.</span>
+              You've got emails going out (Day 1, Day 3, Day 7), but you can't point to what's actually working.
             </p>
 
-            <p>If that sounds familiar, keep reading.</p>
+            <div className="space-y-1">
+              <p>Your team keeps rewriting onboarding hoping something sticks.</p>
+              <p>It never really does.</p>
+            </div>
+
+            <div className="space-y-1">
+              <p>Product says activation means one thing.</p>
+              <p>Growth says another.</p>
+              <p><span className="text-foreground font-medium">No one's measuring the same thing.</span></p>
+            </div>
+
+            <p>
+              You've got data, but it's not telling you where users drop off — or how to catch them when they do.
+            </p>
+
+            <p>
+              Users stall before they see value, and you don't have a system that catches them.
+            </p>
+
+            <p className="text-2xl font-bold text-primary font-serif">
+              The leak stays open.
+            </p>
           </div>
         </motion.div>
 
