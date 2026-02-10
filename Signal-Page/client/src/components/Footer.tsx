@@ -1,5 +1,5 @@
 import { Link } from "wouter";
-import logo from "@assets/Signal_logo_(1)_1767386181696.png";
+import logo from "@assets/Signal_logo_clean.png";
 
 export function Footer() {
   return (
