@@ -18,7 +18,7 @@ function Router() {
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/terms" component={TermsOfService} />
       <Route path="/about" component={About} />
-      <Route path="/resources/checklist" component={LeadMagnet} />
+      <Route path="/resources/reverb" component={LeadMagnet} />
       <Route component={NotFound} />
     </Switch>
   );
