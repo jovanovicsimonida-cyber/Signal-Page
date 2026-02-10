@@ -161,6 +161,10 @@ export default function LeadMagnet() {
                     </>
                   )}
                 </button>
+
+                <p className="text-xs text-muted-foreground/70 font-sans text-center mt-4">
+                  I may send you an occasional email with useful resources — no spam, ever. Unsubscribe anytime.
+                </p>
               </form>
             ) : (
               <div className="text-center py-6 space-y-6">
