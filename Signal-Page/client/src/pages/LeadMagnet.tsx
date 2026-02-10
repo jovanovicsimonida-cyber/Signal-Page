@@ -11,10 +11,10 @@ import { Footer } from "@/components/Footer";
 // ──────────────────────────────────────────────
 // Configure these for your lead magnet
 // ──────────────────────────────────────────────
-const RESOURCE_TITLE = "The Trial-to-Paid Leak Checklist";
+const RESOURCE_TITLE = "The Reverb Stall-Recovery Workflow";
 const RESOURCE_DESCRIPTION =
-  "A step-by-step checklist to find (and fix) the moments in your trial where future paying customers silently drop off.";
-const DOWNLOAD_URL = "/lead-magnet/signal-leak-checklist.pdf";
+  "A micro-loop template that shows you how to define the stall signal, send a single next-step nudge, offer a friction-reducer, and escalate to a human only if the user stays stuck.";
+const DOWNLOAD_URL = "/lead-magnet/reverb-stall-recovery-workflow-signal.pdf";
 const FORMSPREE_ENDPOINT = "https://formspree.io/f/mwvbwvgv";
 // ──────────────────────────────────────────────
 
@@ -157,7 +157,7 @@ export default function LeadMagnet() {
                   ) : (
                     <>
                       <Download className="w-5 h-5" />
-                      Get the Checklist
+                      Get the Template
                     </>
                   )}
                 </button>
