@@ -2,9 +2,9 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, ClipboardCheck, Users, MapPin, AlertTriangle } from "lucide-react";
 
 const deliverables = [
-  "A map of JTBD, AHA moments, and stall points documented and prioritized",
-  "A clear sequence from signup to paid, with the gaps marked",
-  "A decision on what to fix first",
+  "A documented JTBD map (up to 3 paths), with Aha moments and stall points prioritized by value",
+  "A clear trial-to-paid sequence with the leaks identified and ranked",
+  "A decision-ready roadmap your team can act on, or hand off to us to build",
 ];
 
 const sessionCovers = [
