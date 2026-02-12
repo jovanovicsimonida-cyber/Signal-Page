@@ -61,15 +61,15 @@ export function Framework() {
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group p-8 bg-background rounded-xl border border-border hover:border-primary/20 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="mb-6">
+              <div className="flex items-center gap-3 mb-6">
                 <div className="w-12 h-12 bg-white rounded-lg border border-black/5 flex items-center justify-center shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                   <step.icon className="w-6 h-6" />
                 </div>
+                <h3 className="text-xl font-bold text-foreground group-hover:text-primary transition-colors">
+                  {step.title}
+                </h3>
               </div>
 
-              <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">
-                {step.title}
-              </h3>
               <p className="text-sm font-semibold text-primary/80 mb-3 font-sans">
                 {step.subtitle}
               </p>
