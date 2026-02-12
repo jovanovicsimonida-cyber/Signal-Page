@@ -35,9 +35,9 @@ export function Offer() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mb-16"
         >
-          <p className="text-white/70 font-sans text-lg mb-4">Now you're thinking <span className="text-white italic">that's exactly what I need…</span></p>
+          <p className="text-white/70 font-sans text-lg mb-4">Now if you're thinking <span className="text-white italic">that's exactly what I need...</span></p>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            Not so fast. First, we need to do an Audit.
+            First, we need to do an Audit.
           </h2>
           <p className="text-lg text-white/80 leading-relaxed font-sans mb-4">
             Yeah, I know it's a weird way to sell a service. But here's the thing.
