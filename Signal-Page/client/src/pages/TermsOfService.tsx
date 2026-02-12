@@ -5,15 +5,15 @@ export default function TermsOfService() {
   return (
     <div className="min-h-screen bg-background">
       <Helmet>
-        <title>Terms of Service — Signal Lifecycle Email Strategy</title>
+        <title>Terms of Service - Signal Lifecycle Email Strategy</title>
         <meta name="description" content="Terms of Service for Signal Lifecycle Email Strategy. Review the terms governing your use of signallifecycle.com." />
         <link rel="canonical" href="https://signallifecycle.com/terms" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="Terms of Service — Signal Lifecycle Email Strategy" />
+        <meta property="og:title" content="Terms of Service - Signal Lifecycle Email Strategy" />
         <meta property="og:description" content="Terms of Service for Signal Lifecycle Email Strategy. Review the terms governing your use of signallifecycle.com." />
         <meta property="og:url" content="https://signallifecycle.com/terms" />
         <meta name="twitter:card" content="summary" />
-        <meta name="twitter:title" content="Terms of Service — Signal Lifecycle Email Strategy" />
+        <meta name="twitter:title" content="Terms of Service - Signal Lifecycle Email Strategy" />
       </Helmet>
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
         <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors mb-8 inline-block">
@@ -48,7 +48,7 @@ export default function TermsOfService() {
 
           <section>
             <h2 className="text-xl font-semibold text-foreground mb-3">4. Intellectual Property</h2>
-            <p>All content on this website — including text, graphics, logos, images, and the SIGNAL Framework methodology — is the property of Signal Strategy and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without prior written consent.</p>
+            <p>All content on this website - including text, graphics, logos, images, and the SIGNAL Framework methodology - is the property of Signal Strategy and is protected by applicable intellectual property laws. You may not reproduce, distribute, or create derivative works from our content without prior written consent.</p>
           </section>
 
           <section>

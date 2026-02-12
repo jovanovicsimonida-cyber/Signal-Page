@@ -48,7 +48,7 @@ export function Fit() {
             </div>
 
             <p>
-              You've got data, but it's not telling you where users drop off — or how to catch them when they do.
+              You've got data, but it's not telling you where users drop off - or how to catch them when they do.
             </p>
 
             <p>

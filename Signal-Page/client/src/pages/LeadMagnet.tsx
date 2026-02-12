@@ -60,7 +60,7 @@ export default function LeadMagnet() {
   return (
     <div className="min-h-screen bg-[#EBEAE8] text-foreground flex flex-col">
       <Helmet>
-        <title>{RESOURCE_TITLE} — Signal</title>
+        <title>{RESOURCE_TITLE} - Signal</title>
         <meta name="robots" content="noindex, nofollow" />
         <meta
           name="description"
@@ -163,7 +163,7 @@ export default function LeadMagnet() {
                 </button>
 
                 <p className="text-xs text-muted-foreground/70 font-sans text-center mt-4">
-                  I may send you an occasional email with useful resources — no spam, ever. Unsubscribe anytime.
+                  I may send you an occasional email with useful resources - no spam, ever. Unsubscribe anytime.
                 </p>
               </form>
             ) : (

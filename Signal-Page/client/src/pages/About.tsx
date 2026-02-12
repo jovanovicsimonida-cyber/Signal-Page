@@ -19,22 +19,22 @@ export default function About() {
   return (
     <div className="min-h-screen bg-[#EBEAE8] text-foreground flex flex-col">
       <Helmet>
-        <title>About — Signal Lifecycle Email Strategy</title>
+        <title>About - Signal Lifecycle Email Strategy</title>
         <meta name="description" content="Meet Simonida Jovanovic, founder of Signal. Learn about the Jobs to Be Done methodology behind our lifecycle email strategy for SaaS trial-to-paid conversion." />
         <link rel="canonical" href="https://signallifecycle.com/about" />
         <meta property="og:type" content="website" />
-        <meta property="og:title" content="About — Signal Lifecycle Email Strategy" />
+        <meta property="og:title" content="About - Signal Lifecycle Email Strategy" />
         <meta property="og:description" content="Meet Simonida Jovanovic, founder of Signal. Learn about the Jobs to Be Done methodology behind our lifecycle email strategy." />
         <meta property="og:url" content="https://signallifecycle.com/about" />
         <meta property="og:image" content="https://signallifecycle.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
-        <meta name="twitter:title" content="About — Signal Lifecycle Email Strategy" />
+        <meta name="twitter:title" content="About - Signal Lifecycle Email Strategy" />
         <meta name="twitter:description" content="Meet Simonida Jovanovic, founder of Signal. Learn about the Jobs to Be Done methodology behind our lifecycle email strategy." />
         <meta name="twitter:image" content="https://signallifecycle.com/og-image.png" />
       </Helmet>
       <Navigation />
       <main className="flex-grow pt-32 pb-24">
-        {/* Philosophy text — narrower container */}
+        {/* Philosophy text - narrower container */}
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors mb-12 inline-block font-sans">
             &larr; Back to Home
@@ -103,7 +103,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* What You Should Know About Me — dark card, full width */}
+        {/* What You Should Know About Me - dark card, full width */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}

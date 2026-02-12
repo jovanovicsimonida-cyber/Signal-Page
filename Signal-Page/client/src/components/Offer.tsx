@@ -51,7 +51,7 @@ export function Offer() {
         </motion.div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          {/* Left side — description */}
+          {/* Left side - description */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -59,7 +59,7 @@ export function Offer() {
             transition={{ duration: 0.6 }}
           >
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">One session. Full clarity.</h3>
-            <p className="text-white/70 font-sans mb-8">A 60–90 minute working session with your team — Product, Sales, and CS in the room.</p>
+            <p className="text-white/70 font-sans mb-8">A 60–90 minute working session with your team - Product, Sales, and CS in the room.</p>
 
             <h4 className="text-sm font-bold uppercase tracking-widest text-white/40 font-sans mb-4">Together, we define:</h4>
             <div className="space-y-4 mb-8">
@@ -84,7 +84,7 @@ export function Offer() {
             </p>
           </motion.div>
 
-          {/* Right side — white card */}
+          {/* Right side - white card */}
           <motion.div
             initial={{ opacity: 0, x: 20 }}
             whileInView={{ opacity: 1, x: 0 }}
