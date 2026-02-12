@@ -21,8 +21,8 @@ export function Offer() {
   };
 
   return (
-    <section id="audit" className="py-24 bg-primary text-primary-foreground relative overflow-hidden">
-      <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none">
+    <section id="audit" className="py-24 bg-primary text-primary-foreground relative overflow-hidden group">
+      <div className="absolute top-0 right-0 p-12 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
         <ClipboardCheck className="w-96 h-96 text-white" />
       </div>
 
