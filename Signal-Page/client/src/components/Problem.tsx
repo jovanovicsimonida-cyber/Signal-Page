@@ -39,7 +39,7 @@ export function Problem() {
             </p>
 
             <p>
-              Here's what's probably happening — <span className="text-foreground font-medium">you're treating everyone the same.</span>
+              Here's what's probably happening - <span className="text-foreground font-medium">you're treating everyone the same.</span>
             </p>
 
             <p>

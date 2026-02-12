@@ -3,45 +3,39 @@ import { Target, Search, Network, Heart, Zap, BarChart3, RefreshCw } from "lucid
 
 const steps = [
   {
-    letter: "S",
     title: "Segment",
-    subtitle: "Your users aren't one group. Stop emailing them like they are.",
-    description: "Someone who finished onboarding and someone who never logged in again need completely different messages. Segmentation means knowing who's where, and building cohorts you can actually do something with.",
+    subtitle: "Your users signed up for different reasons. Group them that way.",
+    description: "Users who hired your tool for different jobs aren't going to respond to the same email. Segment by what they hired your tool to do, not just by plan tier or signup date.",
     icon: Target,
   },
   {
-    letter: "I",
     title: "Interpret",
-    subtitle: "What are users telling you with their behavior?",
-    description: "Which actions lead to upgrades? Where do good users get stuck? Why do some people fly through onboarding while others stall on step two? This stage turns raw event data into something you can use.",
+    subtitle: "Figure out which behaviors predict upgrades - and where users stall.",
+    description: "Some actions correlate with conversion. Others are noise. This stage is about connecting in-product behavior to outcomes so you know who's likely to upgrade, who's stuck, and what's worth nudging.",
     icon: Search,
   },
   {
-    letter: "G",
     title: "Generate",
-    subtitle: "Design the flow before you write the words.",
-    description: "What triggers the first email? What stops it from sending if they already upgraded? What happens if they stall on day four? Most teams skip this step, then wonder why their sequences feel duct-taped together.",
+    subtitle: "Map out states, triggers, and suppression rules before you write a single email.",
+    description: "Define the user's current state, what moves them to the next one, and what should stop a message from being sent. Get the logic right first; the copy comes after.",
     icon: Network,
   },
   {
-    letter: "N",
     title: "Nurture",
-    subtitle: "Write like a human who wants them to succeed.",
-    description: "Your emails finally sound like they came from a person who actually uses the product, and wants the reader to get something out of it too.",
+    subtitle: "Write like someone who actually wants them to succeed.",
+    description: "Every message has a reason to exist and a clear next step, written like it came from someone who uses the product, not someone trying to hit a send quota.",
     icon: Heart,
   },
   {
-    letter: "A",
     title: "Automate",
-    subtitle: "Set the rules so the system runs itself.",
-    description: "Triggers, suppressions, cooldowns, \"stop if paid\" logic — handled. You shouldn't have to check whether emails are firing correctly. They just do.",
+    subtitle: "Set the rules so the system runs itself across every channel.",
+    description: "With the right triggers, suppressions, cooldowns, and exit logic, your messages land where and when they need to. You shouldn't be manually checking whether sequences are firing. They just work.",
     icon: Zap,
   },
   {
-    letter: "L",
     title: "Learn",
-    subtitle: "Measure what matters and keep improving.",
-    description: "Which cohorts convert best? Which Reverb nudges actually bring users back? What's worth testing next? This is where the system stops being static and starts compounding.",
+    subtitle: "Measure which cohorts convert and which nudges actually pull users back.",
+    description: "Track which segments upgrade, which messages do the work, and where there's room to test. This is where the system stops being static and starts compounding.",
     icon: BarChart3,
   },
 ];
@@ -60,20 +54,17 @@ export function Framework() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {steps.map((step, index) => (
             <motion.div
-              key={step.letter}
+              key={step.title}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: index * 0.1 }}
               className="group p-8 bg-background rounded-xl border border-border hover:border-primary/20 hover:shadow-xl hover:shadow-black/5 hover:-translate-y-1 transition-all duration-300"
             >
-              <div className="flex items-start justify-between mb-6">
+              <div className="mb-6">
                 <div className="w-12 h-12 bg-white rounded-lg border border-black/5 flex items-center justify-center shadow-sm group-hover:bg-primary group-hover:text-white transition-colors duration-300">
                   <step.icon className="w-6 h-6" />
                 </div>
-                <span className="text-5xl font-bold text-black/5 group-hover:text-primary/10 transition-colors duration-300 font-display">
-                  {step.letter}
-                </span>
               </div>
 
               <h3 className="text-xl font-bold text-foreground mb-1 group-hover:text-primary transition-colors">

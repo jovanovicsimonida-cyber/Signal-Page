@@ -7,7 +7,7 @@ const buildFeatures = [
   "All the email copy",
   "Reverb micro-cycles",
   "Measurement plan",
-  "Everything documented — ready for your team to implement",
+  "Everything documented - ready for your team to implement",
   "Ongoing support for A/B testing, iteration, and campaign strategy",
 ];
 
@@ -85,7 +85,7 @@ export function AfterAudit() {
 
             <h3 className="text-2xl font-bold text-foreground mb-2">Build + Implement</h3>
             <p className="text-muted-foreground font-sans mb-6">
-              Same as Build — but the system gets wired directly into your tools. You end up with a live, running system.
+              Same as Build - but the system gets wired directly into your tools. You end up with a live, running system.
             </p>
 
             <ul className="space-y-3">

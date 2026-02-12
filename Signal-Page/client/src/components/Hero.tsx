@@ -18,7 +18,7 @@ export function Hero() {
                 Lifecycle Email Strategy
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-wide text-balance text-primary">Your trial-to-paid flow finally converts.</h1>
-              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">Users hit their Aha moment. Upgrades follow. The guesswork stops.</p>
+              <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">Users hit their AHA moments. Upgrades follow. The guesswork stops.</p>
             </div>
           </motion.div>
 
