@@ -2,14 +2,14 @@ import { motion } from "framer-motion";
 import { Check, ArrowRight, ClipboardCheck, Users, MapPin, AlertTriangle } from "lucide-react";
 
 const deliverables = [
-  "A documented JTBD + Aha map",
-  "Stall points identified and prioritized",
-  "A clear picture of what to build next",
+  "A map of JTBD, AHA moments, and stall points documented and prioritized",
+  "A clear sequence from signup to paid, with the gaps marked",
+  "A decision on what to fix first",
 ];
 
 const sessionCovers = [
   { icon: Users, text: "The core jobs your users hire your product for" },
-  { icon: MapPin, text: "The Aha moment for each job (in plain language and measurable events)" },
+  { icon: MapPin, text: "The AHA moments for each job (in plain language and measurable events)" },
   { icon: ArrowRight, text: "The value path from signup to paid" },
   { icon: AlertTriangle, text: "Where users stall and why" },
 ];
@@ -74,10 +74,13 @@ export function Offer() {
             </div>
 
             <p className="text-white/60 font-sans text-sm">
-              You can take the deliverables and implement yourself. Or continue to the Build phase where SIGNAL + Reverb kick in.
+              You can take the deliverables and implement them yourself.
             </p>
             <p className="text-white/60 font-sans text-sm mt-2">
-              Timeline: Workshop + deliverable in 1–2 weeks
+              Or continue to the Build phase where SIGNAL + Reverb kick in.
+            </p>
+            <p className="text-white/60 font-sans text-sm mt-2">
+              Timeline: Workshop + deliverables in 1-2 weeks
             </p>
             <p className="text-white/60 font-sans text-sm mt-2">
               One-time investment: $5,000
