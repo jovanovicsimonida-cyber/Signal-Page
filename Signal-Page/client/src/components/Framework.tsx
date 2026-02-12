@@ -114,7 +114,7 @@ export function Framework() {
                     REVERB Micro-Loops
                   </h3>
                   <p className="text-white/70 font-sans font-medium">
-                    A set of micro-loops that fire when a user stalls, before the trial dies.
+                    Short, targeted sequences that re-engage users the moment they stall, not after they've already churned.
                   </p>
                 </div>
               </div>
