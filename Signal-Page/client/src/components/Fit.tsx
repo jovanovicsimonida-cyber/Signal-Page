@@ -67,9 +67,9 @@ export function Fit() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="bg-primary p-8 md:p-10 rounded-2xl shadow-2xl relative overflow-hidden"
+          className="bg-primary p-8 md:p-10 rounded-2xl shadow-2xl relative overflow-hidden group"
         >
-          <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none">
+          <div className="absolute top-0 right-0 p-8 opacity-5 pointer-events-none group-hover:scale-110 transition-transform duration-700">
             <UserCheck className="w-48 h-48 text-white" />
           </div>
 

@@ -144,10 +144,10 @@ export function Framework() {
                   </div>
                 </div>
 
-                <div className="bg-white/5 backdrop-blur-sm rounded-xl border border-white/10 p-6 flex flex-col justify-center">
-                  <div className="flex flex-col gap-2">
-                    <span className="text-xs font-bold uppercase tracking-widest text-white/40 font-sans">Result</span>
-                    <p className="text-lg font-bold text-white leading-tight">
+                <div className="bg-white/15 backdrop-blur-sm rounded-xl border border-white/20 p-8 flex flex-col justify-center">
+                  <div className="flex flex-col gap-3">
+                    <span className="text-xs font-bold uppercase tracking-widest text-white/50 font-sans">Result</span>
+                    <p className="text-xl font-bold text-white leading-snug">
                       Fewer silent trials. Faster time-to-value. More upgrades without discounts.
                     </p>
                   </div>
