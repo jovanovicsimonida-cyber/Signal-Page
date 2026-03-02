@@ -1,0 +1,1568 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JTBD Mapping Tool — Signal</title>
+
+  <!-- Inter + JetBrains Mono from Google Fonts (per design system rule #10) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:ital,wght@0,400;1,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ── Design System: CSS Custom Properties ─────────────────────────────── */
+    :root {
+      /* Backgrounds */
+      --bg-primary:    #0a0a0a;
+      --bg-secondary:  #111111;
+      --bg-tertiary:   #1a1a1a;
+      --bg-surface:    #222222;
+
+      /* Text */
+      --text-primary:   #f5f5f5;
+      --text-secondary: #a0a0a0;
+      --text-muted:     #666666;
+      --text-inverse:   #0a0a0a;
+
+      /* Accent */
+      --accent-primary: #e8e8e8;
+      --accent-hover:   #ffffff;
+      --accent-subtle:  #333333;
+
+      /* Status */
+      --status-high:     #4ade80;
+      --status-medium:   #fbbf24;
+      --status-low:      #f87171;
+      --status-inferred: #a78bfa;
+
+      /* Forces */
+      --force-push:    #f97316;
+      --force-pull:    #3b82f6;
+      --force-anxiety: #ef4444;
+      --force-habit:   #8b5cf6;
+
+      /* Borders */
+      --border-default: #2a2a2a;
+      --border-hover:   #444444;
+      --border-focus:   #f5f5f5;
+
+      /* Typography */
+      --font-body: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      --font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', monospace;
+
+      --text-xs:   0.75rem;
+      --text-sm:   0.875rem;
+      --text-base: 1rem;
+      --text-lg:   1.125rem;
+      --text-xl:   1.25rem;
+      --text-2xl:  1.5rem;
+      --text-3xl:  2rem;
+
+      --font-normal:   400;
+      --font-medium:   500;
+      --font-semibold: 600;
+      --font-bold:     700;
+
+      --leading-tight:   1.25;
+      --leading-normal:  1.5;
+      --leading-relaxed: 1.75;
+
+      /* Spacing */
+      --space-1:  0.25rem;
+      --space-2:  0.5rem;
+      --space-3:  0.75rem;
+      --space-4:  1rem;
+      --space-5:  1.5rem;
+      --space-6:  2rem;
+      --space-8:  3rem;
+      --space-10: 4rem;
+
+      /* Radius */
+      --radius-sm: 4px;
+      --radius-md: 8px;
+      --radius-lg: 12px;
+    }
+
+    /* ── Reset + Base ─────────────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      font-family: var(--font-body);
+      font-size: var(--text-base);
+      line-height: var(--leading-normal);
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ── Layout ───────────────────────────────────────────────────────────── */
+    .app-container {
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: var(--space-6) var(--space-5);
+    }
+
+    /* ── Header ───────────────────────────────────────────────────────────── */
+    .app-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: var(--space-4) 0;
+      border-bottom: 1px solid var(--border-default);
+      margin-bottom: var(--space-6);
+    }
+    .app-header .logo {
+      font-size: var(--text-lg);
+      font-weight: var(--font-bold);
+      color: var(--text-primary);
+      letter-spacing: -0.02em;
+    }
+    .app-header .logo span {
+      color: var(--text-muted);
+      font-weight: var(--font-normal);
+    }
+    .header-actions {
+      display: flex;
+      gap: var(--space-3);
+      align-items: center;
+    }
+
+    /* ── Buttons ──────────────────────────────────────────────────────────── */
+    .btn-primary {
+      background: var(--accent-primary);
+      color: var(--text-inverse);
+      font-weight: var(--font-semibold);
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-sm);
+      border: none;
+      cursor: pointer;
+      transition: background 0.15s ease, transform 0.1s ease;
+      letter-spacing: 0.01em;
+      font-family: var(--font-body);
+    }
+    .btn-primary:hover { background: var(--accent-hover); transform: translateY(-1px); }
+    .btn-primary:disabled { opacity: 0.4; cursor: not-allowed; transform: none; }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--text-primary);
+      font-weight: var(--font-medium);
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-sm);
+      border: 1px solid var(--border-default);
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+      font-family: var(--font-body);
+    }
+    .btn-secondary:hover { border-color: var(--border-hover); background: var(--bg-tertiary); }
+
+    .btn-danger {
+      background: transparent;
+      color: var(--status-low);
+      border: 1px solid var(--status-low);
+      font-weight: var(--font-medium);
+      font-size: var(--text-sm);
+      padding: var(--space-3) var(--space-5);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      font-family: var(--font-body);
+      transition: background 0.15s ease;
+    }
+    .btn-danger:hover { background: rgba(248,113,113,0.08); }
+
+    .btn-icon {
+      background: transparent;
+      border: none;
+      color: var(--text-muted);
+      cursor: pointer;
+      padding: var(--space-2);
+      border-radius: var(--radius-sm);
+      transition: color 0.15s ease;
+      font-family: var(--font-body);
+      font-size: var(--text-sm);
+    }
+    .btn-icon:hover { color: var(--text-primary); }
+
+    /* ── Cards ────────────────────────────────────────────────────────────── */
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      transition: border-color 0.15s ease;
+    }
+    .card:hover { border-color: var(--border-hover); }
+
+    /* ── Inputs ───────────────────────────────────────────────────────────── */
+    input, textarea, select {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-base);
+      font-family: var(--font-body);
+      transition: border-color 0.15s ease;
+      width: 100%;
+    }
+    input:focus, textarea:focus, select:focus {
+      outline: none;
+      border-color: var(--border-focus);
+    }
+    input::placeholder, textarea::placeholder { color: var(--text-muted); }
+
+    select {
+      appearance: none;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23666' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+      background-repeat: no-repeat;
+      background-position: right 12px center;
+      padding-right: 36px;
+    }
+
+    label {
+      display: block;
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-2);
+    }
+
+    .form-group { margin-bottom: var(--space-4); }
+
+    /* ── Tabs ─────────────────────────────────────────────────────────────── */
+    .tab-bar {
+      display: flex;
+      gap: 0;
+      border-bottom: 1px solid var(--border-default);
+      margin-bottom: var(--space-6);
+      overflow-x: auto;
+    }
+    .tab {
+      color: var(--text-secondary);
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 2px solid transparent;
+      cursor: pointer;
+      transition: color 0.15s ease, border-color 0.15s ease;
+      white-space: nowrap;
+      background: none;
+      border-top: none;
+      border-left: none;
+      border-right: none;
+      font-family: var(--font-body);
+    }
+    .tab:hover { color: var(--text-primary); }
+    .tab.active { color: var(--text-primary); border-bottom-color: var(--text-primary); }
+
+    /* ── Upload Zone ──────────────────────────────────────────────────────── */
+    .upload-zone {
+      border: 2px dashed var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-8);
+      text-align: center;
+      color: var(--text-secondary);
+      cursor: pointer;
+      transition: border-color 0.15s ease, background 0.15s ease;
+    }
+    .upload-zone:hover, .upload-zone.dragover {
+      border-color: var(--text-secondary);
+      background: var(--bg-tertiary);
+    }
+    .upload-zone svg { margin-bottom: var(--space-3); opacity: 0.5; }
+    .upload-zone .upload-hint { font-size: var(--text-sm); margin-top: var(--space-2); color: var(--text-muted); }
+
+    /* ── Force Cards ──────────────────────────────────────────────────────── */
+    .force-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      margin-bottom: var(--space-4);
+    }
+    .force-card--push    { border-left: 3px solid var(--force-push); }
+    .force-card--pull    { border-left: 3px solid var(--force-pull); }
+    .force-card--anxiety { border-left: 3px solid var(--force-anxiety); }
+    .force-card--habit   { border-left: 3px solid var(--force-habit); }
+
+    /* ── Force Labels ─────────────────────────────────────────────────────── */
+    .force-label {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .force-label--push    { color: var(--force-push);    background: rgba(249,115,22,0.1); }
+    .force-label--pull    { color: var(--force-pull);    background: rgba(59,130,246,0.1); }
+    .force-label--anxiety { color: var(--force-anxiety); background: rgba(239,68,68,0.1); }
+    .force-label--habit   { color: var(--force-habit);   background: rgba(139,92,246,0.1); }
+
+    /* ── Verbatim Quotes ──────────────────────────────────────────────────── */
+    .verbatim-quote {
+      font-family: var(--font-mono);
+      font-size: var(--text-sm);
+      font-style: italic;
+      color: var(--text-primary);
+      background: var(--bg-tertiary);
+      border-left: 3px solid var(--border-hover);
+      padding: var(--space-3) var(--space-4);
+      margin: var(--space-3) 0;
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      line-height: var(--leading-relaxed);
+    }
+    .verbatim-quote .source-ref {
+      display: block;
+      font-style: normal;
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      margin-top: var(--space-2);
+      font-family: var(--font-body);
+    }
+
+    /* ── Confidence Badges ────────────────────────────────────────────────── */
+    .confidence-badge {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+    .confidence-badge--high   { color: var(--status-high);     background: rgba(74,222,128,0.1); }
+    .confidence-badge--medium { color: var(--status-medium);   background: rgba(251,191,36,0.1); }
+    .confidence-badge--low    { color: var(--status-low);      background: rgba(248,113,113,0.1); }
+
+    .inferred-badge {
+      display: inline-block;
+      color: var(--status-inferred);
+      background: rgba(167,139,250,0.1);
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      padding: 2px 8px;
+      border-radius: 3px;
+    }
+
+    /* ── Job Story Cards ──────────────────────────────────────────────────── */
+    .job-story-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      margin-bottom: var(--space-4);
+    }
+    .job-story-card:hover { border-color: var(--border-hover); }
+    .job-story-when, .job-story-want, .job-story-so { margin-bottom: var(--space-3); }
+    .job-story-label {
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      margin-bottom: var(--space-1);
+    }
+    .job-story-text {
+      font-size: var(--text-base);
+      color: var(--text-primary);
+      line-height: var(--leading-normal);
+    }
+
+    /* ── Progress Bar ─────────────────────────────────────────────────────── */
+    .progress-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      margin: var(--space-4) 0;
+      overflow: hidden;
+    }
+    .progress-bar .fill {
+      height: 100%;
+      background: var(--text-primary);
+      transition: width 0.3s ease;
+      border-radius: 2px;
+    }
+
+    /* ── Analysis Status ──────────────────────────────────────────────────── */
+    .analysis-status {
+      text-align: center;
+      padding: var(--space-8);
+    }
+    .analysis-status .step-label {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-bottom: var(--space-2);
+    }
+    .analysis-status .step-name {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+    }
+
+    /* ── Empty States ─────────────────────────────────────────────────────── */
+    .empty-state {
+      text-align: center;
+      padding: var(--space-10) var(--space-5);
+      color: var(--text-secondary);
+    }
+    .empty-state .title {
+      font-size: var(--text-xl);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .empty-state .description {
+      font-size: var(--text-base);
+      max-width: 480px;
+      margin: 0 auto var(--space-5);
+      line-height: var(--leading-relaxed);
+    }
+
+    /* ── Results Layout ───────────────────────────────────────────────────── */
+    .results-layout {
+      display: grid;
+      grid-template-columns: 220px 1fr;
+      gap: var(--space-5);
+    }
+    .results-sidebar {
+      position: sticky;
+      top: var(--space-5);
+      align-self: start;
+    }
+    .sidebar-nav { display: flex; flex-direction: column; gap: var(--space-1); }
+    .sidebar-nav-item {
+      font-size: var(--text-sm);
+      font-weight: var(--font-medium);
+      color: var(--text-secondary);
+      padding: var(--space-2) var(--space-3);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      transition: color 0.15s ease, background 0.15s ease;
+      background: none;
+      border: none;
+      text-align: left;
+      font-family: var(--font-body);
+      width: 100%;
+    }
+    .sidebar-nav-item:hover { color: var(--text-primary); background: var(--bg-tertiary); }
+    .sidebar-nav-item.active { color: var(--text-primary); background: var(--bg-tertiary); }
+
+    /* ── Misc Helpers ─────────────────────────────────────────────────────── */
+    .section-heading {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-5);
+    }
+    .subsection-heading {
+      font-size: var(--text-xl);
+      font-weight: var(--font-medium);
+      color: var(--text-primary);
+      margin-bottom: var(--space-4);
+    }
+    .page-title {
+      font-size: var(--text-3xl);
+      font-weight: var(--font-bold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .text-secondary { color: var(--text-secondary); }
+    .text-muted     { color: var(--text-muted); font-size: var(--text-xs); }
+
+    .divider {
+      border: none;
+      border-top: 1px solid var(--border-default);
+      margin: var(--space-5) 0;
+    }
+
+    .badge-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
+    }
+
+    /* File list */
+    .file-list { display: flex; flex-direction: column; gap: var(--space-3); margin-top: var(--space-4); }
+    .file-item {
+      display: flex;
+      align-items: center;
+      gap: var(--space-3);
+      background: var(--bg-tertiary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-4);
+    }
+    .file-item .file-name {
+      flex: 1;
+      font-size: var(--text-sm);
+      color: var(--text-primary);
+      font-weight: var(--font-medium);
+    }
+    .file-item .file-size { font-size: var(--text-xs); color: var(--text-muted); }
+    .file-item select { width: 180px; font-size: var(--text-sm); padding: var(--space-2) var(--space-3); }
+
+    /* Project list cards */
+    .project-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--space-4); }
+    .project-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .project-card:hover { border-color: var(--border-hover); }
+    .project-card .project-name {
+      font-size: var(--text-lg);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .project-card .project-meta {
+      font-size: var(--text-xs);
+      color: var(--text-muted);
+      display: flex;
+      gap: var(--space-3);
+    }
+
+    .status-pill {
+      display: inline-block;
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      padding: 2px 8px;
+      border-radius: 3px;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .status-pill--draft     { color: var(--text-muted);   background: var(--bg-tertiary); }
+    .status-pill--analyzing { color: var(--status-medium); background: rgba(251,191,36,0.1); }
+    .status-pill--complete  { color: var(--status-high);   background: rgba(74,222,128,0.1); }
+    .status-pill--error     { color: var(--status-low);    background: rgba(248,113,113,0.1); }
+
+    /* Cluster section */
+    .cluster-block {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      margin-bottom: var(--space-6);
+    }
+    .cluster-header {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      margin-bottom: var(--space-4);
+    }
+    .cluster-label {
+      font-size: var(--text-xl);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+    }
+    .cluster-job-statement {
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-top: var(--space-1);
+      line-height: var(--leading-relaxed);
+    }
+    .forces-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--space-4);
+    }
+
+    /* Signal item */
+    .signal-item { margin-bottom: var(--space-3); }
+    .signal-text {
+      font-size: var(--text-sm);
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+      line-height: var(--leading-normal);
+    }
+
+    /* Quote bank */
+    .quote-bank-filters {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-5);
+      flex-wrap: wrap;
+    }
+    .quote-bank-filters input { flex: 1; min-width: 200px; }
+    .quote-bank-filters select { width: 160px; }
+
+    /* Modal / panel overlay */
+    .overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.7);
+      z-index: 100;
+      display: flex;
+      align-items: flex-start;
+      justify-content: flex-end;
+    }
+    .panel {
+      background: var(--bg-secondary);
+      border-left: 1px solid var(--border-default);
+      width: 400px;
+      max-width: 100vw;
+      height: 100vh;
+      overflow-y: auto;
+      padding: var(--space-6);
+    }
+    .panel-title {
+      font-size: var(--text-2xl);
+      font-weight: var(--font-semibold);
+      margin-bottom: var(--space-5);
+    }
+    .hidden { display: none !important; }
+
+    /* ODI table */
+    table { width: 100%; border-collapse: collapse; font-size: var(--text-sm); }
+    th {
+      text-align: left;
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-xs);
+      font-weight: var(--font-semibold);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-default);
+    }
+    td {
+      padding: var(--space-3) var(--space-4);
+      border-bottom: 1px solid var(--border-default);
+      color: var(--text-primary);
+      vertical-align: top;
+    }
+    tr:last-child td { border-bottom: none; }
+
+    /* Export buttons row */
+    .export-row {
+      display: flex;
+      gap: var(--space-3);
+      margin-bottom: var(--space-6);
+    }
+
+    /* Mode selector cards */
+    .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: var(--space-4); margin-bottom: var(--space-5); }
+    .mode-card {
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border-default);
+      border-radius: var(--radius-md);
+      padding: var(--space-5);
+      cursor: pointer;
+      transition: border-color 0.15s ease;
+    }
+    .mode-card:hover { border-color: var(--border-hover); }
+    .mode-card.selected { border-color: var(--text-primary); }
+    .mode-card .mode-title {
+      font-size: var(--text-base);
+      font-weight: var(--font-semibold);
+      color: var(--text-primary);
+      margin-bottom: var(--space-2);
+    }
+    .mode-card .mode-desc { font-size: var(--text-sm); color: var(--text-secondary); line-height: var(--leading-relaxed); }
+
+    .net-force-note {
+      background: var(--bg-tertiary);
+      border-radius: var(--radius-sm);
+      padding: var(--space-3) var(--space-4);
+      font-size: var(--text-sm);
+      color: var(--text-secondary);
+      margin-top: var(--space-4);
+      line-height: var(--leading-relaxed);
+    }
+
+    @media (max-width: 768px) {
+      .results-layout { grid-template-columns: 1fr; }
+      .results-sidebar { position: static; }
+      .forces-grid { grid-template-columns: 1fr; }
+      .mode-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<div class="app-container">
+
+  <!-- ── Header ─────────────────────────────────────────────────────────── -->
+  <header class="app-header">
+    <div class="logo">JTBD <span>/ Signal</span></div>
+    <div class="header-actions">
+      <button class="btn-secondary" onclick="showSettings()">Settings</button>
+    </div>
+  </header>
+
+  <!-- ── Screen: Dashboard ──────────────────────────────────────────────── -->
+  <div id="screen-dashboard">
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:var(--space-6);">
+      <div>
+        <h1 class="page-title">Projects</h1>
+        <p class="text-secondary" style="font-size:var(--text-base);">Map the forces driving and blocking your customers' switching decisions.</p>
+      </div>
+      <button class="btn-primary" onclick="showNewProject()">New Project</button>
+    </div>
+
+    <div id="project-list-container">
+      <div class="empty-state" id="projects-empty">
+        <div class="title">No projects yet</div>
+        <div class="description">Create a project, upload your data, and let the tool extract JTBD forces maps and job stories.</div>
+        <button class="btn-primary" onclick="showNewProject()">Create first project</button>
+      </div>
+      <div class="project-grid" id="project-grid"></div>
+    </div>
+  </div>
+
+  <!-- ── Screen: New Project ────────────────────────────────────────────── -->
+  <div id="screen-new-project" class="hidden">
+    <button class="btn-icon" onclick="showDashboard()" style="margin-bottom:var(--space-4);">
+      &larr; Back
+    </button>
+    <h1 class="page-title" style="margin-bottom:var(--space-6);">New Project</h1>
+
+    <div class="card" style="max-width:600px;">
+      <div class="form-group">
+        <label for="project-name-input">Project name</label>
+        <input type="text" id="project-name-input" placeholder="e.g. Q2 Customer Research — SMB segment" />
+      </div>
+
+      <div class="form-group">
+        <label>Analysis mode</label>
+        <div class="mode-grid">
+          <div class="mode-card selected" id="mode-without" onclick="selectMode('without_interviews')">
+            <div class="mode-title">Without interviews</div>
+            <div class="mode-desc">Sales calls, support tickets, and product usage data. Extracts Forces of Progress signals from each source and synthesizes them into a unified map.</div>
+          </div>
+          <div class="mode-card" id="mode-with" onclick="selectMode('with_interviews')">
+            <div class="mode-title">With interviews</div>
+            <div class="mode-desc">Adds Switch Interview analysis on top. Reconstructs the full buying timeline and produces richer forces maps and sharper Job Stories.</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display:flex; gap:var(--space-3);">
+        <button class="btn-primary" onclick="createProject()">Create Project</button>
+        <button class="btn-secondary" onclick="showDashboard()">Cancel</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── Screen: Upload ─────────────────────────────────────────────────── -->
+  <div id="screen-upload" class="hidden">
+    <button class="btn-icon" onclick="showDashboard()" style="margin-bottom:var(--space-4);">&larr; Back to projects</button>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:var(--space-5);">
+      <div>
+        <h1 class="page-title" id="upload-project-name"></h1>
+        <p class="text-secondary" id="upload-mode-label" style="font-size:var(--text-sm);margin-top:var(--space-1);"></p>
+      </div>
+      <button class="btn-primary" id="run-analysis-btn" disabled onclick="runAnalysis()">Run Analysis</button>
+    </div>
+
+    <!-- Upload zone -->
+    <div class="upload-zone" id="upload-zone"
+         ondragover="handleDragOver(event)"
+         ondragleave="handleDragLeave(event)"
+         ondrop="handleDrop(event)"
+         onclick="document.getElementById('file-input').click()">
+      <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4M17 8l-5-5-5 5M12 3v12"/>
+      </svg>
+      <div style="font-size:var(--text-base); color:var(--text-secondary);">Drop files here or click to upload</div>
+      <div class="upload-hint">Supports .txt, .docx, .pdf, .csv</div>
+      <input type="file" id="file-input" multiple accept=".txt,.docx,.pdf,.csv" style="display:none" onchange="handleFileSelect(event)" />
+    </div>
+
+    <div class="file-list" id="file-list"></div>
+  </div>
+
+  <!-- ── Screen: Results ────────────────────────────────────────────────── -->
+  <div id="screen-results" class="hidden">
+    <button class="btn-icon" onclick="showDashboard()" style="margin-bottom:var(--space-4);">&larr; Back to projects</button>
+    <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:var(--space-4);">
+      <h1 class="page-title" id="results-project-name"></h1>
+      <div class="export-row">
+        <button class="btn-secondary" onclick="exportResults('markdown')">Export MD</button>
+        <button class="btn-secondary" onclick="exportResults('json')">Export JSON</button>
+        <button class="btn-secondary" onclick="exportResults('csv')">Export CSV</button>
+        <button class="btn-secondary" id="odi-btn" onclick="runOdi()">Run ODI Scoring</button>
+      </div>
+    </div>
+
+    <div class="results-layout">
+      <!-- Sidebar -->
+      <aside class="results-sidebar">
+        <nav class="sidebar-nav">
+          <button class="sidebar-nav-item active" onclick="showResultTab('forces-map', this)">Forces Map</button>
+          <button class="sidebar-nav-item" onclick="showResultTab('job-stories', this)">Job Stories</button>
+          <button class="sidebar-nav-item" onclick="showResultTab('per-source', this)">Per-Source Details</button>
+          <button class="sidebar-nav-item" onclick="showResultTab('odi', this)">ODI Scoring</button>
+          <button class="sidebar-nav-item" onclick="showResultTab('blind-spots', this)">Blind Spots</button>
+          <button class="sidebar-nav-item" onclick="showResultTab('quote-bank', this)">Quote Bank</button>
+        </nav>
+      </aside>
+
+      <!-- Main content -->
+      <main>
+        <!-- Analyzing state -->
+        <div id="analyzing-state" class="hidden">
+          <div class="analysis-status">
+            <div class="step-label">Running analysis</div>
+            <div class="step-name" id="analysis-step-name">Extracting signals from sources...</div>
+            <div class="progress-bar"><div class="fill" id="progress-fill" style="width:30%"></div></div>
+            <p class="text-secondary" style="font-size:var(--text-sm); margin-top:var(--space-3);">This may take a minute depending on your LLM provider and data volume.</p>
+          </div>
+        </div>
+
+        <!-- Forces Map tab -->
+        <div id="tab-forces-map">
+          <div id="forces-map-content"></div>
+        </div>
+
+        <!-- Job Stories tab -->
+        <div id="tab-job-stories" class="hidden">
+          <div id="job-stories-content"></div>
+        </div>
+
+        <!-- Per-Source tab -->
+        <div id="tab-per-source" class="hidden">
+          <div id="per-source-content"></div>
+        </div>
+
+        <!-- ODI tab -->
+        <div id="tab-odi" class="hidden">
+          <div id="odi-content">
+            <div class="empty-state">
+              <div class="title">ODI Scoring not run yet</div>
+              <div class="description">Click "Run ODI Scoring" to generate a prioritized opportunity list based on importance and satisfaction proxies from your data.</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Blind Spots tab -->
+        <div id="tab-blind-spots" class="hidden">
+          <div id="blind-spots-content"></div>
+        </div>
+
+        <!-- Quote Bank tab -->
+        <div id="tab-quote-bank" class="hidden">
+          <div id="quote-bank-content"></div>
+        </div>
+      </main>
+    </div>
+  </div>
+
+</div><!-- /.app-container -->
+
+<!-- ── Settings Panel ───────────────────────────────────────────────────── -->
+<div class="overlay hidden" id="settings-overlay" onclick="if(event.target===this)closeSettings()">
+  <div class="panel">
+    <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:var(--space-5);">
+      <h2 class="panel-title" style="margin-bottom:0;">Settings</h2>
+      <button class="btn-icon" onclick="closeSettings()">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+
+    <div class="form-group">
+      <label for="s-provider">LLM Provider</label>
+      <select id="s-provider" onchange="updateModelSuggestions()">
+        <option value="openai">OpenAI</option>
+        <option value="anthropic">Anthropic</option>
+        <option value="gemini">Google Gemini</option>
+        <option value="ollama">Ollama (local)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="s-model">Model</label>
+      <input type="text" id="s-model" placeholder="e.g. gpt-4o-mini" />
+      <div id="model-suggestions" style="margin-top:var(--space-2); font-size:var(--text-xs); color:var(--text-muted); line-height:var(--leading-relaxed);"></div>
+    </div>
+
+    <div class="form-group" id="api-key-group">
+      <label for="s-api-key">API Key</label>
+      <input type="password" id="s-api-key" placeholder="sk-..." />
+    </div>
+
+    <div class="form-group hidden" id="ollama-url-group">
+      <label for="s-ollama-url">Ollama Base URL</label>
+      <input type="text" id="s-ollama-url" value="http://localhost:11434" />
+    </div>
+
+    <div style="display:flex; gap:var(--space-3); margin-top:var(--space-5);">
+      <button class="btn-primary" onclick="saveSettings()">Save</button>
+      <button class="btn-secondary" onclick="testConnection()">Test connection</button>
+    </div>
+    <div id="settings-status" style="margin-top:var(--space-3); font-size:var(--text-sm);"></div>
+  </div>
+</div>
+
+<script>
+// ── State ──────────────────────────────────────────────────────────────────
+let currentProjectId = null;
+let currentProjectName = '';
+let currentResults = {};
+let allQuotes = [];
+let pollTimer = null;
+let selectedMode = 'without_interviews';
+
+const MODEL_SUGGESTIONS = {
+  openai:    'gpt-4o-mini (cheapest), gpt-4o (better quality)',
+  anthropic: 'claude-haiku-4-5-20251001 (cheap), claude-sonnet-4-6 (balanced)',
+  gemini:    'gemini-2.5-flash (cheapest), gemini-2.5-pro (better)',
+  ollama:    'llama3:8b (free/local), mistral (free/local)',
+};
+
+// ── Navigation ─────────────────────────────────────────────────────────────
+function showScreen(id) {
+  ['screen-dashboard','screen-new-project','screen-upload','screen-results']
+    .forEach(s => document.getElementById(s).classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+
+async function showDashboard() {
+  stopPolling();
+  showScreen('screen-dashboard');
+  await loadProjects();
+}
+
+function showNewProject() {
+  document.getElementById('project-name-input').value = '';
+  selectMode('without_interviews');
+  showScreen('screen-new-project');
+}
+
+async function showUpload(projectId, projectName, analysisMode) {
+  currentProjectId = projectId;
+  currentProjectName = projectName;
+  document.getElementById('upload-project-name').textContent = projectName;
+  document.getElementById('upload-mode-label').textContent =
+    analysisMode === 'with_interviews'
+      ? 'Mode: with interviews (Switch Interview analysis enabled)'
+      : 'Mode: without interviews';
+  showScreen('screen-upload');
+  await loadSources();
+}
+
+async function showResults(projectId, projectName) {
+  currentProjectId = projectId;
+  currentProjectName = projectName;
+  document.getElementById('results-project-name').textContent = projectName;
+  showScreen('screen-results');
+
+  // Reset tabs
+  showResultTab('forces-map', document.querySelector('.sidebar-nav-item'));
+
+  const project = await fetchJSON(`/api/projects`).then(ps => ps.find(p => p.id === projectId));
+  if (project && project.status === 'analyzing') {
+    startPolling();
+  } else {
+    await loadResults();
+  }
+}
+
+function showResultTab(tabId, btn) {
+  ['tab-forces-map','tab-job-stories','tab-per-source','tab-odi','tab-blind-spots','tab-quote-bank']
+    .forEach(t => document.getElementById(t).classList.add('hidden'));
+  document.querySelectorAll('.sidebar-nav-item').forEach(b => b.classList.remove('active'));
+  document.getElementById(`tab-${tabId}`).classList.remove('hidden');
+  if (btn) btn.classList.add('active');
+}
+
+// ── Project CRUD ───────────────────────────────────────────────────────────
+async function loadProjects() {
+  const projects = await fetchJSON('/api/projects');
+  const grid = document.getElementById('project-grid');
+  const empty = document.getElementById('projects-empty');
+
+  if (!projects.length) {
+    grid.innerHTML = '';
+    empty.classList.remove('hidden');
+    return;
+  }
+  empty.classList.add('hidden');
+
+  grid.innerHTML = projects.map(p => `
+    <div class="project-card" onclick="openProject(${p.id}, '${esc(p.name)}', '${p.analysis_mode}', '${p.status}')">
+      <div style="display:flex; justify-content:space-between; align-items:start; margin-bottom:var(--space-3);">
+        <div class="project-name">${esc(p.name)}</div>
+        <span class="status-pill status-pill--${p.status}">${p.status}</span>
+      </div>
+      <div class="project-meta">
+        <span>${p.source_count} source${p.source_count !== 1 ? 's' : ''}</span>
+        <span>${p.analysis_mode === 'with_interviews' ? 'With interviews' : 'Without interviews'}</span>
+        <span>${formatDate(p.created_at)}</span>
+      </div>
+    </div>
+  `).join('');
+}
+
+function openProject(id, name, mode, status) {
+  if (status === 'complete' || status === 'error') {
+    showResults(id, name);
+  } else {
+    showUpload(id, name, mode);
+  }
+}
+
+function selectMode(mode) {
+  selectedMode = mode;
+  document.getElementById('mode-without').classList.toggle('selected', mode === 'without_interviews');
+  document.getElementById('mode-with').classList.toggle('selected',    mode === 'with_interviews');
+}
+
+async function createProject() {
+  const name = document.getElementById('project-name-input').value.trim();
+  if (!name) { alert('Enter a project name'); return; }
+
+  const project = await fetchJSON('/api/projects', {
+    method: 'POST',
+    headers: {'Content-Type': 'application/json'},
+    body: JSON.stringify({ name, analysis_mode: selectedMode }),
+  });
+  await showUpload(project.id, project.name, project.analysis_mode);
+}
+
+// ── Upload ─────────────────────────────────────────────────────────────────
+async function loadSources() {
+  const sources = await fetchJSON(`/api/projects/${currentProjectId}/sources`);
+  renderFileList(sources);
+}
+
+function renderFileList(sources) {
+  const list = document.getElementById('file-list');
+  const btn  = document.getElementById('run-analysis-btn');
+
+  if (!sources.length) {
+    list.innerHTML = '';
+    btn.disabled = true;
+    return;
+  }
+  btn.disabled = false;
+
+  list.innerHTML = sources.map(s => `
+    <div class="file-item" id="file-item-${s.id}">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" style="color:var(--text-muted);flex-shrink:0;"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+      <span class="file-name">${esc(s.filename)}</span>
+      <span class="file-size">${formatBytes(s.char_count)} chars</span>
+      <select onchange="updateSourceType(${s.id}, this.value)">
+        <option value="sales_call"      ${s.source_type==='sales_call'      ?'selected':''}>Sales call</option>
+        <option value="support_ticket"  ${s.source_type==='support_ticket'  ?'selected':''}>Support tickets</option>
+        <option value="product_usage"   ${s.source_type==='product_usage'   ?'selected':''}>Product usage</option>
+        <option value="interview"       ${s.source_type==='interview'       ?'selected':''}>Interview transcript</option>
+      </select>
+      <button class="btn-icon" onclick="deleteSource(${s.id})" title="Remove">
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </div>
+  `).join('');
+}
+
+function handleDragOver(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.add('dragover');
+}
+function handleDragLeave(e) {
+  document.getElementById('upload-zone').classList.remove('dragover');
+}
+function handleDrop(e) {
+  e.preventDefault();
+  document.getElementById('upload-zone').classList.remove('dragover');
+  uploadFiles(Array.from(e.dataTransfer.files));
+}
+function handleFileSelect(e) {
+  uploadFiles(Array.from(e.target.files));
+  e.target.value = '';
+}
+
+async function uploadFiles(files) {
+  for (const file of files) {
+    const fd = new FormData();
+    fd.append('file', file);
+    fd.append('source_type', 'sales_call'); // default, user can change
+    await fetchJSON(`/api/projects/${currentProjectId}/sources`, { method: 'POST', body: fd });
+  }
+  await loadSources();
+}
+
+async function updateSourceType(sourceId, newType) {
+  const fd = new FormData();
+  fd.append('source_type', newType);
+  await fetchJSON(`/api/projects/${currentProjectId}/sources/${sourceId}`, { method: 'PATCH', body: fd });
+}
+
+async function deleteSource(sourceId) {
+  await fetch(`/api/projects/${currentProjectId}/sources/${sourceId}`, { method: 'DELETE' });
+  await loadSources();
+}
+
+async function runAnalysis() {
+  await fetchJSON(`/api/projects/${currentProjectId}/analyze`, { method: 'POST' });
+  await showResults(currentProjectId, currentProjectName);
+  startPolling();
+}
+
+// ── Polling ────────────────────────────────────────────────────────────────
+function startPolling() {
+  document.getElementById('analyzing-state').classList.remove('hidden');
+  animateProgress();
+  pollTimer = setInterval(async () => {
+    const status = await fetchJSON(`/api/projects/${currentProjectId}/status`);
+    if (status.status === 'complete') {
+      stopPolling();
+      await loadResults();
+    } else if (status.status === 'error') {
+      stopPolling();
+      document.getElementById('analysis-step-name').textContent = 'Analysis failed. Check your LLM settings and try again.';
+    }
+  }, 3000);
+}
+
+function stopPolling() {
+  if (pollTimer) { clearInterval(pollTimer); pollTimer = null; }
+}
+
+let progressVal = 10;
+function animateProgress() {
+  progressVal = 10;
+  const steps = ['Parsing source files...', 'Extracting forces from sources...', 'Running synthesis...', 'Generating job stories...', 'Finalizing results...'];
+  let stepIdx = 0;
+  const iv = setInterval(() => {
+    if (!pollTimer) { clearInterval(iv); return; }
+    progressVal = Math.min(progressVal + 8, 90);
+    document.getElementById('progress-fill').style.width = progressVal + '%';
+    if (stepIdx < steps.length && progressVal > (stepIdx + 1) * 18) {
+      document.getElementById('analysis-step-name').textContent = steps[stepIdx++];
+    }
+  }, 1500);
+}
+
+// ── Results rendering ──────────────────────────────────────────────────────
+async function loadResults() {
+  document.getElementById('analyzing-state').classList.add('hidden');
+  document.getElementById('progress-fill').style.width = '100%';
+
+  const data = await fetchJSON(`/api/projects/${currentProjectId}/results`);
+  currentResults = data.results;
+  allQuotes = [];
+
+  renderForcesMap(currentResults.synthesis);
+  renderJobStories(currentResults.job_stories);
+  renderPerSource(currentResults);
+  renderBlindSpots(currentResults.synthesis);
+  renderQuoteBank();
+  if (currentResults.odi_scoring) renderOdi(currentResults.odi_scoring);
+}
+
+function renderForcesMap(synthesis) {
+  const el = document.getElementById('forces-map-content');
+  if (!synthesis) { el.innerHTML = emptyState('No synthesis yet', 'Run analysis to generate the forces map.'); return; }
+
+  const clusters = synthesis.unified_forces_map?.job_clusters || [];
+  const stalls = synthesis.conversion_stalls || [];
+
+  let html = `<h2 class="section-heading">Forces Map</h2>`;
+
+  clusters.forEach((cluster, i) => {
+    html += `
+      <div class="cluster-block">
+        <div class="cluster-header">
+          <div>
+            <div class="cluster-label">${esc(cluster.cluster_label || `Cluster ${i+1}`)}</div>
+            <div class="cluster-job-statement">${esc(cluster.core_job_statement || '')}</div>
+          </div>
+          <span class="status-pill status-pill--${cluster.priority === 'high' ? 'complete' : cluster.priority === 'low' ? 'error' : 'analyzing'}">${cluster.priority || '?'} priority</span>
+        </div>
+        <div class="forces-grid">
+          ${renderForceSection('push',    cluster.push)}
+          ${renderForceSection('pull',    cluster.pull)}
+          ${renderForceSection('anxiety', cluster.anxiety)}
+          ${renderForceSection('habit',   cluster.habit)}
+        </div>
+        ${cluster.net_force_assessment ? `<div class="net-force-note">${esc(cluster.net_force_assessment)}</div>` : ''}
+      </div>
+    `;
+  });
+
+  if (stalls.length) {
+    html += `<h2 class="section-heading" style="margin-top:var(--space-8);">Conversion Stalls</h2>`;
+    stalls.forEach(stall => {
+      html += `
+        <div class="card" style="margin-bottom:var(--space-4);">
+          <div style="display:flex; gap:var(--space-3); align-items:start; margin-bottom:var(--space-3);">
+            <span class="force-label force-label--${stall.dominant_blocking_force}">${stall.dominant_blocking_force || 'unknown'}</span>
+          </div>
+          <p style="font-size:var(--text-base); margin-bottom:var(--space-3);">${esc(stall.stall_description)}</p>
+          ${(stall.verbatim_evidence||[]).map(q => renderQuote(q.quote, q.source_type, q.source_file, '')).join('')}
+          ${stall.recommended_intervention_type ? `<p class="text-secondary" style="font-size:var(--text-sm);margin-top:var(--space-3);">Intervention: ${esc(stall.recommended_intervention_type)}</p>` : ''}
+        </div>
+      `;
+    });
+  }
+
+  el.innerHTML = html;
+}
+
+function renderForceSection(force, data) {
+  if (!data) return '';
+  const signals = data.signals || [];
+  const conf = data.confidence || data.strength || '';
+
+  // Collect quotes for quote bank
+  signals.forEach(sig => {
+    (sig.verbatim_quotes || []).forEach(q => {
+      allQuotes.push({ ...q, force, signal: sig.signal, is_inferred: sig.is_inferred });
+    });
+  });
+
+  return `
+    <div class="force-card force-card--${force}">
+      <div class="badge-row">
+        <span class="force-label force-label--${force}">${force}</span>
+        ${conf ? `<span class="confidence-badge confidence-badge--${conf}">${conf}</span>` : ''}
+      </div>
+      ${signals.map(sig => `
+        <div class="signal-item">
+          <div class="signal-text">${esc(sig.signal)}</div>
+          ${sig.is_inferred ? `<span class="inferred-badge">inferred</span> <span style="font-size:var(--text-xs);color:var(--text-muted);">${esc(sig.inference_note||'')}</span>` : ''}
+          ${(sig.verbatim_quotes||[]).map(q =>
+            renderQuote(q.quote, q.source_type || q.source_file, q.source_file, q.location, q.speaker_or_author || q.speaker)
+          ).join('')}
+        </div>
+      `).join('')}
+    </div>
+  `;
+}
+
+function renderQuote(quote, sourceType, sourceFile, location, speaker) {
+  const parts = [sourceType, sourceFile, speaker, location].filter(Boolean);
+  return `
+    <div class="verbatim-quote">
+      "${esc(quote || '')}"
+      <span class="source-ref">${parts.map(esc).join(' · ')}</span>
+    </div>
+  `;
+}
+
+function renderJobStories(data) {
+  const el = document.getElementById('job-stories-content');
+  if (!data) { el.innerHTML = emptyState('No job stories yet', 'Run analysis first.'); return; }
+
+  const stories = data.job_stories || [];
+  let html = `<h2 class="section-heading">Job Stories</h2>`;
+
+  if (!stories.length) { el.innerHTML = html + emptyState('No stories found', 'The analysis did not produce job stories.'); return; }
+
+  stories.forEach((story, i) => {
+    const s = story.story || {};
+    const fc = story.force_context || {};
+    const ot = story.operational_triggers || {};
+    html += `
+      <div class="job-story-card">
+        <div style="display:flex; gap:var(--space-3); align-items:center; margin-bottom:var(--space-4);">
+          ${fc.primary_force ? `<span class="force-label force-label--${fc.primary_force}">${fc.primary_force}</span>` : ''}
+          <span class="confidence-badge confidence-badge--${story.confidence||'medium'}">${story.confidence||'?'}</span>
+          <span class="text-muted">${esc(story.cluster||'')}</span>
+        </div>
+        <div class="job-story-when">
+          <div class="job-story-label">When</div>
+          <div class="job-story-text">${esc(s.when||'')}</div>
+        </div>
+        <div class="job-story-want">
+          <div class="job-story-label">I want to</div>
+          <div class="job-story-text">${esc(s.i_want_to||'')}</div>
+        </div>
+        <div class="job-story-so">
+          <div class="job-story-label">So I can</div>
+          <div class="job-story-text">${esc(s.so_i_can||'')}</div>
+        </div>
+
+        ${fc.how_it_addresses_it ? `
+          <hr class="divider"/>
+          <p style="font-size:var(--text-sm);color:var(--text-secondary);">${esc(fc.how_it_addresses_it)}</p>
+        ` : ''}
+
+        ${ot.entry_trigger ? `
+          <hr class="divider"/>
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:var(--space-4); font-size:var(--text-sm);">
+            <div><div class="job-story-label">Entry trigger</div><div>${esc(ot.entry_trigger)}</div></div>
+            <div><div class="job-story-label">Channel</div><div>${esc(ot.channel||'')}</div></div>
+            <div><div class="job-story-label">Micro-win</div><div>${esc(ot.micro_win||'')}</div></div>
+            <div><div class="job-story-label">Exit condition</div><div>${esc(ot.exit_condition||'')}</div></div>
+          </div>
+        ` : ''}
+
+        ${(story.verbatim_evidence||[]).length ? `
+          <hr class="divider"/>
+          <div class="job-story-label" style="margin-bottom:var(--space-2);">Supporting evidence</div>
+          ${story.verbatim_evidence.map(ev =>
+            renderQuote(ev.quote, ev.source_type, ev.source_file, '', ev.speaker_or_author) +
+            (ev.why_it_supports_this_story ? `<p style="font-size:var(--text-xs);color:var(--text-muted);margin-top:calc(var(--space-1)*-1);margin-bottom:var(--space-2);">${esc(ev.why_it_supports_this_story)}</p>` : '')
+          ).join('')}
+        ` : ''}
+      </div>
+    `;
+  });
+
+  el.innerHTML = html;
+}
+
+function renderPerSource(results) {
+  const el = document.getElementById('per-source-content');
+  const typeMap = {
+    forces_sales_call:     'Sales Calls',
+    forces_support:        'Support Tickets',
+    forces_product_usage:  'Product Usage',
+    switch_interview:      'Interview Transcripts',
+  };
+
+  const keys = Object.keys(results).filter(k => typeMap[k]);
+  if (!keys.length) { el.innerHTML = emptyState('No per-source results', 'Run analysis first.'); return; }
+
+  let html = `<h2 class="section-heading">Per-Source Details</h2>`;
+  keys.forEach(key => {
+    const data = results[key];
+    html += `
+      <details style="margin-bottom:var(--space-4);" open>
+        <summary style="cursor:pointer; font-size:var(--text-xl); font-weight:var(--font-medium); color:var(--text-primary); padding:var(--space-3) 0; border-bottom:1px solid var(--border-default); list-style:none;">
+          ${typeMap[key]}
+        </summary>
+        <div style="margin-top:var(--space-4);">
+          <pre style="font-family:var(--font-mono);font-size:var(--text-xs);color:var(--text-secondary);background:var(--bg-tertiary);padding:var(--space-4);border-radius:var(--radius-sm);overflow-x:auto;white-space:pre-wrap;word-break:break-word;">${esc(JSON.stringify(data,null,2))}</pre>
+        </div>
+      </details>
+    `;
+  });
+  el.innerHTML = html;
+}
+
+function renderBlindSpots(synthesis) {
+  const el = document.getElementById('blind-spots-content');
+  if (!synthesis) { el.innerHTML = emptyState('No analysis yet', 'Run analysis first.'); return; }
+
+  const blindSpots = synthesis.blind_spots || [];
+  const conflicts  = synthesis.data_conflicts || [];
+
+  let html = `<h2 class="section-heading">Blind Spots & Limitations</h2>`;
+
+  html += `
+    <div class="card" style="margin-bottom:var(--space-5);">
+      <h3 class="subsection-heading">What this analysis cannot answer</h3>
+      ${blindSpots.length
+        ? blindSpots.map(b => `<p style="font-size:var(--text-base);color:var(--text-secondary);margin-bottom:var(--space-3);line-height:var(--leading-relaxed);">${esc(b)}</p>`).join('')
+        : '<p class="text-muted">None identified.</p>'}
+    </div>
+    <div class="card" style="margin-bottom:var(--space-5);">
+      <h3 class="subsection-heading">Data conflicts</h3>
+      ${conflicts.length
+        ? conflicts.map(c => `<p style="font-size:var(--text-base);color:var(--text-secondary);margin-bottom:var(--space-3);line-height:var(--leading-relaxed);">${esc(c)}</p>`).join('')
+        : '<p class="text-muted">No conflicts found across sources.</p>'}
+    </div>
+    <div class="card">
+      <h3 class="subsection-heading">Inherent limitations</h3>
+      <ul style="padding-left:var(--space-5); color:var(--text-secondary); font-size:var(--text-sm); line-height:var(--leading-relaxed);">
+        <li style="margin-bottom:var(--space-3);">Without interviews, the full "why now" context (internal politics, budget timing, leadership pressure) cannot be reliably inferred.</li>
+        <li style="margin-bottom:var(--space-3);">ODI-lite scoring is a proxy, not real ODI. Importance and satisfaction scores are approximations based on frequency and behavioral signals.</li>
+        <li style="margin-bottom:var(--space-3);">Quality depends on input quality. Detailed verbatim transcripts produce better analysis than summaries or notes.</li>
+        <li>The LLM can still infer beyond the evidence despite sourcing rules. Always verify cited quotes. Confidence flags help but human review is essential.</li>
+      </ul>
+    </div>
+  `;
+  el.innerHTML = html;
+}
+
+function renderQuoteBank() {
+  const el = document.getElementById('quote-bank-content');
+  let html = `
+    <h2 class="section-heading">Quote Bank</h2>
+    <p class="text-secondary" style="font-size:var(--text-sm);margin-bottom:var(--space-5);">All verbatim quotes extracted across all sources. Use for writing copy, sales scripts, and objection-handling docs.</p>
+    <div class="quote-bank-filters">
+      <input type="text" id="qb-search" placeholder="Search quotes..." oninput="filterQuotes()" />
+      <select id="qb-force" onchange="filterQuotes()">
+        <option value="">All forces</option>
+        <option value="push">Push</option>
+        <option value="pull">Pull</option>
+        <option value="anxiety">Anxiety</option>
+        <option value="habit">Habit</option>
+      </select>
+    </div>
+    <div id="qb-list"></div>
+  `;
+  el.innerHTML = html;
+  filterQuotes();
+}
+
+function filterQuotes() {
+  const search = (document.getElementById('qb-search')?.value || '').toLowerCase();
+  const force  = document.getElementById('qb-force')?.value || '';
+  const list   = document.getElementById('qb-list');
+  if (!list) return;
+
+  const filtered = allQuotes.filter(q => {
+    if (force && q.force !== force) return false;
+    if (search && !JSON.stringify(q).toLowerCase().includes(search)) return false;
+    return true;
+  });
+
+  if (!filtered.length) {
+    list.innerHTML = '<p class="text-muted" style="text-align:center;padding:var(--space-8);">No quotes match your filters.</p>';
+    return;
+  }
+
+  list.innerHTML = filtered.map(q => `
+    <div style="margin-bottom:var(--space-4);">
+      <div class="badge-row">
+        <span class="force-label force-label--${q.force}">${q.force}</span>
+        ${q.is_inferred ? '<span class="inferred-badge">inferred</span>' : ''}
+      </div>
+      ${renderQuote(q.quote, q.source_type || '', q.source_file || '', q.location || '', q.speaker_or_author || q.speaker || '')}
+      <p style="font-size:var(--text-xs);color:var(--text-muted);margin-top:calc(var(--space-2)*-1);">${esc(q.signal||'')}</p>
+    </div>
+  `).join('');
+}
+
+function renderOdi(data) {
+  const el = document.getElementById('odi-content');
+  if (!data) { el.innerHTML = emptyState('No ODI results', 'Click "Run ODI Scoring" above.'); return; }
+
+  const opps = data.scored_opportunities || [];
+  const caveats = data.scoring_caveats || [];
+
+  let html = `<h2 class="section-heading">ODI-Lite Opportunity Scoring</h2>`;
+
+  if (opps.length) {
+    html += `
+      <div class="card" style="margin-bottom:var(--space-5);overflow-x:auto;">
+        <table>
+          <thead>
+            <tr>
+              <th>Cluster</th>
+              <th>Importance</th>
+              <th>Satisfaction</th>
+              <th>Opportunity</th>
+              <th>Conversion impact</th>
+              <th>Confidence</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${opps.map(o => `
+              <tr>
+                <td>${esc(o.cluster_label)}</td>
+                <td><span style="font-size:var(--text-lg);font-weight:var(--font-bold);color:var(--text-primary);">${o.importance_score}</span><span class="text-muted">/10</span></td>
+                <td><span style="font-size:var(--text-lg);font-weight:var(--font-bold);color:var(--text-primary);">${o.satisfaction_score}</span><span class="text-muted">/10</span></td>
+                <td><span style="font-size:var(--text-lg);font-weight:var(--font-bold);color:var(--status-high);">${o.opportunity_score}</span></td>
+                <td><span class="confidence-badge confidence-badge--${o.conversion_impact}">${o.conversion_impact}</span></td>
+                <td><span class="confidence-badge confidence-badge--${o.confidence_in_scoring}">${o.confidence_in_scoring}</span></td>
+              </tr>
+            `).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+  }
+
+  if (caveats.length) {
+    html += `
+      <div class="card">
+        <h3 class="subsection-heading">Scoring caveats</h3>
+        ${caveats.map(c => `<p style="font-size:var(--text-sm);color:var(--text-secondary);margin-bottom:var(--space-2);line-height:var(--leading-relaxed);">${esc(c)}</p>`).join('')}
+      </div>
+    `;
+  }
+
+  el.innerHTML = html;
+  showResultTab('odi', document.querySelectorAll('.sidebar-nav-item')[3]);
+}
+
+async function runOdi() {
+  await fetchJSON(`/api/projects/${currentProjectId}/odi`, { method: 'POST' });
+  // Poll briefly then reload
+  setTimeout(async () => {
+    await loadResults();
+    renderOdi(currentResults.odi_scoring);
+  }, 5000);
+}
+
+// ── Export ─────────────────────────────────────────────────────────────────
+function exportResults(format) {
+  window.location.href = `/api/projects/${currentProjectId}/export/${format}`;
+}
+
+// ── Settings ───────────────────────────────────────────────────────────────
+async function showSettings() {
+  const s = await fetchJSON('/api/settings');
+  document.getElementById('s-provider').value = s.provider || 'openai';
+  document.getElementById('s-model').value    = s.model    || '';
+  document.getElementById('s-ollama-url').value = s.ollama_base_url || 'http://localhost:11434';
+  updateModelSuggestions();
+  document.getElementById('settings-overlay').classList.remove('hidden');
+}
+function closeSettings() {
+  document.getElementById('settings-overlay').classList.add('hidden');
+  document.getElementById('settings-status').textContent = '';
+}
+function updateModelSuggestions() {
+  const provider = document.getElementById('s-provider').value;
+  document.getElementById('model-suggestions').textContent = 'Suggested: ' + (MODEL_SUGGESTIONS[provider] || '');
+  const isOllama = provider === 'ollama';
+  document.getElementById('ollama-url-group').classList.toggle('hidden', !isOllama);
+  document.getElementById('api-key-group').classList.toggle('hidden', isOllama);
+}
+async function saveSettings() {
+  const body = {
+    provider:         document.getElementById('s-provider').value,
+    model:            document.getElementById('s-model').value,
+    api_key:          document.getElementById('s-api-key').value,
+    ollama_base_url:  document.getElementById('s-ollama-url').value,
+  };
+  await fetchJSON('/api/settings', { method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body) });
+  showSettingsStatus('Settings saved.', 'var(--status-high)');
+}
+async function testConnection() {
+  showSettingsStatus('Testing...', 'var(--text-secondary)');
+  const res = await fetchJSON('/api/settings/test', { method:'POST', headers:{'Content-Type':'application/json'}, body:'{}' });
+  showSettingsStatus(res.message, res.ok ? 'var(--status-high)' : 'var(--status-low)');
+}
+function showSettingsStatus(msg, color) {
+  const el = document.getElementById('settings-status');
+  el.textContent = msg;
+  el.style.color = color;
+}
+
+// ── Utils ──────────────────────────────────────────────────────────────────
+function esc(str) {
+  return String(str||'')
+    .replace(/&/g,'&amp;')
+    .replace(/</g,'&lt;')
+    .replace(/>/g,'&gt;')
+    .replace(/"/g,'&quot;');
+}
+function emptyState(title, desc) {
+  return `<div class="empty-state"><div class="title">${title}</div><div class="description">${desc}</div></div>`;
+}
+function formatDate(iso) {
+  return new Date(iso).toLocaleDateString('en-US', { month:'short', day:'numeric', year:'numeric' });
+}
+function formatBytes(n) {
+  if (n < 1000) return n + '';
+  return (n/1000).toFixed(1) + 'k';
+}
+async function fetchJSON(url, opts={}) {
+  const res = await fetch(url, opts);
+  if (!res.ok) {
+    const err = await res.text();
+    throw new Error(`${res.status}: ${err}`);
+  }
+  if (res.status === 204) return null;
+  return res.json();
+}
+
+// ── Init ───────────────────────────────────────────────────────────────────
+showDashboard();
+</script>
+</body>
+</html>
