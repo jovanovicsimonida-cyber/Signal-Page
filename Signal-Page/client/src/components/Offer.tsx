@@ -59,7 +59,8 @@ export function Offer() {
             transition={{ duration: 0.6 }}
           >
             <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">One session. Full clarity.</h3>
-            <p className="text-white/70 font-sans mb-8">A 60–90 minute working session with your team - Product, Sales, and CS in the room.</p>
+            <p className="text-white/70 font-sans mb-3">Before we meet, I review your existing customer data, product analytics, and current email sequences so I walk in with context, not questions.</p>
+            <p className="text-white/70 font-sans mb-8">Then a 60–90 minute working session with your team - Product, Sales, and CS in the room.</p>
 
             <h4 className="text-sm font-bold uppercase tracking-widest text-white/40 font-sans mb-4">Together, we define:</h4>
             <div className="space-y-4 mb-8">
