@@ -1,5 +1,4 @@
 import { Link } from "wouter";
-import logo from "@assets/Signal_logo_clean.png";
 
 export function Footer() {
   return (
@@ -7,11 +6,7 @@ export function Footer() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col md:flex-row justify-between items-center gap-8">
           <div className="flex items-center gap-3">
-            <img
-              src={logo}
-              alt="Signal Strategy Logo"
-              className="h-8 w-auto opacity-80 grayscale hover:grayscale-0 transition-all"
-            />
+            <span className="text-xl font-bold font-display text-primary/80 tracking-tight">signal.</span>
           </div>
 
           <div className="flex items-center gap-8 text-sm text-muted-foreground font-sans">

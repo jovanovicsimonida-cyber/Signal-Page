@@ -1,8 +1,6 @@
 import { useState } from "react";
 import { Link, useLocation } from "wouter";
 import { Menu, X } from "lucide-react";
-import logo from "@assets/Signal_logo_clean.png";
-
 export function Navigation() {
   const [location] = useLocation();
   const [mobileOpen, setMobileOpen] = useState(false);
@@ -22,11 +20,7 @@ export function Navigation() {
         <div className="flex justify-between items-center h-20">
           <div className="flex-shrink-0 flex items-center gap-3">
             <Link href="/" className="cursor-pointer hover:opacity-80 transition-opacity">
-              <img
-                src={logo}
-                alt="Signal Strategy Logo"
-                className="h-10 w-auto object-contain"
-              />
+              <span className="text-2xl font-bold font-display text-primary tracking-tight">signal.</span>
             </Link>
           </div>
 

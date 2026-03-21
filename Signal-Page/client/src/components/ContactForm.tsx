@@ -34,7 +34,7 @@ export function ContactForm() {
   };
 
   return (
-    <section id="contact" className="py-24 bg-[#EBEAE8]">
+    <section id="contact" className="py-24 bg-background">
       <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="text-center mb-12">
           <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">
@@ -47,7 +47,7 @@ export function ContactForm() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-black/5 border border-border"
+          className="bg-white p-8 md:p-10 rounded-2xl shadow-xl shadow-black/5 border border-border border-l-2 border-l-accent"
         >
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
             <div className="space-y-2">
