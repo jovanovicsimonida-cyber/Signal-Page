@@ -65,7 +65,7 @@ export function Hero() {
                         <div className="flex items-center pl-5 py-0.5">
                           <motion.div
                             className="w-px h-4"
-                            animate={{ backgroundColor: isPast || isActive ? '#ffd231' : 'hsl(var(--border))' }}
+                            animate={{ backgroundColor: isPast || isActive ? 'hsl(var(--accent))' : 'hsl(var(--border))' }}
                             transition={{ duration: 0.3 }}
                           />
                         </div>
@@ -78,7 +78,7 @@ export function Hero() {
                           borderColor: isActive
                             ? 'hsl(var(--primary))'
                             : isPast
-                              ? '#ffd231'
+                              ? 'hsl(var(--accent))'
                               : 'hsl(var(--border))',
                         }}
                         transition={{ duration: 0.3 }}
@@ -86,20 +86,20 @@ export function Hero() {
                       >
                         <motion.div
                           animate={{
-                            backgroundColor: isActive ? 'rgba(255,255,255,0.1)' : isPast ? 'rgba(255,210,49,0.15)' : 'rgba(35,35,35,0.05)',
+                            backgroundColor: isActive ? 'hsl(0 0% 100% / 0.1)' : isPast ? 'hsl(var(--accent) / 0.15)' : 'hsl(var(--primary) / 0.05)',
                           }}
                           transition={{ duration: 0.3 }}
                           className="w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0"
                         >
                           <motion.div
-                            animate={{ color: isActive ? '#ffffff' : isPast ? '#ffd231' : 'hsl(var(--primary))' }}
+                            animate={{ color: isActive ? 'hsl(var(--primary-foreground))' : isPast ? 'hsl(var(--accent))' : 'hsl(var(--primary))' }}
                             transition={{ duration: 0.3 }}
                           >
                             <Icon className="w-4 h-4" />
                           </motion.div>
                         </motion.div>
                         <motion.span
-                          animate={{ color: isActive ? '#ffffff' : 'hsl(var(--foreground))' }}
+                          animate={{ color: isActive ? 'hsl(var(--primary-foreground))' : 'hsl(var(--foreground))' }}
                           transition={{ duration: 0.3 }}
                           className="text-sm font-semibold font-sans tracking-wide uppercase"
                         >
@@ -107,7 +107,7 @@ export function Hero() {
                         </motion.span>
                         {index < steps.length - 1 && (
                           <motion.svg
-                            animate={{ color: isActive ? 'rgba(255,255,255,0.4)' : isPast ? '#ffd231' : 'hsl(var(--muted-foreground))' }}
+                            animate={{ color: isActive ? 'hsl(var(--primary-foreground) / 0.4)' : isPast ? 'hsl(var(--accent))' : 'hsl(var(--muted-foreground))' }}
                             transition={{ duration: 0.3 }}
                             className="w-3 h-3 ml-auto"
                             viewBox="0 0 12 12"
