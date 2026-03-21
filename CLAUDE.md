@@ -30,6 +30,7 @@
 4. **In Framer Motion `animate` props** (which need resolved values) use the same `hsl(var(--token))` syntax.
 5. **The accent yellow (`--accent`)** is for borders, icons, and decorative elements — not for body text, as it is not readable on light backgrounds.
 6. **Do not invent new colors.** If a design need cannot be met with the existing palette, flag it to the user and ask before adding anything to `index.css`.
+7. **SVG/image files** cannot use CSS variables — use the exact hex values from the table above. This is the only exception to rule 1.
 
 ### Fonts
 
