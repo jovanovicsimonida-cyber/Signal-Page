@@ -57,7 +57,7 @@ export function ContactForm() {
               <input
                 {...form.register("name")}
                 id="name"
-                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                className="w-full px-4 py-3 rounded-lg bg-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all font-sans" style={{border: '1px solid rgba(255,210,49,0.4)', outline: 'none'}} onFocus={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.8)'} onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.4)'}
                 placeholder="Jane Doe"
               />
               {form.formState.errors.name && (
@@ -73,7 +73,7 @@ export function ContactForm() {
                 {...form.register("email")}
                 id="email"
                 type="email"
-                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                className="w-full px-4 py-3 rounded-lg bg-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all font-sans" style={{border: '1px solid rgba(255,210,49,0.4)', outline: 'none'}} onFocus={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.8)'} onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.4)'}
                 placeholder="jane@company.com"
               />
               {form.formState.errors.email && (
@@ -88,7 +88,7 @@ export function ContactForm() {
               <input
                 {...form.register("conversionRate")}
                 id="conversionRate"
-                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                className="w-full px-4 py-3 rounded-lg bg-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all font-sans" style={{border: '1px solid rgba(255,210,49,0.4)', outline: 'none'}} onFocus={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.8)'} onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.4)'}
                 placeholder="Rough estimate is fine"
               />
               {form.formState.errors.conversionRate && (
@@ -103,7 +103,7 @@ export function ContactForm() {
               <input
                 {...form.register("espTool")}
                 id="espTool"
-                className="w-full px-4 py-3 rounded-lg bg-background border border-border text-foreground placeholder:text-muted-foreground/50 focus:outline-none focus:border-primary focus:ring-1 focus:ring-primary transition-all font-sans"
+                className="w-full px-4 py-3 rounded-lg bg-background text-foreground placeholder:text-muted-foreground/50 focus:outline-none transition-all font-sans" style={{border: '1px solid rgba(255,210,49,0.4)', outline: 'none'}} onFocus={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.8)'} onBlur={e => e.currentTarget.style.borderColor = 'rgba(255,210,49,0.4)'}
                 placeholder="e.g. Customer.io, HubSpot, Klaviyo"
               />
               {form.formState.errors.espTool && (

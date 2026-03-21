@@ -103,8 +103,8 @@ export function Offer() {
             <ul className="space-y-4 mb-8">
               {deliverables.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-primary/10 flex items-center justify-center mt-0.5">
-                    <Check className="w-3.5 h-3.5 text-primary" />
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5" style={{backgroundColor: 'rgba(255,210,49,0.2)'}}>
+                    <Check className="w-3.5 h-3.5" style={{color: '#b8960a'}} />
                   </div>
                   <span className="text-muted-foreground font-sans font-medium">{item}</span>
                 </li>
