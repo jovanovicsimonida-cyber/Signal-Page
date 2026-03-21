@@ -1,16 +1,26 @@
-import { motion } from "framer-motion";
+import { motion, animate, useMotionValue } from "framer-motion";
+import { useEffect, useState } from "react";
 import { Target, Search, Network, Heart, Zap, BarChart3 } from "lucide-react";
 
 const steps = [
-  { label: "Segment", icon: Target, highlight: "dark" },
+  { label: "Segment", icon: Target },
   { label: "Interpret", icon: Search },
   { label: "Generate", icon: Network },
-  { label: "Nurture", icon: Heart, highlight: "accent" },
+  { label: "Nurture", icon: Heart },
   { label: "Automate", icon: Zap },
   { label: "Learn", icon: BarChart3 },
 ] as const;
 
 export function Hero() {
+  const [activeStep, setActiveStep] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setActiveStep((prev) => (prev + 1) % steps.length);
+    }, 1400);
+    return () => clearInterval(interval);
+  }, []);
+
   return (
     <section className="relative pt-32 pb-20 lg:pt-48 lg:pb-32 overflow-hidden bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -41,8 +51,8 @@ export function Hero() {
               <div className="flex flex-col gap-1">
                 {steps.map((step, index) => {
                   const Icon = step.icon;
-                  const isDark = step.highlight === "dark";
-                  const isAccent = step.highlight === "accent";
+                  const isActive = index === activeStep;
+                  const isPast = index < activeStep;
 
                   return (
                     <motion.div
@@ -53,38 +63,62 @@ export function Hero() {
                     >
                       {index > 0 && (
                         <div className="flex items-center pl-5 py-0.5">
-                          <div className="w-px h-4 bg-border" />
+                          <motion.div
+                            className="w-px h-4"
+                            animate={{ backgroundColor: isPast || isActive ? '#ffd231' : 'hsl(var(--border))' }}
+                            transition={{ duration: 0.3 }}
+                          />
                         </div>
                       )}
-                      <div
-                        className={`flex items-center gap-3 px-4 py-3 rounded-lg border transition-all ${
-                          isDark
-                            ? "bg-primary text-primary-foreground border-primary"
-                            : isAccent
-                              ? "bg-secondary border-accent border-l-2 text-foreground"
-                              : "bg-background border-border text-foreground"
-                        }`}
+                      <motion.div
+                        animate={{
+                          backgroundColor: isActive
+                            ? 'hsl(var(--primary))'
+                            : 'hsl(var(--background))',
+                          borderColor: isActive
+                            ? 'hsl(var(--primary))'
+                            : isPast
+                              ? '#ffd231'
+                              : 'hsl(var(--border))',
+                        }}
+                        transition={{ duration: 0.3 }}
+                        className="flex items-center gap-3 px-4 py-3 rounded-lg border"
                       >
-                        <div
-                          className={`w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0 ${
-                            isDark
-                              ? "bg-white/10"
-                              : isAccent
-                                ? "bg-accent/10"
-                                : "bg-primary/5"
-                          }`}
+                        <motion.div
+                          animate={{
+                            backgroundColor: isActive ? 'rgba(255,255,255,0.1)' : isPast ? 'rgba(255,210,49,0.15)' : 'rgba(35,35,35,0.05)',
+                          }}
+                          transition={{ duration: 0.3 }}
+                          className="w-8 h-8 rounded-md flex items-center justify-center flex-shrink-0"
                         >
-                          <Icon className={`w-4 h-4 ${isDark ? "text-white" : isAccent ? "text-accent-foreground" : "text-primary"}`} />
-                        </div>
-                        <span className={`text-sm font-semibold font-sans tracking-wide uppercase ${isDark ? "text-white" : ""}`}>
+                          <motion.div
+                            animate={{ color: isActive ? '#ffffff' : isPast ? '#ffd231' : 'hsl(var(--primary))' }}
+                            transition={{ duration: 0.3 }}
+                          >
+                            <Icon className="w-4 h-4" />
+                          </motion.div>
+                        </motion.div>
+                        <motion.span
+                          animate={{ color: isActive ? '#ffffff' : 'hsl(var(--foreground))' }}
+                          transition={{ duration: 0.3 }}
+                          className="text-sm font-semibold font-sans tracking-wide uppercase"
+                        >
                           {step.label}
-                        </span>
+                        </motion.span>
                         {index < steps.length - 1 && (
-                          <svg className={`w-3 h-3 ml-auto ${isDark ? "text-white/40" : "text-muted-foreground"}`} viewBox="0 0 12 12" fill="none" stroke="currentColor" strokeWidth="2">
+                          <motion.svg
+                            animate={{ color: isActive ? 'rgba(255,255,255,0.4)' : isPast ? '#ffd231' : 'hsl(var(--muted-foreground))' }}
+                            transition={{ duration: 0.3 }}
+                            className="w-3 h-3 ml-auto"
+                            viewBox="0 0 12 12"
+                            fill="none"
+                            stroke="currentColor"
+                            strokeWidth="2"
+                          >
                             <path d="M6 2 L6 10 M3 7 L6 10 L9 7" />
-                          </svg>
+                          </motion.svg>
                         )}
-                      </div>
+                      </motion.div>
                     </motion.div>
                   );
                 })}
