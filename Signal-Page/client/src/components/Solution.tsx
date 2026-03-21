@@ -41,10 +41,10 @@ export function Solution() {
                 transition={{ duration: 0.4, delay: idx * 0.1 }}
                 className="flex items-start gap-4 p-5 bg-white rounded-xl border border-border"
               >
-                <ArrowRight className="w-5 h-5 text-primary mt-0.5 flex-shrink-0" />
+                <ArrowRight className="w-5 h-5 mt-0.5 flex-shrink-0" style={{color: '#ffd231'}} />
                 <p className="text-foreground font-sans">
                   <span className="text-muted-foreground">{s.trigger}</span>
-                  <span className="mx-2">→</span>
+                  <span className="mx-2" style={{color: '#ffd231'}}>→</span>
                   <span className="font-semibold">{s.result}</span>
                 </p>
               </motion.div>

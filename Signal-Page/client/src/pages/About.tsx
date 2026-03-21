@@ -58,7 +58,7 @@ export default function About() {
               <p>
                 Other times, I didn't. Not because the tool was bad, but because I never reached the moment where the value felt obvious.
               </p>
-              <div className="border-l-4 border-primary/30 pl-6 py-4 space-y-3 bg-white/50 rounded-r-lg">
+              <div className="border-l-4 border-accent pl-6 py-4 space-y-3 bg-white/50 rounded-r-lg">
                 <p className="font-medium text-foreground">Some things are always true:</p>
                 <p>No trial flow can rescue a product that doesn't deliver real value.</p>
                 <p>Some users will convert no matter what, because they showed up with a job to get done.</p>
@@ -78,11 +78,11 @@ export default function About() {
               <p>
                 So a trial-to-paid sequence can't just educate. It has to reduce switching friction.
               </p>
-              <div className="border-l-4 border-primary/30 pl-6 py-4 space-y-3 bg-white/50 rounded-r-lg">
+              <div className="border-l-4 border-accent pl-6 py-4 space-y-3 bg-white/50 rounded-r-lg">
                 <p className="font-medium text-foreground">It has to help users do three things quickly:</p>
-                <p><span className="text-primary font-bold">1.</span> See the job your tool helps them complete</p>
-                <p><span className="text-primary font-bold">2.</span> Get a win that feels like progress fast</p>
-                <p><span className="text-primary font-bold">3.</span> Trust that moving over is worth the time and effort</p>
+                <p><span className="text-accent-foreground font-bold" style={{color: '#b8960a'}}>1.</span> See the job your tool helps them complete</p>
+                <p><span className="text-accent-foreground font-bold" style={{color: '#b8960a'}}>2.</span> Get a win that feels like progress fast</p>
+                <p><span className="text-accent-foreground font-bold" style={{color: '#b8960a'}}>3.</span> Trust that moving over is worth the time and effort</p>
               </div>
               <p>
                 That's where Jobs to Be Done comes in.
