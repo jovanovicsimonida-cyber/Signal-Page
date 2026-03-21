@@ -17,7 +17,7 @@ export default function About() {
   };
 
   return (
-    <div className="min-h-screen bg-[#EBEAE8] text-foreground flex flex-col">
+    <div className="min-h-screen bg-background text-foreground flex flex-col">
       <Helmet>
         <title>About - Signal Lifecycle Email Strategy</title>
         <meta name="description" content="Meet Simonida Jovanovic, founder of Signal. Learn about the Jobs to Be Done methodology behind our lifecycle email strategy for SaaS trial-to-paid conversion." />
