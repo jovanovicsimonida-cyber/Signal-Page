@@ -64,3 +64,13 @@
 .text-balance {
   text-wrap: balance;
 }
+
+/* Brand yellow border for form inputs */
+.input-accent {
+  border: 1px solid hsl(var(--accent) / 0.4);
+}
+.input-accent:focus {
+  outline: none;
+  border-color: hsl(var(--accent) / 0.8);
+  box-shadow: 0 0 0 1px hsl(var(--accent) / 0.3);
+}

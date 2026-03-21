@@ -80,9 +80,9 @@ export default function About() {
               </p>
               <div className="border-l-4 border-accent pl-6 py-4 space-y-3 bg-white/50 rounded-r-lg">
                 <p className="font-medium text-foreground">It has to help users do three things quickly:</p>
-                <p><span className="text-accent-foreground font-bold" style={{color: '#b8960a'}}>1.</span> See the job your tool helps them complete</p>
-                <p><span className="text-accent-foreground font-bold" style={{color: '#b8960a'}}>2.</span> Get a win that feels like progress fast</p>
-                <p><span className="text-accent-foreground font-bold" style={{color: '#b8960a'}}>3.</span> Trust that moving over is worth the time and effort</p>
+                <p><span className="text-accent-foreground font-bold" style={{color: 'hsl(var(--accent))'}}>1.</span> See the job your tool helps them complete</p>
+                <p><span className="text-accent-foreground font-bold" style={{color: 'hsl(var(--accent))'}}>2.</span> Get a win that feels like progress fast</p>
+                <p><span className="text-accent-foreground font-bold" style={{color: 'hsl(var(--accent))'}}>3.</span> Trust that moving over is worth the time and effort</p>
               </div>
               <p>
                 That's where Jobs to Be Done comes in.
