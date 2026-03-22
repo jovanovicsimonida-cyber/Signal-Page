@@ -15,7 +15,7 @@ const RESOURCE_TITLE = "The Reverb Stall-Recovery Workflow";
 const RESOURCE_DESCRIPTION =
   "A micro-loop template that shows you how to define the stall signal, send a single next-step nudge, offer a friction-reducer, and escalate to a human only if the user stays stuck.";
 const DOWNLOAD_URL = "/lead-magnet/reverb-stall-recovery-workflow-signal.pdf";
-const FORMSPREE_ENDPOINT = "https://formspree.io/f/mwvbwvgv";
+const SUBSCRIBE_ENDPOINT = "/api/subscribe";
 // ──────────────────────────────────────────────
 
 const leadFormSchema = z.object({
@@ -43,10 +43,10 @@ export default function LeadMagnet() {
   const onSubmit = async (data: LeadFormData) => {
     setIsSubmitting(true);
     try {
-      await fetch(FORMSPREE_ENDPOINT, {
+      await fetch(SUBSCRIBE_ENDPOINT, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ name: data.firstName, email: data.email }),
+        body: JSON.stringify({ firstName: data.firstName, email: data.email }),
       });
     } catch {
       // Even if the email capture fails, let them download
