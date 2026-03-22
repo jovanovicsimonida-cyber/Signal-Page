@@ -1,5 +1,8 @@
 {
   "outputDirectory": "dist/public",
+  "redirects": [
+    { "source": "/leak-finder", "destination": "/leak-finder/", "permanent": false }
+  ],
   "headers": [
     {
       "source": "/llm/(.*)",
@@ -33,6 +36,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/((?!api/|leak-finder).*)", "destination": "/index.html" }
+    { "source": "/(.*)", "destination": "/index.html" }
   ]
 }
