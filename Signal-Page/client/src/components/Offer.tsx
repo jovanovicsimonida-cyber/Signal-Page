@@ -112,7 +112,7 @@ export function Offer() {
             </ul>
 
             <p className="text-sm text-muted-foreground font-sans mb-6">
-              You'll know exactly what's broken, why it's breaking, and what to fix first.
+              You'll know exactly what's broken, why it's breaking, and what you can do about it today.
             </p>
 
             <button
