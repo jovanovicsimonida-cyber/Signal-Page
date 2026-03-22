@@ -630,56 +630,6 @@
     </div>
   </div>
 
-  <!-- CONFIRMATION -->
-  <div class="conf-wrap" id="confirmation">
-    <div class="sec-label" style="margin-bottom:0.75rem;">Your results</div>
-
-    <div class="conf-gate-row">
-      <div class="conf-gate">
-        <div class="conf-gate-name">Gate 01 — Aha path</div>
-        <div class="conf-pips" id="cp1"></div>
-        <div class="conf-badge" id="cb1"></div>
-        <div class="conf-gate-title" id="ct1"></div>
-      </div>
-      <div class="conf-gate">
-        <div class="conf-gate-name">Gate 02 — Stall recovery</div>
-        <div class="conf-pips" id="cp2"></div>
-        <div class="conf-badge" id="cb2"></div>
-        <div class="conf-gate-title" id="ct2"></div>
-      </div>
-      <div class="conf-gate">
-        <div class="conf-gate-name">Gate 03 — Upgrade moment</div>
-        <div class="conf-pips" id="cp3"></div>
-        <div class="conf-badge" id="cb3"></div>
-        <div class="conf-gate-title" id="ct3"></div>
-      </div>
-    </div>
-
-    <p style="font-size:14px;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Your full gate-by-gate breakdown — what's causing each gap and what to fix first — is in the report below.</p>
-
-    <button class="conf-download-btn" onclick="exportPDF()">
-      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-      Download your report (PDF)
-    </button>
-
-    <div class="cta-bar" style="margin-bottom:1rem;">
-      <div>
-        <h3>Not sure what to do with this?</h3>
-        <p>15 minutes. We'll look at your results together and I'll tell you straight away whether this is something I can help with — and how. No pitch, no pressure. Just an honest answer.</p>
-      </div>
-      <a class="cta-link" href="https://calendly.com/simonida-signallifecycle/15min" target="_blank" rel="noopener noreferrer">
-        Book a 15-min fit check
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-      </a>
-    </div>
-
-    <div style="display:flex;justify-content:flex-start;">
-      <button class="conf-restart" onclick="resetAll()">
-        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-        Start over with different answers
-      </button>
-    </div>
-  </div>
 
 </div><!-- end #page-content -->
 
@@ -815,7 +765,6 @@
     Object.keys(A).forEach(k => delete A[k]);
     document.querySelectorAll('.opt').forEach(o => o.className = 'opt');
     document.querySelectorAll('.gate-badge').forEach(b => { b.className = 'gate-badge'; b.textContent = ''; });
-    document.getElementById('confirmation').classList.remove('show');
     document.getElementById('gate-modal').classList.remove('show');
     gateShown = false;
     updateProgress();
@@ -856,19 +805,7 @@
   }
 
   function showResults() {
-    const wrap = document.getElementById('confirmation');
-    wrap.classList.add('show');
-    const statusMap = { g:['rb-g','Solid'], y:['rb-y','Gaps exist'], r:['rb-r','Needs work'] };
-    [1,2,3].forEach(gn => {
-      const d = diagnose(gn);
-      const c = results[gn][d.combo];
-      document.getElementById('cp'+gn).innerHTML = gates[gn].map(q => `<div class="pip ${A[q]}"></div>`).join('');
-      const cb = document.getElementById('cb'+gn);
-      cb.className = 'conf-badge ' + statusMap[d.tier][0];
-      cb.textContent = statusMap[d.tier][1];
-      document.getElementById('ct'+gn).textContent = c.title;
-    });
-    wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    exportPDF();
   }
 
   function exportPDF() {
@@ -959,8 +896,9 @@
     // Footer
     w.document.write('<div style="border-top:1px solid #e0ddd6;padding-top:14px;display:flex;justify-content:space-between"><div style="font-size:10px;color:#aaa8a3">signal. lifecycle email &nbsp;&#183;&nbsp; This diagnostic is a self-assessment guide. Results reflect your own answers, not measured data. Use as a starting point for conversation, not a definitive audit.</div></div>');
 
-    // Print button
-    w.document.write('<div class="noprint" style="text-align:center;margin-top:28px"><button onclick="window.print()" style="background:#232323;color:#fff;border:none;border-radius:8px;padding:12px 28px;font-size:13px;font-weight:600;font-family:DM Sans,sans-serif;cursor:pointer">Save as PDF (Cmd+P / Ctrl+P)</button><div style="font-size:11px;color:#aaa8a3;margin-top:8px">In the print dialog, choose Save as PDF as the destination</div></div>');
+    // CTA + Print button (both hidden from print)
+    w.document.write('<div class="noprint" style="margin-top:32px;background:#232323;border-radius:10px;padding:24px 28px;display:flex;align-items:center;justify-content:space-between;gap:24px;margin-bottom:20px"><div><div style="font-family:Playfair Display,serif;font-size:18px;font-weight:700;color:#fff;margin-bottom:6px">Not sure what to do with this?</div><div style="font-size:13px;color:#888580;font-weight:300;max-width:400px;line-height:1.55">15 minutes. We\'ll look at your results together and I\'ll tell you straight away whether this is something I can help with — and how. No pitch, no pressure. Just an honest answer.</div></div><a href="https://calendly.com/simonida-signallifecycle/15min" target="_blank" style="display:inline-flex;align-items:center;gap:8px;background:#ffd231;color:#232323;font-family:DM Sans,sans-serif;font-weight:700;font-size:13px;padding:12px 24px;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0">Book a 15-min fit check &rarr;</a></div>');
+    w.document.write('<div class="noprint" style="text-align:center"><button onclick="window.print()" style="background:#232323;color:#fff;border:none;border-radius:8px;padding:12px 28px;font-size:13px;font-weight:600;font-family:DM Sans,sans-serif;cursor:pointer">Save as PDF (Cmd+P / Ctrl+P)</button><div style="font-size:11px;color:#aaa8a3;margin-top:8px">In the print dialog, choose Save as PDF as the destination</div></div>');
 
     w.document.write('</div></body></html>');
     w.document.close();
