@@ -21,7 +21,7 @@ export function FunnelLeakCTA() {
           </div>
           <Link
             href="/leak-finder"
-            className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-foreground underline underline-offset-4 decoration-accent hover:opacity-70 transition-opacity font-sans"
+            className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-foreground border border-accent rounded-lg px-4 py-2 hover:bg-accent/10 transition-colors font-sans"
           >
             Find out in 10 minutes
             <ArrowRight className="w-4 h-4" />
