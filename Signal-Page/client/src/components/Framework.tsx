@@ -87,10 +87,7 @@ export function Framework() {
           </div>
 
           <div className="text-center mb-8">
-            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2">The save that fires before the trial dies</h3>
-            <p className="text-base text-muted-foreground font-sans mb-2">
-              40–60% of free trial users log in once and never come back.
-            </p>
+            <h3 className="text-2xl md:text-3xl font-bold text-primary mb-2">40–60% of free trial users log in once and never come back.</h3>
             <p className="text-sm font-bold uppercase tracking-widest text-primary/60 font-sans">
               SIGNAL builds the path. REVERB keeps users on it when they drift.
             </p>
