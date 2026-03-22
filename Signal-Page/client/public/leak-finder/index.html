@@ -77,19 +77,35 @@
     font-family: 'DM Sans', sans-serif;
   }
 
+  /* INTRO SPLIT — video left, triangle right */
+  .intro-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: stretch;
+  }
+  .intro-video {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    display: flex; align-items: stretch;
+  }
+  .intro-video > div { flex: 1; }
+
   /* TRIANGLE */
   .triangle-wrap {
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 1.75rem 1.5rem 1.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
-  .triangle-svg-wrap { flex-shrink: 0; width: 320px; }
-  .triangle-legend { display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+  .triangle-svg-wrap { flex-shrink: 0; width: 100%; max-width: 280px; }
+  .triangle-legend { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
   .tl-item { display: flex; gap: 12px; align-items: flex-start; }
   .tl-num {
     width: 28px; height: 28px; border-radius: 50%;
@@ -103,9 +119,9 @@
   .tl-num-3 { background: #ffe07a; color: #232323; }
   .tl-name {
     font-family: 'Playfair Display', serif;
-    font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 2px;
+    font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 2px;
   }
-  .tl-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.45; }
+  .tl-desc { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.5; }
 
   /* HOW TO */
   .how-to {
@@ -122,8 +138,8 @@
     flex-shrink: 0; margin-top: 1px;
     font-family: 'DM Sans', sans-serif;
   }
-  .how-text strong { display: block; font-size: 12px; font-weight: 700; margin-bottom: 2px; }
-  .how-text span { font-size: 12px; color: var(--muted); font-weight: 300; }
+  .how-text strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .how-text span { font-size: 13px; color: var(--muted); font-weight: 300; }
 
   /* PROGRESS */
   .progress-row {
@@ -141,7 +157,7 @@
 
   /* LEGEND */
   .legend-row { display: flex; gap: 16px; margin-bottom: 0.75rem; align-items: center; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
   .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
   .ld-g { background: #4caf82; }
   .ld-y { background: var(--yellow); border: 1px solid var(--yellow-dark); }
@@ -190,8 +206,8 @@
     padding: 2px 7px; border-radius: 3px;
     display: inline-block; margin-bottom: 7px;
   }
-  .q-text { font-size: 13px; font-weight: 600; color: var(--black); line-height: 1.4; margin-bottom: 5px; }
-  .q-sub { font-size: 11.5px; color: var(--muted); font-weight: 300; line-height: 1.5; margin-bottom: 11px; }
+  .q-text { font-size: 14px; font-weight: 600; color: var(--black); line-height: 1.4; margin-bottom: 5px; }
+  .q-sub { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.5; margin-bottom: 11px; }
 
   /* OPTIONS */
   .opts { display: flex; flex-direction: column; gap: 6px; }
@@ -212,7 +228,7 @@
     content: ''; width: 6px; height: 6px; border-radius: 50%;
     background: white; opacity: 0; transition: opacity 0.12s;
   }
-  .opt-lbl { font-size: 12px; line-height: 1.45; color: #555; }
+  .opt-lbl { font-size: 13px; line-height: 1.45; color: #555; }
   .opt-lbl b { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 3px; }
 
   .opt.g { border-color: #4caf82; background: var(--green-bg); }
@@ -333,18 +349,21 @@
     <a href="/" class="logo-text" style="text-decoration:none;color:inherit;">signal.</a>
   </div>
 
-  <!-- VIDEO PLACEHOLDER -->
-  <div style="background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:1rem;overflow:hidden;">
-    <div style="aspect-ratio:16/9;background:var(--card-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-      <div style="width:56px;height:56px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#f2efe8" style="margin-left:3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </div>
-      <p style="font-size:12px;color:var(--muted);font-family:'DM Sans',sans-serif;">90-second walkthrough - coming soon</p>
-    </div>
-  </div>
+  <!-- INTRO SPLIT -->
+  <div class="intro-split">
 
-  <!-- TRIANGLE -->
-  <div class="triangle-wrap">
+    <!-- LEFT: VIDEO -->
+    <div class="intro-video">
+      <div style="width:100%;background:var(--card-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:260px;">
+        <div style="width:56px;height:56px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f2efe8" style="margin-left:3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p style="font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;">90-second walkthrough - coming soon</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: TRIANGLE -->
+    <div class="triangle-wrap">
     <div class="triangle-svg-wrap">
       <svg viewBox="-10 -10 520 500" xmlns="http://www.w3.org/2000/svg" width="100%">
         <defs>
@@ -366,22 +385,6 @@
         <circle cx="250" cy="34" r="6" fill="#ffd231"/>
         <circle cx="26" cy="432" r="6" fill="#ffd231"/>
         <circle cx="474" cy="432" r="6" fill="#ffd231"/>
-
-        <!-- Gate number badges — small circles at edge midpoints, inside -->
-        <circle cx="155" cy="215" r="14" fill="#232323"/>
-        <text x="155" y="216" text-anchor="middle" dominant-baseline="middle"
-          font-family="'DM Sans', Arial, sans-serif" font-size="9" font-weight="700"
-          letter-spacing="1" fill="#ffd231">01</text>
-
-        <circle cx="345" cy="215" r="14" fill="#232323"/>
-        <text x="345" y="216" text-anchor="middle" dominant-baseline="middle"
-          font-family="'DM Sans', Arial, sans-serif" font-size="9" font-weight="700"
-          letter-spacing="1" fill="#ffd231">02</text>
-
-        <circle cx="250" cy="405" r="14" fill="#232323"/>
-        <text x="250" y="406" text-anchor="middle" dominant-baseline="middle"
-          font-family="'DM Sans', Arial, sans-serif" font-size="9" font-weight="700"
-          letter-spacing="1" fill="#ffd231">03</text>
 
         <!-- Center text -->
         <text x="250" y="255"
@@ -445,7 +448,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div><!-- end triangle-wrap -->
+  </div><!-- end intro-split -->
 
   <!-- HOW TO -->
   <div class="how-to">
