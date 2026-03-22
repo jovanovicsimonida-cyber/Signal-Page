@@ -809,6 +809,11 @@
   }
 
   function showGate() {
+    if (localStorage.getItem('lf_submitted')) {
+      document.getElementById('expbtn').style.display = 'flex';
+      showResults();
+      return;
+    }
     document.getElementById('gate-modal').classList.add('show');
     setTimeout(function() { document.getElementById('gm-name').focus(); }, 50);
   }
@@ -832,6 +837,7 @@
         body: JSON.stringify({ firstName: firstName, email: email, reds: reds, yellows: yellows })
       });
     } catch(e) {}
+    localStorage.setItem('lf_submitted', '1');
     document.getElementById('gate-modal').classList.remove('show');
     document.getElementById('expbtn').style.display = 'flex';
     showResults();
