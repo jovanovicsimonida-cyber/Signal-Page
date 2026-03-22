@@ -55,6 +55,16 @@ export function Solution() {
             <p>No more blasting the same sequence to everyone.</p>
             <p>No more guessing why trials don't convert.</p>
             <p>No more rewriting onboarding every quarter hoping something sticks.</p>
+            <p>There's no mystery about what fixes this.</p>
+            <p>
+              Emails that respond to what a user actually did (rather than what day it is) get opened 47% more often.
+            </p>
+            <p>
+              The companies hitting 35–45% trial-to-paid conversion aren't doing something exotic.
+            </p>
+            <p>
+              They know which behaviors predict upgrades, they catch stalls before they become churn, and they don't send the same message to everyone.
+            </p>
             <p>
               You get a system that knows where each user is, what they need next, and when to step in.
             </p>
