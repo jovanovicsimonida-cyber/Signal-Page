@@ -1,5 +1,4 @@
 import { motion } from "framer-motion";
-import { Link } from "wouter";
 import { ArrowRight } from "lucide-react";
 
 export function FunnelLeakCTA() {
@@ -19,13 +18,13 @@ export function FunnelLeakCTA() {
               Think your trial funnel is leaking?
             </p>
           </div>
-          <Link
+          <a
             href="/leak-finder/"
             className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-accent-foreground border border-accent-foreground rounded-lg px-4 py-2 hover:bg-white/30 transition-colors font-sans"
           >
             Find out in 10 minutes
             <ArrowRight className="w-4 h-4" />
-          </Link>
+          </a>
         </motion.div>
       </div>
     </section>
