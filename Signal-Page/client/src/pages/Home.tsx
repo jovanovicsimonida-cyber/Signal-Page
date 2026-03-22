@@ -8,6 +8,7 @@ import { Framework } from "@/components/Framework";
 import { Offer } from "@/components/Offer";
 import { AfterAudit } from "@/components/AfterAudit";
 import { Fit } from "@/components/Fit";
+import { FunnelLeakCTA } from "@/components/FunnelLeakCTA";
 import { ContactForm } from "@/components/ContactForm";
 import { Footer } from "@/components/Footer";
 
@@ -47,6 +48,7 @@ export default function Home() {
         <Offer />
         <AfterAudit />
         <Fit />
+        <FunnelLeakCTA />
         <ContactForm />
       </main>
       <Footer />
