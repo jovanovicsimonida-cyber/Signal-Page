@@ -2,10 +2,10 @@ import { motion } from "framer-motion";
 import { Check, UserCheck } from "lucide-react";
 
 const readinessChecks = [
-  "You're the one who gets asked \"why aren't more trials converting?\", and you don't have a clear answer",
-  "You've tweaked the emails, adjusted the timing, rewritten the CTAs. The numbers barely moved.",
+  "You keep asking yourself \"why aren't more trials converting?\", and you don't have a clear answer",
+  "Your team has tried everything - new emails, adjusted timing, rewritten CTAs. The numbers barely moved.",
   "You know the data's there, somewhere, but you don't have time to dig through it and build a system from scratch",
-  "You're tired of duct-taping flows together and hoping this quarter's version works better than last quarter's",
+  "You're tired of watching your team patch the same problem every quarter and still not knowing what's actually broken",
   "You want to hand someone the problem and get back a system, not a slide deck",
 ];
 
