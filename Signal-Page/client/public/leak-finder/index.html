@@ -77,19 +77,35 @@
     font-family: 'DM Sans', sans-serif;
   }
 
+  /* INTRO SPLIT — video left, triangle right */
+  .intro-split {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    align-items: stretch;
+  }
+  .intro-video {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 10px; overflow: hidden;
+    display: flex; align-items: stretch;
+  }
+  .intro-video > div { flex: 1; }
+
   /* TRIANGLE */
   .triangle-wrap {
     background: var(--white);
     border: 1px solid var(--border);
     border-radius: 10px;
     padding: 1.75rem 1.5rem 1.25rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 2.5rem;
+    gap: 1.5rem;
   }
-  .triangle-svg-wrap { flex-shrink: 0; width: 320px; }
-  .triangle-legend { display: flex; flex-direction: column; gap: 1rem; flex: 1; }
+  .triangle-svg-wrap { flex-shrink: 0; width: 100%; max-width: 280px; }
+  .triangle-legend { display: flex; flex-direction: column; gap: 1rem; width: 100%; }
   .tl-item { display: flex; gap: 12px; align-items: flex-start; }
   .tl-num {
     width: 28px; height: 28px; border-radius: 50%;
@@ -103,9 +119,9 @@
   .tl-num-3 { background: #ffe07a; color: #232323; }
   .tl-name {
     font-family: 'Playfair Display', serif;
-    font-size: 15px; font-weight: 700; color: var(--black); margin-bottom: 2px;
+    font-size: 16px; font-weight: 700; color: var(--black); margin-bottom: 2px;
   }
-  .tl-desc { font-size: 12px; color: var(--muted); font-weight: 300; line-height: 1.45; }
+  .tl-desc { font-size: 14px; color: var(--muted); font-weight: 300; line-height: 1.5; }
 
   /* HOW TO */
   .how-to {
@@ -122,8 +138,8 @@
     flex-shrink: 0; margin-top: 1px;
     font-family: 'DM Sans', sans-serif;
   }
-  .how-text strong { display: block; font-size: 12px; font-weight: 700; margin-bottom: 2px; }
-  .how-text span { font-size: 12px; color: var(--muted); font-weight: 300; }
+  .how-text strong { display: block; font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+  .how-text span { font-size: 13px; color: var(--muted); font-weight: 300; }
 
   /* PROGRESS */
   .progress-row {
@@ -141,7 +157,7 @@
 
   /* LEGEND */
   .legend-row { display: flex; gap: 16px; margin-bottom: 0.75rem; align-items: center; }
-  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 12px; color: var(--muted); }
+  .legend-item { display: flex; align-items: center; gap: 6px; font-size: 13px; color: var(--muted); }
   .legend-dot { width: 9px; height: 9px; border-radius: 50%; flex-shrink: 0; }
   .ld-g { background: #4caf82; }
   .ld-y { background: var(--yellow); border: 1px solid var(--yellow-dark); }
@@ -190,8 +206,8 @@
     padding: 2px 7px; border-radius: 3px;
     display: inline-block; margin-bottom: 7px;
   }
-  .q-text { font-size: 13px; font-weight: 600; color: var(--black); line-height: 1.4; margin-bottom: 5px; }
-  .q-sub { font-size: 11.5px; color: var(--muted); font-weight: 300; line-height: 1.5; margin-bottom: 11px; }
+  .q-text { font-size: 14px; font-weight: 600; color: var(--black); line-height: 1.4; margin-bottom: 5px; }
+  .q-sub { font-size: 13px; color: var(--muted); font-weight: 300; line-height: 1.5; margin-bottom: 11px; }
 
   /* OPTIONS */
   .opts { display: flex; flex-direction: column; gap: 6px; }
@@ -212,7 +228,7 @@
     content: ''; width: 6px; height: 6px; border-radius: 50%;
     background: white; opacity: 0; transition: opacity 0.12s;
   }
-  .opt-lbl { font-size: 12px; line-height: 1.45; color: #555; }
+  .opt-lbl { font-size: 13px; line-height: 1.45; color: #555; }
   .opt-lbl b { font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; margin-right: 3px; }
 
   .opt.g { border-color: #4caf82; background: var(--green-bg); }
@@ -230,35 +246,48 @@
   .opt.r .opt-dot::after { opacity: 1; }
   .opt.r .opt-lbl { color: var(--red); }
 
-  /* RESULTS */
-  .results-wrap { display: none; }
-  .results-wrap.show { display: block; }
-
-  .result-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-bottom: 1rem; }
-  .rc {
-    background: var(--white); border: 1px solid var(--border);
-    border-top: 3px solid var(--border); border-radius: 8px; padding: 16px 18px;
+  /* CONFIRMATION SCREEN */
+  .conf-wrap { display: none; }
+  .conf-wrap.show { display: block; }
+  .conf-gate-row {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 10px; margin-bottom: 1.5rem;
   }
-  .rc.g { border-top-color: #4caf82; }
-  .rc.y { border-top-color: var(--yellow); }
-  .rc.r { border-top-color: #e05252; }
-  .rc-gate { font-size: 10px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; margin-bottom: 7px; }
-  .rc-pips { display: flex; gap: 5px; margin-bottom: 9px; }
+  .conf-gate {
+    background: var(--white); border: 1px solid var(--border);
+    border-radius: 8px; padding: 1rem 1.1rem;
+    display: flex; flex-direction: column; gap: 8px;
+  }
+  .conf-gate-name { font-size: 11px; text-transform: uppercase; letter-spacing: 0.1em; color: var(--muted); font-weight: 600; }
+  .conf-pips { display: flex; gap: 5px; }
   .pip { width: 11px; height: 11px; border-radius: 50%; background: var(--border); }
   .pip.g { background: #4caf82; }
   .pip.y { background: var(--yellow); }
   .pip.r { background: #e05252; }
-  .rc-badge {
+  .conf-badge {
     display: inline-block; font-size: 10px; font-weight: 700;
     letter-spacing: 0.08em; text-transform: uppercase;
-    padding: 3px 8px; border-radius: 3px; margin-bottom: 9px;
+    padding: 3px 8px; border-radius: 3px;
   }
   .rb-g { background: var(--green-bg); color: var(--green); }
   .rb-y { background: var(--yellow-bg); color: var(--yellow-dark); }
   .rb-r { background: var(--red-bg); color: var(--red); }
-  .rc-title { font-size: 13px; font-weight: 700; color: var(--black); margin-bottom: 7px; }
-  .rc-body { font-size: 12px; color: var(--muted); line-height: 1.65; }
-  .rc-body strong { color: var(--black); font-weight: 600; }
+  .conf-gate-title { font-size: 14px; font-weight: 700; color: var(--black); }
+  .conf-download-btn {
+    width: 100%; padding: 15px; background: var(--black); color: var(--off-white);
+    border: none; border-radius: 8px; font-size: 15px; font-weight: 700;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+    display: flex; align-items: center; justify-content: center; gap: 10px;
+    transition: opacity 0.15s; margin-bottom: 0.75rem;
+  }
+  .conf-download-btn:hover { opacity: 0.85; }
+  .conf-restart {
+    background: none; border: none; color: var(--muted); font-size: 13px;
+    font-family: 'DM Sans', sans-serif; cursor: pointer;
+    display: flex; align-items: center; gap: 6px; padding: 0;
+    transition: color 0.12s;
+  }
+  .conf-restart:hover { color: var(--black); }
 
   /* CTA */
   .cta-bar {
@@ -333,18 +362,21 @@
     <a href="/" class="logo-text" style="text-decoration:none;color:inherit;">signal.</a>
   </div>
 
-  <!-- VIDEO PLACEHOLDER -->
-  <div style="background:#fff;border:1px solid var(--border);border-radius:10px;margin-bottom:1rem;overflow:hidden;">
-    <div style="aspect-ratio:16/9;background:var(--card-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;">
-      <div style="width:56px;height:56px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="#f2efe8" style="margin-left:3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-      </div>
-      <p style="font-size:12px;color:var(--muted);font-family:'DM Sans',sans-serif;">90-second walkthrough - coming soon</p>
-    </div>
-  </div>
+  <!-- INTRO SPLIT -->
+  <div class="intro-split">
 
-  <!-- TRIANGLE -->
-  <div class="triangle-wrap">
+    <!-- LEFT: VIDEO -->
+    <div class="intro-video">
+      <div style="width:100%;background:var(--card-bg);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px;min-height:260px;">
+        <div style="width:56px;height:56px;background:var(--black);border-radius:50%;display:flex;align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,0.2);">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="#f2efe8" style="margin-left:3px;"><polygon points="5 3 19 12 5 21 5 3"/></svg>
+        </div>
+        <p style="font-size:13px;color:var(--muted);font-family:'DM Sans',sans-serif;">90-second walkthrough - coming soon</p>
+      </div>
+    </div>
+
+    <!-- RIGHT: TRIANGLE -->
+    <div class="triangle-wrap">
     <div class="triangle-svg-wrap">
       <svg viewBox="-10 -10 520 500" xmlns="http://www.w3.org/2000/svg" width="100%">
         <defs>
@@ -366,22 +398,6 @@
         <circle cx="250" cy="34" r="6" fill="#ffd231"/>
         <circle cx="26" cy="432" r="6" fill="#ffd231"/>
         <circle cx="474" cy="432" r="6" fill="#ffd231"/>
-
-        <!-- Gate number badges — small circles at edge midpoints, inside -->
-        <circle cx="155" cy="215" r="14" fill="#232323"/>
-        <text x="155" y="216" text-anchor="middle" dominant-baseline="middle"
-          font-family="'DM Sans', Arial, sans-serif" font-size="9" font-weight="700"
-          letter-spacing="1" fill="#ffd231">01</text>
-
-        <circle cx="345" cy="215" r="14" fill="#232323"/>
-        <text x="345" y="216" text-anchor="middle" dominant-baseline="middle"
-          font-family="'DM Sans', Arial, sans-serif" font-size="9" font-weight="700"
-          letter-spacing="1" fill="#ffd231">02</text>
-
-        <circle cx="250" cy="405" r="14" fill="#232323"/>
-        <text x="250" y="406" text-anchor="middle" dominant-baseline="middle"
-          font-family="'DM Sans', Arial, sans-serif" font-size="9" font-weight="700"
-          letter-spacing="1" fill="#ffd231">03</text>
 
         <!-- Center text -->
         <text x="250" y="255"
@@ -445,7 +461,8 @@
         </div>
       </div>
     </div>
-  </div>
+  </div><!-- end triangle-wrap -->
+  </div><!-- end intro-split -->
 
   <!-- HOW TO -->
   <div class="how-to">
@@ -613,64 +630,64 @@
     </div>
   </div>
 
-  <!-- RESULTS -->
-  <div class="results-wrap" id="results">
-    <div class="sec-label" style="margin-bottom:0.6rem;">Your results</div>
-    <div class="result-grid">
-      <div class="rc" id="rc1">
-        <div class="rc-gate">Gate 01 - Aha path</div>
-        <div class="rc-pips" id="rp1"></div>
-        <div class="rc-badge" id="rb1"></div>
-        <div class="rc-title" id="rt1"></div>
-        <div class="rc-body" id="rx1"></div>
+  <!-- CONFIRMATION -->
+  <div class="conf-wrap" id="confirmation">
+    <div class="sec-label" style="margin-bottom:0.75rem;">Your results</div>
+
+    <div class="conf-gate-row">
+      <div class="conf-gate">
+        <div class="conf-gate-name">Gate 01 — Aha path</div>
+        <div class="conf-pips" id="cp1"></div>
+        <div class="conf-badge" id="cb1"></div>
+        <div class="conf-gate-title" id="ct1"></div>
       </div>
-      <div class="rc" id="rc2">
-        <div class="rc-gate">Gate 02 - Stall recovery</div>
-        <div class="rc-pips" id="rp2"></div>
-        <div class="rc-badge" id="rb2"></div>
-        <div class="rc-title" id="rt2"></div>
-        <div class="rc-body" id="rx2"></div>
+      <div class="conf-gate">
+        <div class="conf-gate-name">Gate 02 — Stall recovery</div>
+        <div class="conf-pips" id="cp2"></div>
+        <div class="conf-badge" id="cb2"></div>
+        <div class="conf-gate-title" id="ct2"></div>
       </div>
-      <div class="rc" id="rc3">
-        <div class="rc-gate">Gate 03 - Upgrade moment</div>
-        <div class="rc-pips" id="rp3"></div>
-        <div class="rc-badge" id="rb3"></div>
-        <div class="rc-title" id="rt3"></div>
-        <div class="rc-body" id="rx3"></div>
+      <div class="conf-gate">
+        <div class="conf-gate-name">Gate 03 — Upgrade moment</div>
+        <div class="conf-pips" id="cp3"></div>
+        <div class="conf-badge" id="cb3"></div>
+        <div class="conf-gate-title" id="ct3"></div>
       </div>
     </div>
 
-    <div class="cta-bar">
+    <p style="font-size:14px;color:var(--muted);margin-bottom:1.25rem;line-height:1.6;">Your full gate-by-gate breakdown — what's causing each gap and what to fix first — is in the report below.</p>
+
+    <button class="conf-download-btn" onclick="exportPDF()">
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+      Download your report (PDF)
+    </button>
+
+    <div class="cta-bar" style="margin-bottom:1rem;">
       <div>
-        <h3>Want to know if these leaks are costing you real money?</h3>
-        <p>15 minutes. We'll look at your results together, plug your real numbers into the impact model, and tell you honestly whether there's enough upside to justify fixing this. No pitch — just math.</p>
+        <h3>Not sure what to do with this?</h3>
+        <p>15 minutes. We'll look at your results together and I'll tell you straight away whether this is something I can help with — and how. No pitch, no pressure. Just an honest answer.</p>
       </div>
       <a class="cta-link" href="https://calendly.com/simonida-signallifecycle/15min" target="_blank" rel="noopener noreferrer">
         Book a 15-min fit check
         <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
       </a>
     </div>
+
+    <div style="display:flex;justify-content:flex-start;">
+      <button class="conf-restart" onclick="resetAll()">
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        Start over with different answers
+      </button>
+    </div>
   </div>
 
 </div><!-- end #page-content -->
-
-<!-- Export button lives OUTSIDE page-content so it's never in the PDF -->
-<div class="export-bar">
-  <button class="export-btn" id="resetbtn" onclick="resetAll()" style="background:transparent;color:var(--muted);border:1px solid var(--border);margin-right:8px;display:none;">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
-    Start over
-  </button>
-  <button class="export-btn" id="expbtn" onclick="exportPDF()" style="display:none;">
-    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
-    Export as PDF
-  </button>
-</div>
 
 <!-- EMAIL GATE MODAL -->
 <div id="gate-modal">
   <div class="gm-card">
     <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--black);margin-bottom:0.4rem;">Your results are ready</h2>
-    <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:1.5rem;">Enter your details to unlock your gate-by-gate breakdown. We'll also email you a copy to share with your team.</p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:1.5rem;">Enter your details to unlock your gate-by-gate breakdown. You can download and share it directly from the results page.</p>
     <label class="gm-label" for="gm-name">First name</label>
     <input id="gm-name" class="gm-input" type="text" placeholder="Jane" />
     <label class="gm-label" for="gm-email">Work email</label>
@@ -791,7 +808,6 @@
     const n = Object.keys(A).length;
     document.getElementById('pfill').style.width = (n / 9 * 100) + '%';
     document.getElementById('pcount').textContent = n;
-    if (n > 0) document.getElementById('resetbtn').style.display = 'flex';
     if (n === 9 && !gateShown) { gateShown = true; showGate(); }
   }
 
@@ -799,9 +815,7 @@
     Object.keys(A).forEach(k => delete A[k]);
     document.querySelectorAll('.opt').forEach(o => o.className = 'opt');
     document.querySelectorAll('.gate-badge').forEach(b => { b.className = 'gate-badge'; b.textContent = ''; });
-    document.getElementById('results').classList.remove('show');
-    document.getElementById('resetbtn').style.display = 'none';
-    document.getElementById('expbtn').style.display = 'none';
+    document.getElementById('confirmation').classList.remove('show');
     document.getElementById('gate-modal').classList.remove('show');
     gateShown = false;
     updateProgress();
@@ -809,6 +823,10 @@
   }
 
   function showGate() {
+    if (localStorage.getItem('lf_submitted')) {
+      showResults();
+      return;
+    }
     document.getElementById('gate-modal').classList.add('show');
     setTimeout(function() { document.getElementById('gm-name').focus(); }, 50);
   }
@@ -832,25 +850,23 @@
         body: JSON.stringify({ firstName: firstName, email: email, reds: reds, yellows: yellows })
       });
     } catch(e) {}
+    localStorage.setItem('lf_submitted', '1');
     document.getElementById('gate-modal').classList.remove('show');
-    document.getElementById('expbtn').style.display = 'flex';
     showResults();
   }
 
   function showResults() {
-    const wrap = document.getElementById('results');
+    const wrap = document.getElementById('confirmation');
     wrap.classList.add('show');
+    const statusMap = { g:['rb-g','Solid'], y:['rb-y','Gaps exist'], r:['rb-r','Needs work'] };
     [1,2,3].forEach(gn => {
       const d = diagnose(gn);
       const c = results[gn][d.combo];
-      const statusMap = { g:['rb-g','Solid'], y:['rb-y','Gaps exist'], r:['rb-r','Needs work'] };
-      document.getElementById('rc'+gn).className = 'rc ' + d.tier;
-      document.getElementById('rp'+gn).innerHTML = gates[gn].map(q => `<div class="pip ${A[q]}"></div>`).join('');
-      const rb = document.getElementById('rb'+gn);
-      rb.className = 'rc-badge ' + statusMap[d.tier][0];
-      rb.textContent = statusMap[d.tier][1];
-      document.getElementById('rt'+gn).textContent = c.title;
-      document.getElementById('rx'+gn).innerHTML = c.body;
+      document.getElementById('cp'+gn).innerHTML = gates[gn].map(q => `<div class="pip ${A[q]}"></div>`).join('');
+      const cb = document.getElementById('cb'+gn);
+      cb.className = 'conf-badge ' + statusMap[d.tier][0];
+      cb.textContent = statusMap[d.tier][1];
+      document.getElementById('ct'+gn).textContent = c.title;
     });
     wrap.scrollIntoView({ behavior: 'smooth', block: 'start' });
   }
