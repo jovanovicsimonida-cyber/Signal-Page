@@ -39,6 +39,14 @@
 | `--font-body` | DM Sans | All body/UI text — use `font-sans` |
 | `--font-display` | Playfair Display | Headings (h1–h6) — applied globally |
 
+### Logo rule
+
+The `signal.` text logo **must always use Playfair Display** (the display/serif font) on every surface — React pages, static HTML pages, and downloaded/printed PDFs. Never render the logo in DM Sans or any other font.
+
+- In React / Tailwind: `<span className="font-display ...">signal.</span>`
+- In static HTML CSS: `font-family: 'Playfair Display', serif;`
+- In PDF / `window.open` print output: `font-family:'Playfair Display',serif` as an inline style (the font is already loaded via the Google Fonts `<link>` in the print window)
+
 ---
 
 ## Project Structure
