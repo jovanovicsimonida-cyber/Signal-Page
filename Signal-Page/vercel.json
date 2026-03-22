@@ -33,6 +33,6 @@
     }
   ],
   "rewrites": [
-    { "source": "/((?!api/).*)", "destination": "/index.html" }
+    { "source": "/((?!api/|leak-finder).*)", "destination": "/index.html" }
   ]
 }
