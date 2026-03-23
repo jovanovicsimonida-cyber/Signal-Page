@@ -45,7 +45,20 @@ The `signal.` text logo **must always use Playfair Display** (the display/serif 
 
 - In React / Tailwind: `<span className="font-display ...">signal.</span>`
 - In static HTML CSS: `font-family: 'Playfair Display', serif;`
-- In PDF / `window.open` print output: `font-family:'Playfair Display',serif` as an inline style (the font is already loaded via the Google Fonts `<link>` in the print window)
+- In PDF / `window.open` print output: `font-family:Playfair Display,serif` — **no quotes** around the font name (see JS string safety rule below)
+
+---
+
+## JS String Safety
+
+`leak-finder/index.html` (and any future static tool pages) use `w.document.write('...')` with **single-quoted** JS strings. Inserting single quotes inside those strings breaks the JavaScript entirely — a silent parse error that kills all interactivity on the page (clicks stop working, nothing runs).
+
+### Rules
+
+1. **Never use single quotes inside a `w.document.write('...')` call.** This includes CSS values like `font-family:'Playfair Display',serif`.
+2. **Multi-word font names in these strings** must be written without quotes: `font-family:Playfair Display,serif`. CSS parsers accept this in inline `style` attributes.
+3. **Before editing any line inside a `document.write()`**, check the outer quote style (single or double) and ensure your additions don't use the same quote character unescaped.
+4. **After any edit to a static HTML file with JS**, mentally trace whether the change touches a JS string literal and could introduce a mismatched quote.
 
 ---
 
