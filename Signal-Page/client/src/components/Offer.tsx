@@ -37,7 +37,7 @@ export function Offer() {
         >
           <p className="text-white/70 font-sans text-lg mb-4">Now if you're thinking <span className="text-white italic">that's exactly what I need...</span></p>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
-            First, we need to do an Audit.
+            First, we need to do an Audit
           </h2>
           <p className="text-lg text-white/80 leading-relaxed font-sans mb-4">
             Yeah, I know it's a weird way to sell a service. But here's the thing.
@@ -58,7 +58,7 @@ export function Offer() {
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
           >
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">One session. Full clarity.</h3>
+            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">One session. Full clarity</h3>
             <p className="text-white/70 font-sans mb-3">Before we meet, I review your existing customer data, product analytics, and current email sequences so I walk in with context, not questions.</p>
             <p className="text-white/70 font-sans mb-8">Then a 60–90 minute working session with your team - Product, Sales, and CS in the room.</p>
 
@@ -97,7 +97,7 @@ export function Offer() {
             className="bg-background text-foreground p-8 md:p-10 rounded-2xl shadow-2xl border-t-2 border-accent"
           >
             <div className="mb-6">
-              <h3 className="text-2xl font-bold">What You Walk Away With</h3>
+              <h3 className="text-2xl font-bold">What you walk away with</h3>
             </div>
 
             <ul className="space-y-4 mb-8">

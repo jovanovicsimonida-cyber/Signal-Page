@@ -16,7 +16,7 @@ export function Problem() {
           </p>
 
           <h2 className="text-3xl md:text-4xl font-bold text-primary">
-            The signups are there. The upgrades aren't.
+            The signups are there... The upgrades aren't
           </h2>
 
           <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">

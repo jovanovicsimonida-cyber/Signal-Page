@@ -46,7 +46,7 @@ export default function About() {
             transition={{ duration: 0.6 }}
           >
             <h1 className="text-3xl md:text-4xl font-bold text-primary mb-8">
-              The Job That Comes First
+              The job that comes first
             </h1>
             <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
               <p>
@@ -103,7 +103,7 @@ export default function About() {
           </motion.div>
         </div>
 
-        {/* What You Should Know About Me - dark card, full width */}
+        {/* What you should know about me - dark card, full width */}
         <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -116,7 +116,7 @@ export default function About() {
             </div>
 
             <div className="relative z-10">
-            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">What You Should Know About Me</h2>
+            <h2 className="text-2xl md:text-3xl font-bold text-white mb-8">What you should know about me</h2>
 
             <div className="flex flex-col md:flex-row gap-8 mb-8">
               {/* Photo inside the card */}
@@ -145,10 +145,10 @@ export default function About() {
             <div className="flex flex-col md:flex-row gap-8">
               <div className="space-y-4 text-white/80 font-sans leading-relaxed flex-1">
                 <p>
-                  Today I focus on trial-to-paid because it's the highest-leverage part of the customer journey, and I love to nerd out about people's behaviour + less crying.
+                  Today I focus on trial-to-paid because it's the highest-leverage part of the customer journey, and I love to nerd out about people's behavior + less crying.
                 </p>
                 <p>
-                  That also means I'm selective with clients because this only works when there's real value to unlock. If we're not a match, I'll tell you right away.
+                  That means I'm selective with clients because this only works when there's real value to unlock. If we're not a match, I'll tell you right away.
                 </p>
                 <p>
                   Also, I live with a cat who believes all keyboards belong to her.
@@ -164,7 +164,7 @@ export default function About() {
                   className="w-48 h-60 object-cover rounded-lg"
                 />
                 <p className="font-mono text-sm text-white/80 mt-2">
-                  ";si[ awr[\v ir p"
+                  <em>";si[ awr[\v ir p"</em> - Ljubica, the owner of all the keybords
                 </p>
               </div>
             </div>
