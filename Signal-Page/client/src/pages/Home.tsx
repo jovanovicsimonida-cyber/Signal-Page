@@ -51,13 +51,19 @@ export default function Home() {
         <FunnelLeakCTA />
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center space-y-4">
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            If you've already seen enough, you can skip straight to the form.
+            If you're ready to skip ahead - fill out the form below.
           </p>
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            Once you submit it I will reach out within 48 hours, to see if we're a fit.
+            I'll take a look and get back to you within 48 hours to let you know if it's a fit.
           </p>
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            Keep in mind that this is a working session that will require your current data, and some time from your team.
+            If it is, we'll get on a call before anything else.
+          </p>
+          <p className="text-muted-foreground font-sans text-lg leading-relaxed">
+            The Audit is a working session that requires your conversion data, product analytics, and time from your team.
+          </p>
+          <p className="text-muted-foreground font-sans text-lg leading-relaxed">
+            It's not something you walk into blind, and it's not something I take on without being confident I can help.
           </p>
         </div>
         <ContactForm />
