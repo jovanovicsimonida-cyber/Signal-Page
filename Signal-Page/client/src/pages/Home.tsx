@@ -51,10 +51,7 @@ export default function Home() {
         <FunnelLeakCTA />
         <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-12 text-center">
           <p className="text-muted-foreground font-sans text-lg">
-            If you've already seen enough —
-          </p>
-          <p className="text-foreground font-semibold font-sans text-xl mt-1">
-            the Audit is where we start.
+            If you didn't need the tool to confirm it —
           </p>
         </div>
         <ContactForm />
