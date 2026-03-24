@@ -35,7 +35,7 @@ export function Offer() {
           transition={{ duration: 0.6 }}
           className="max-w-3xl mb-16"
         >
-          <p className="text-white/70 font-sans text-lg mb-4">Now if you're thinking <span className="text-white italic">that's exactly what I need...</span></p>
+          <p className="text-white/70 font-sans text-lg mb-4">Now if you're thinking <span className="text-accent italic">that's exactly what I need...</span></p>
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
             First, we need to do an Audit
           </h2>
@@ -103,8 +103,8 @@ export function Offer() {
             <ul className="space-y-4 mb-8">
               {deliverables.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 bg-accent/20">
-                    <Check className="w-3.5 h-3.5 text-primary" />
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 bg-accent">
+                    <Check className="w-3.5 h-3.5 text-accent-foreground" />
                   </div>
                   <span className="text-muted-foreground font-sans font-medium">{item}</span>
                 </li>
