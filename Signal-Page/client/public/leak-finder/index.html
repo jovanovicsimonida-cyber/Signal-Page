@@ -327,6 +327,7 @@
     .triangle-wrap { flex-direction: column; align-items: center; }
   }
   @media (max-width: 768px) {
+    .intro-split { grid-template-columns: 1fr; }
     .q-grid { grid-template-columns: 1fr; }
     .q-cell { border-right: none; border-bottom: 1px solid var(--border); }
     .q-cell:last-child { border-bottom: none; }
@@ -346,6 +347,11 @@
   .gm-btn { width: 100%; padding: 13px; background: var(--black); color: var(--off-white); border: none; border-radius: 6px; font-size: 14px; font-weight: 700; font-family: 'DM Sans', sans-serif; cursor: pointer; transition: opacity 0.15s; }
   .gm-btn:hover { opacity: 0.85; }
   .gm-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+  .gm-card { position: relative; }
+  .gm-close { position: absolute; top: 1rem; right: 1rem; background: none; border: none; cursor: pointer; color: var(--muted); line-height: 1; padding: 4px; border-radius: 4px; transition: color 0.12s; }
+  .gm-close:hover { color: var(--black); }
+  .gm-skip { display: block; text-align: center; font-size: 12px; color: var(--muted); margin-top: 0.75rem; cursor: pointer; background: none; border: none; font-family: 'DM Sans', sans-serif; text-decoration: underline; text-underline-offset: 2px; padding: 0; }
+  .gm-skip:hover { color: var(--black); }
 </style>
 </head>
 <body>
@@ -636,6 +642,9 @@
 <!-- EMAIL GATE MODAL -->
 <div id="gate-modal">
   <div class="gm-card">
+    <button class="gm-close" onclick="closeGate()" aria-label="Close">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/></svg>
+    </button>
     <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--black);margin-bottom:0.4rem;">Your results are ready</h2>
     <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:1.5rem;">Enter your details to unlock your gate-by-gate breakdown. You can download and share it directly from the results page.</p>
     <label class="gm-label" for="gm-name">First name</label>
@@ -645,6 +654,7 @@
     <button id="gm-btn" class="gm-btn" onclick="submitGate()">Unlock my results</button>
     <p id="gm-error" style="display:none;font-size:12px;color:var(--red);margin-top:0.75rem;text-align:center;"></p>
     <p style="font-size:11px;color:#aaa8a3;margin-top:1rem;text-align:center;">No spam. Unsubscribe anytime.</p>
+    <button class="gm-skip" onclick="closeGate()">No thanks, I'll pass</button>
   </div>
 </div>
 
@@ -769,6 +779,10 @@
     gateShown = false;
     updateProgress();
     window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  function closeGate() {
+    document.getElementById('gate-modal').classList.remove('show');
   }
 
   function showGate() {
