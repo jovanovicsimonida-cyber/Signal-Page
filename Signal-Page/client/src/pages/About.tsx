@@ -157,13 +157,13 @@ export default function About() {
                   She thinks you should:
                 </p>
               </div>
-              <div className="flex-shrink-0 mx-auto md:mx-0">
+              <div className="flex-shrink-0 mx-auto md:mx-0 w-48">
                 <img
                   src={catPhoto}
                   alt="Ljubica the cat"
                   className="w-48 h-60 object-cover rounded-lg"
                 />
-                <p className="font-mono text-sm text-white/80 mt-2">
+                <p className="font-mono text-sm text-white/80 mt-2 w-48 break-words">
                   <em>";si[ awr[\v ir p"</em> - Ljubica, the owner of all the keybords
                 </p>
               </div>
