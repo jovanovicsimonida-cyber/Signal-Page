@@ -49,6 +49,17 @@ export default function Home() {
         <AfterAudit />
         <Fit />
         <FunnelLeakCTA />
+        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center space-y-4">
+          <p className="text-muted-foreground font-sans text-lg leading-relaxed">
+            If you've already seen enough, you can skip straight to the form.
+          </p>
+          <p className="text-muted-foreground font-sans text-lg leading-relaxed">
+            Once you submit it I will reach out within 48 hours, to see if we're a fit.
+          </p>
+          <p className="text-muted-foreground font-sans text-lg leading-relaxed">
+            Keep in mind that this is a working session that will require your current data, and some time from your team.
+          </p>
+        </div>
         <ContactForm />
       </main>
       <Footer />
