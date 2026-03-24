@@ -82,8 +82,8 @@ export function Fit() {
             <div className="space-y-4">
               {readinessChecks.map((item, idx) => (
                 <div key={idx} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-white/10 flex items-center justify-center mt-0.5">
-                    <Check className="w-3.5 h-3.5 text-white" />
+                  <div className="flex-shrink-0 w-6 h-6 rounded-full bg-accent flex items-center justify-center mt-0.5">
+                    <Check className="w-3.5 h-3.5 text-accent-foreground" />
                   </div>
                   <span className="text-white/80 font-sans font-medium">{item}</span>
                 </div>

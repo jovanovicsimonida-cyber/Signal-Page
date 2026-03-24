@@ -60,8 +60,8 @@ export function AfterAudit() {
             <ul className="space-y-3">
               {buildFeatures.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 bg-accent/20">
-                    <Check className="w-3 h-3 text-primary" />
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 bg-accent">
+                    <Check className="w-3 h-3 text-accent-foreground" />
                   </div>
                   <span className="text-sm text-muted-foreground font-sans">{item}</span>
                 </li>
@@ -91,8 +91,8 @@ export function AfterAudit() {
             <ul className="space-y-3">
               {buildImplementFeatures.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
-                  <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 bg-accent/20">
-                    <Check className="w-3 h-3 text-primary" />
+                  <div className="flex-shrink-0 w-5 h-5 rounded-full flex items-center justify-center mt-0.5 bg-accent">
+                    <Check className="w-3 h-3 text-accent-foreground" />
                   </div>
                   <span className="text-sm text-muted-foreground font-sans">{item}</span>
                 </li>
