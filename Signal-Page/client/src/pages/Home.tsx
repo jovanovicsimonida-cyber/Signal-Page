@@ -51,13 +51,13 @@ export default function Home() {
         <FunnelLeakCTA />
         <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-center space-y-4">
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            The Audit is a working session, not a sales call.
+            If you've already seen enough, you can skip straight to the form.
           </p>
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            Before we meet, I review your data, your emails, and your current trial flow — so I walk in with context, not questions. Then 60–90 minutes with your team to map exactly where users drop off and what it would take to catch them.
+            Once you submit it I will reach out within 48 hours, to see if we're a fit.
           </p>
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            Fill out the form below and I'll reach out if I think I can help.
+            Keep in mind that this is a working session that will require your current data, and some time from your team.
           </p>
         </div>
         <ContactForm />
