@@ -21,7 +21,7 @@ export function Fit() {
           className="space-y-8 mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-bold text-primary">
-            If your trials leak, this is for you
+            Here's how to know if you're ready
           </h2>
 
           <div className="space-y-6 text-lg text-muted-foreground font-sans leading-relaxed">
@@ -75,7 +75,7 @@ export function Fit() {
 
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Here's how to know if you're ready.
+              Here's how to know if you're ready
             </h3>
             <p className="text-white/60 font-sans mb-8">You're a fit if:</p>
 
