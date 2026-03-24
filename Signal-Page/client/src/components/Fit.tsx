@@ -75,9 +75,9 @@ export function Fit() {
 
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Here's how to know if you're ready
+              You're a fit if
             </h3>
-            <p className="text-white/60 font-sans mb-8">You're a fit if:</p>
+            <p className="text-white/60 font-sans mb-8">Here's how to know if you're ready</p>
 
             <div className="space-y-4">
               {readinessChecks.map((item, idx) => (
