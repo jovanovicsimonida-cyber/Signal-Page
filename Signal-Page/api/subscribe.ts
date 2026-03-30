@@ -1,4 +1,11 @@
+import { z } from "zod";
+
 export const config = { runtime: "edge" };
+
+const schema = z.object({
+  firstName: z.string().min(1).max(100),
+  email: z.string().email().max(254),
+});
 
 export default async function handler(req: Request): Promise<Response> {
   if (req.method !== "POST") {
@@ -10,17 +17,19 @@ export default async function handler(req: Request): Promise<Response> {
     return new Response("Server misconfiguration", { status: 500 });
   }
 
-  let body: { firstName?: string; email?: string };
+  let raw: unknown;
   try {
-    body = await req.json();
+    raw = await req.json();
   } catch {
     return new Response("Invalid JSON", { status: 400 });
   }
 
-  const { firstName, email } = body;
-  if (!email || !firstName) {
-    return new Response("Missing required fields", { status: 400 });
+  const parsed = schema.safeParse(raw);
+  if (!parsed.success) {
+    return new Response("Invalid input", { status: 400 });
   }
+
+  const { firstName, email } = parsed.data;
 
   const payload: Record<string, unknown> = {
     email,
@@ -42,8 +51,7 @@ export default async function handler(req: Request): Promise<Response> {
   });
 
   if (!mlRes.ok) {
-    const text = await mlRes.text();
-    console.error("MailerLite error:", mlRes.status, text);
+    console.error("MailerLite error:", mlRes.status);
     return new Response("Failed to subscribe", { status: 502 });
   }
 
