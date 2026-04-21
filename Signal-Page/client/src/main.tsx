@@ -1,19 +1,25 @@
 import { hydrateRoot, createRoot } from "react-dom/client";
-import posthog from "posthog-js";
+import { PostHogProvider } from "@posthog/react";
 import App from "./App";
 import "./index.css";
 
-posthog.init("phc_m7qLNQ2LdaN9An76YEijEERZy4hqBWg9XLEgpoKEkkeq", {
-  api_host: "https://us.i.posthog.com",
-  person_profiles: "identified_only",
-});
+const options = {
+  api_host: import.meta.env.VITE_PUBLIC_POSTHOG_HOST,
+  defaults: "2026-01-30",
+} as const;
 
 const root = document.getElementById("root")!;
+
+const app = (
+  <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN} options={options}>
+    <App />
+  </PostHogProvider>
+);
 
 // If the page was prerendered (has child content), hydrate to preserve
 // the existing DOM and attach event listeners. Otherwise, render fresh.
 if (root.children.length > 0) {
-  hydrateRoot(root, <App />);
+  hydrateRoot(root, app);
 } else {
-  createRoot(root).render(<App />);
+  createRoot(root).render(app);
 }

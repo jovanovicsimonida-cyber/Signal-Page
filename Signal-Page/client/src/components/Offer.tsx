@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Check, ArrowRight, ClipboardCheck, Users, MapPin, AlertTriangle } from "lucide-react";
+import { usePostHog } from "@posthog/react";
 
 const deliverables = [
   "A map of JTBD, AHA moments, and stall points documented and prioritized",
@@ -15,7 +16,10 @@ const sessionCovers = [
 ];
 
 export function Offer() {
+  const posthog = usePostHog();
+
   const scrollToContact = () => {
+    posthog.capture("audit_cta_clicked", { location: "offer_section" });
     const contactSection = document.getElementById('contact');
     contactSection?.scrollIntoView({ behavior: 'smooth' });
   };

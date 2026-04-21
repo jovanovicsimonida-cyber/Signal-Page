@@ -4,6 +4,7 @@ import { z } from "zod";
 import { useCreateContact, type ContactFormData } from "@/hooks/use-contact";
 import { Loader2, Send } from "lucide-react";
 import { motion } from "framer-motion";
+import { usePostHog } from "@posthog/react";
 
 const contactFormSchema = z.object({
   name: z.string().min(1, "Name is required"),
@@ -13,6 +14,7 @@ const contactFormSchema = z.object({
 });
 
 export function ContactForm() {
+  const posthog = usePostHog();
   const mutation = useCreateContact();
 
   const form = useForm<ContactFormData>({
@@ -26,6 +28,7 @@ export function ContactForm() {
   });
 
   const onSubmit = (data: ContactFormData) => {
+    posthog.capture("contact_form_submitted", { esp_tool: data.espTool });
     mutation.mutate(data, {
       onSuccess: () => {
         form.reset();
