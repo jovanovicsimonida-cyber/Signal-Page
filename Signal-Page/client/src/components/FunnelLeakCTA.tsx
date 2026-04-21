@@ -1,7 +1,10 @@
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
+import { usePostHog } from "@posthog/react";
 
 export function FunnelLeakCTA() {
+  const posthog = usePostHog();
+
   return (
     <section className="py-10 bg-background border-t border-border">
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -20,6 +23,7 @@ export function FunnelLeakCTA() {
           </div>
           <a
             href="/leak-finder/"
+            onClick={() => posthog.capture("leak_finder_cta_clicked")}
             className="inline-flex items-center gap-2 whitespace-nowrap text-sm font-semibold text-accent-foreground border border-accent-foreground rounded-lg px-4 py-2 hover:bg-white/30 transition-colors font-sans"
           >
             Find out in 10 minutes
