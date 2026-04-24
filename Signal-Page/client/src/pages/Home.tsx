@@ -38,6 +38,46 @@ export default function Home() {
         <meta name="twitter:title" content="Signal - Lifecycle Email Strategy for SaaS Trial-to-Paid" />
         <meta name="twitter:description" content="Your trial-to-paid flow finally does what it was supposed to do. Users reach value. Upgrades happen. Your team stops guessing." />
         <meta name="twitter:image" content="https://signallifecycle.com/og-image.png" />
+        <script type="application/ld+json">{`
+          {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+              {
+                "@type": "Question",
+                "name": "What is lifecycle email strategy for SaaS?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "Lifecycle email strategy is a system of behavior-triggered emails that respond to what users actually do inside your product — not just what day they signed up. Instead of blasting the same sequence to everyone, each user gets messages based on where they are in their journey: onboarding, activation, stalling, or ready to upgrade."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "Why aren't my trial users converting to paid?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The most common reason is treating all trial users the same. A user who connected their data and hit a key milestone needs different messaging than one who logged in once and went quiet. Without behavior-based segmentation, you're sending the wrong message to the wrong person at the wrong time — and most trials expire silently."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What is the SIGNAL framework?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "SIGNAL is a six-stage methodology for building lifecycle email systems: Segment users into real cohorts, Interpret their behavior to find friction, Generate flow logic before writing a word, Nurture with copy that sounds human, Automate triggers and suppression rules, and Learn from retention data to keep improving."
+                }
+              },
+              {
+                "@type": "Question",
+                "name": "What does The Leak Audit include?",
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": "The Leak Audit is a 60–90 minute working session where we map your user journey, identify where trial-to-paid conversions leak, and deliver a documented strategy. You walk away with a JTBD + Aha moment map, prioritized stall points, and a clear picture of what to fix first."
+                }
+              }
+            ]
+          }
+        `}</script>
       </Helmet>
       <Navigation />
       <main className="flex-grow">
