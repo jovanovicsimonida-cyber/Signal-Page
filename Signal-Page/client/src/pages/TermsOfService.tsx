@@ -7,6 +7,7 @@ export default function TermsOfService() {
       <Helmet>
         <title>Terms of Service - Signal Lifecycle Email Strategy</title>
         <meta name="description" content="Terms of Service for Signal Lifecycle Email Strategy. Review the terms governing your use of signallifecycle.com." />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://signallifecycle.com/terms" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Terms of Service - Signal Lifecycle Email Strategy" />
