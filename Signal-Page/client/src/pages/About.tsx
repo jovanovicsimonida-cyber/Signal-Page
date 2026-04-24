@@ -125,6 +125,7 @@ export default function About() {
                   src={profilePhoto}
                   alt="Simonida Jovanovic"
                   className="w-48 h-60 object-cover rounded-lg"
+                  loading="lazy"
                 />
               </div>
 
@@ -162,6 +163,7 @@ export default function About() {
                   src={catPhoto}
                   alt="Ljubica the cat"
                   className="w-48 h-60 object-cover rounded-lg"
+                  loading="lazy"
                 />
                 <p className="font-mono text-sm text-white/80 mt-2 w-48 break-words">
                   <em>";si[ awr[\v ir p"</em> - Ljubica, the owner of all the keybords
