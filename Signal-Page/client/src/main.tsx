@@ -9,11 +9,14 @@ const options = {
 } as const;
 
 const root = document.getElementById("root")!;
+const posthogToken = import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN;
 
-const app = (
-  <PostHogProvider apiKey={import.meta.env.VITE_PUBLIC_POSTHOG_PROJECT_TOKEN} options={options}>
+const app = posthogToken ? (
+  <PostHogProvider apiKey={posthogToken} options={options}>
     <App />
   </PostHogProvider>
+) : (
+  <App />
 );
 
 // If the page was prerendered (has child content), hydrate to preserve

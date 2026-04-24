@@ -3,11 +3,13 @@ import { Router as WouterRouter } from "wouter";
 import { HelmetProvider } from "react-helmet-async";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { TooltipProvider } from "@/components/ui/tooltip";
+import { Toaster } from "@/components/ui/toaster";
 import { Switch, Route } from "wouter";
 import Home from "@/pages/Home";
 import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import About from "@/pages/About";
+import LeadMagnet from "@/pages/LeadMagnet";
 import NotFound from "@/pages/not-found";
 
 function AppRoutes() {
@@ -17,6 +19,7 @@ function AppRoutes() {
       <Route path="/privacy" component={PrivacyPolicy} />
       <Route path="/terms" component={TermsOfService} />
       <Route path="/about" component={About} />
+      <Route path="/resources/reverb" component={LeadMagnet} />
       <Route component={NotFound} />
     </Switch>
   );
@@ -30,6 +33,7 @@ export function render(url: string) {
       <HelmetProvider>
         <QueryClientProvider client={queryClient}>
           <TooltipProvider>
+            <Toaster />
             <AppRoutes />
           </TooltipProvider>
         </QueryClientProvider>
