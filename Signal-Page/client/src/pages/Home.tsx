@@ -49,7 +49,7 @@ export default function Home() {
         <AfterAudit />
         <Fit />
         <FunnelLeakCTA />
-        <div className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-16 text-left space-y-4">
+        <div className="max-w-2xl mx-auto px-6 lg:px-8 py-16 text-left space-y-4">
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
             If you're ready to skip ahead - fill out the form below.
           </p>

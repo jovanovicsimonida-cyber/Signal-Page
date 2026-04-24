@@ -30,7 +30,7 @@ export function Offer() {
         <ClipboardCheck className="w-96 h-96 text-white" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 lg:px-8 relative z-10">
         {/* Intro text */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}

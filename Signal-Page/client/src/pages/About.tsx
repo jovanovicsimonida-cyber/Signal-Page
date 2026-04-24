@@ -35,7 +35,7 @@ export default function About() {
       <Navigation />
       <main className="flex-grow pt-32 pb-24">
         {/* Philosophy text - narrower container */}
-        <div className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 mb-16">
+        <div className="max-w-3xl mx-auto px-6 lg:px-8 mb-16">
           <Link href="/" className="text-sm text-muted-foreground hover:text-foreground transition-colors mb-12 inline-block font-sans">
             &larr; Back to Home
           </Link>
@@ -104,7 +104,7 @@ export default function About() {
         </div>
 
         {/* What you should know about me - dark card, full width */}
-        <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="max-w-5xl mx-auto px-6 lg:px-8">
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
