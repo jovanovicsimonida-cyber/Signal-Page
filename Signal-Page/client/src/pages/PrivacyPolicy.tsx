@@ -7,6 +7,7 @@ export default function PrivacyPolicy() {
       <Helmet>
         <title>Privacy Policy - Signal Lifecycle Email Strategy</title>
         <meta name="description" content="Privacy Policy for Signal Lifecycle Email Strategy. Learn how we collect, use, and protect your information." />
+        <meta name="robots" content="noindex, nofollow" />
         <link rel="canonical" href="https://signallifecycle.com/privacy" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Privacy Policy - Signal Lifecycle Email Strategy" />
