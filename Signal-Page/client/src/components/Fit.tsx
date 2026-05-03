@@ -1,6 +1,14 @@
 import { motion } from "framer-motion";
 import { Check, UserCheck } from "lucide-react";
 
+const bestFitItems = [
+  "You have a product-led or sales-assisted trial motion",
+  "You can track key in-app events or want help defining which events matter",
+  "You have enough trial volume to spot patterns",
+  "Your onboarding emails exist, but feel generic, time-based, or disconnected from product behavior",
+  "Your Product, Sales, CS, and Marketing teams each see part of the problem, but no one owns the full trial-to-paid path",
+];
+
 const readinessChecks = [
   "You keep asking yourself \"why aren't more trials converting?\", and you don't have a clear answer",
   "Your team has tried everything - new emails, adjusted timing, rewritten CTAs. The numbers barely moved.",
@@ -13,6 +21,38 @@ export function Fit() {
   return (
     <section className="py-24 bg-white">
       <div className="max-w-4xl mx-auto px-6 lg:px-8">
+        {/* Best fit section */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-12"
+        >
+          <p className="text-foreground font-sans text-base md:text-lg mb-6">
+            Signal Lifecycle is best for B2B SaaS teams that already have trial or demo signups coming in, but know too many users disappear before they reach value.
+          </p>
+
+          <p className="text-foreground font-sans font-semibold text-base md:text-lg mb-4">
+            You're likely a good fit if:
+          </p>
+
+          <ul className="space-y-3 mb-8">
+            {bestFitItems.map((item, idx) => (
+              <li key={idx} className="flex items-start gap-3">
+                <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-foreground mt-2.5" />
+                <span className="text-foreground font-sans text-base">{item}</span>
+              </li>
+            ))}
+          </ul>
+
+          <blockquote className="border-l-4 border-accent pl-5 py-1">
+            <p className="text-muted-foreground font-sans text-sm md:text-base italic">
+              This is usually a fit for Seed to Series A+ B2B SaaS teams with an active trial motion, not very early products still searching for basic product-market fit.
+            </p>
+          </blockquote>
+        </motion.div>
+
         {/* Dark readiness card */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
