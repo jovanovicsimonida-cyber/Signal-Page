@@ -5,7 +5,7 @@ import { usePostHog } from "@posthog/react";
 const deliverables = [
   { label: "JTBD + Aha moment map", detail: "Jobs, measurable Aha events, and mini Aha for each path" },
   { label: "Value path + stall diagnosis", detail: "Where users drop off and what likely causes it" },
-  { label: "\"Why not us\" email template", detail: "Trigger, copy, and response handling — ready to send" },
+  { label: "\"Why not us\" email template", detail: "Trigger, copy, and response handling, ready to send" },
   { label: "Prioritized action plan", detail: "What to fix first, with effort and impact estimates" },
   { label: "Implementation handoff", detail: "Specs for triggers, segments, and flow logic ready to build from" },
 ];

@@ -48,7 +48,7 @@ export default function Home() {
                 "name": "What is lifecycle email strategy for SaaS?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "Lifecycle email strategy is a system of behavior-triggered emails that respond to what users actually do inside your product — not just what day they signed up. Instead of blasting the same sequence to everyone, each user gets messages based on where they are in their journey: onboarding, activation, stalling, or ready to upgrade."
+                  "text": "Lifecycle email strategy is a system of behavior-triggered emails that respond to what users actually do inside your product, not just what day they signed up. Instead of blasting the same sequence to everyone, each user gets messages based on where they are in their journey: onboarding, activation, stalling, or ready to upgrade."
                 }
               },
               {
@@ -56,7 +56,7 @@ export default function Home() {
                 "name": "Why aren't my trial users converting to paid?",
                 "acceptedAnswer": {
                   "@type": "Answer",
-                  "text": "The most common reason is treating all trial users the same. A user who connected their data and hit a key milestone needs different messaging than one who logged in once and went quiet. Without behavior-based segmentation, you're sending the wrong message to the wrong person at the wrong time — and most trials expire silently."
+                  "text": "The most common reason is treating all trial users the same. A user who connected their data and hit a key milestone needs different messaging than one who logged in once and went quiet. Without behavior-based segmentation, you're sending the wrong message to the wrong person at the wrong time, and most trials expire silently."
                 }
               },
               {
@@ -91,13 +91,10 @@ export default function Home() {
         <FunnelLeakCTA />
         <div className="max-w-2xl mx-auto px-6 lg:px-8 py-16 text-left space-y-4">
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            If you're ready to skip ahead - fill out the form below.
+            Fill out the form below.
           </p>
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            I'll take a look and get back to you within 48 hours to let you know if it's a fit.
-          </p>
-          <p className="text-muted-foreground font-sans text-lg leading-relaxed">
-            If it is, we'll get on a call before anything else.
+            If it looks promising, I'll reach out within 48 hours to set up a short call. That's where we figure out if this is the right move for your team.
           </p>
           <p className="text-muted-foreground font-sans text-lg leading-relaxed">
             The Audit is a working session that requires your conversion data, product analytics, and time from your team.
