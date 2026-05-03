@@ -3,9 +3,11 @@ import { Check, ArrowRight, ClipboardCheck, Users, MapPin, AlertTriangle } from 
 import { usePostHog } from "@posthog/react";
 
 const deliverables = [
-  "A map of JTBD, AHA moments, and stall points documented and prioritized",
-  "A clear sequence from signup to paid, with the gaps marked",
-  "A decision on what to fix first",
+  { label: "JTBD + Aha moment map", detail: "Jobs, measurable Aha events, and mini Aha for each path" },
+  { label: "Value path + stall diagnosis", detail: "Where users drop off and what likely causes it" },
+  { label: "\"Why not us\" email template", detail: "Trigger, copy, and response handling — ready to send" },
+  { label: "Prioritized action plan", detail: "What to fix first, with effort and impact estimates" },
+  { label: "Implementation handoff", detail: "Specs for triggers, segments, and flow logic ready to build from" },
 ];
 
 const sessionCovers = [
@@ -40,7 +42,7 @@ export function Offer() {
           className="max-w-3xl mb-16"
         >
           <p className="text-white/70 font-sans text-lg mb-4">Now if you're thinking <span className="text-accent italic">that's exactly what I need...</span></p>
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 text-white">
+          <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-6 text-white">
             First, we need to do an Audit
           </h2>
           <p className="text-lg text-white/80 leading-relaxed font-sans mb-4">
@@ -54,15 +56,16 @@ export function Offer() {
           </p>
         </motion.div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
+        <div className="grid grid-cols-1 lg:grid-cols-[5fr,7fr] gap-12 items-stretch">
           {/* Left side - description */}
           <motion.div
             initial={{ opacity: 0, x: -20 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6 }}
+            className="lg:max-w-sm"
           >
-            <h3 className="text-3xl md:text-4xl font-bold text-white mb-2">One session. Full clarity</h3>
+            <h3 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-2">One session. Full clarity</h3>
             <p className="text-white/70 font-sans mb-3">Before we meet, I review your existing customer data, product analytics, and current email sequences so I walk in with context, not questions.</p>
             <p className="text-white/70 font-sans mb-8">Then a 60–90 minute working session with your team - Product, Sales, and CS in the room.</p>
 
@@ -98,19 +101,22 @@ export function Offer() {
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="bg-background text-foreground p-8 md:p-10 rounded-2xl shadow-2xl border-t-2 border-accent"
+            className="bg-background text-foreground p-6 md:p-8 lg:p-10 rounded-2xl shadow-2xl border-t-2 border-accent flex flex-col"
           >
             <div className="mb-6">
               <h3 className="text-2xl font-bold">What you walk away with</h3>
             </div>
 
-            <ul className="space-y-4 mb-8">
+            <ul className="space-y-5 mb-8 flex-1">
               {deliverables.map((item, idx) => (
                 <li key={idx} className="flex items-start gap-3">
                   <div className="flex-shrink-0 w-6 h-6 rounded-full flex items-center justify-center mt-0.5 bg-accent">
                     <Check className="w-3.5 h-3.5 text-accent-foreground" />
                   </div>
-                  <span className="text-muted-foreground font-sans font-medium">{item}</span>
+                  <span className="text-foreground font-sans">
+                    <span className="font-semibold">{item.label}:</span>{" "}
+                    <span className="text-muted-foreground">{item.detail}</span>
+                  </span>
                 </li>
               ))}
             </ul>

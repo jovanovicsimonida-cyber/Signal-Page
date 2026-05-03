@@ -60,10 +60,7 @@ export function Solution() {
               Emails that respond to what a user actually did (rather than what day it is) get opened 47% more often.
             </p>
             <p>
-              The companies hitting 35–45% trial-to-paid conversion aren't doing something exotic.
-            </p>
-            <p>
-              They know which behaviors predict upgrades, they catch stalls before they become churn, and they don't send the same message to everyone.
+              The companies outperforming average trial-to-paid conversion usually aren't sending better calendar-based emails. They know which behaviors predict upgrades, where users stall, and when to step in.
             </p>
             <p>
               You get a system that knows where each user is, what they need next, and when to step in.
