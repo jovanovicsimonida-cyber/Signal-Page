@@ -11,7 +11,7 @@ const bestFitItems = [
 
 const readinessChecks = [
   "You keep asking yourself \"why aren't more trials converting?\", and you don't have a clear answer",
-  "Your team has tried everything - new emails, adjusted timing, rewritten CTAs. The numbers barely moved.",
+  "Your team has tried everything - new emails, adjusted timing, rewritten CTAs. The numbers barely moved",
   "You know the data's there, somewhere, but you don't have time to dig through it and build a system from scratch",
   "You're tired of watching your team patch the same problem every quarter and still not knowing what's actually broken",
   "You want to hand someone the problem and get back a system, not a slide deck",
@@ -63,7 +63,7 @@ export function Fit() {
 
           <div className="relative z-10">
             <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
-              Sound like your team?
+              Here's how to know if you're ready
             </h3>
 
 
