@@ -60,13 +60,21 @@ export function Solution() {
               Emails that respond to what a user actually did (rather than what day it is) get opened 47% more often.
             </p>
             <p>
-              The companies outperforming average trial-to-paid conversion usually aren't sending better calendar-based emails. They know which behaviors predict upgrades, where users stall, and when to step in.
+              The companies outperforming average trial-to-paid conversion usually aren't sending better calendar-based emails.
             </p>
             <p>
-              You get a system that knows where each user is, what they need next, and when to step in.
+              They know:
             </p>
-            <p className="text-2xl font-bold text-primary font-serif">
-              That's what SIGNAL builds.
+            <ul className="list-disc list-inside space-y-1 pl-2">
+              <li>which behaviors predict upgrades</li>
+              <li>where users stall</li>
+              <li>when to step in</li>
+            </ul>
+            <p>
+              You can know it too.
+            </p>
+            <p>
+              With Signal, you get a system that tracks where each user is and what they need next.
             </p>
           </div>
         </motion.div>

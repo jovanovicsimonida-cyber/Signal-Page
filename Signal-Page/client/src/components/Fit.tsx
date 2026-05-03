@@ -29,19 +29,15 @@ export function Fit() {
           transition={{ duration: 0.6 }}
           className="mb-12"
         >
-          <p className="text-foreground font-sans text-base md:text-lg mb-6">
-            Signal Lifecycle is best for B2B SaaS teams that already have trial or demo signups coming in, but know too many users disappear before they reach value.
-          </p>
-
-          <p className="text-foreground font-sans font-semibold text-base md:text-lg mb-4">
-            You're likely a good fit if:
-          </p>
+          <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">
+            This is built for you if...
+          </h2>
 
           <ul className="space-y-3 mb-8">
             {bestFitItems.map((item, idx) => (
               <li key={idx} className="flex items-start gap-3">
-                <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-foreground mt-2.5" />
-                <span className="text-foreground font-sans text-base">{item}</span>
+                <span className="flex-shrink-0 w-1.5 h-1.5 rounded-full bg-muted-foreground mt-2.5" />
+                <span className="text-muted-foreground font-sans text-base">{item}</span>
               </li>
             ))}
           </ul>
@@ -66,8 +62,8 @@ export function Fit() {
           </div>
 
           <div className="relative z-10">
-            <h3 className="text-2xl md:text-3xl font-bold text-white mb-2">
-              Here's how to know if you're ready
+            <h3 className="text-2xl md:text-3xl font-bold text-white mb-6">
+              Sound like your team?
             </h3>
 
 
