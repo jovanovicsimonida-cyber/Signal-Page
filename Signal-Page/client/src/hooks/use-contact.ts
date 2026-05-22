@@ -13,7 +13,7 @@ export function useCreateContact() {
 
   return useMutation({
     mutationFn: async (data: ContactFormData) => {
-      const res = await fetch("https://formspree.io/f/mwvbwvgv", {
+      const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data),
