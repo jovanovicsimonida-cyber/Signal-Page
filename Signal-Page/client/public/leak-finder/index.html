@@ -23,6 +23,10 @@
 <meta name="twitter:image" content="https://signallifecycle.com/og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700&family=Playfair+Display:wght@400;500;700&display=swap" rel="stylesheet">
+<script>
+  !function(t,e){var o,n,p,r;e.__SV||(window.posthog=e,e._i=[],e.init=function(i,s,a){function g(t,e){var o=e.split(".");2==o.length&&(t=t[o[0]],e=o[1]),t[e]=function(){t.push([e].concat(Array.prototype.slice.call(arguments,0)))}}(p=t.createElement("script")).type="text/javascript",p.crossOrigin="anonymous",p.async=!0,p.src=s.api_host.replace(".i.posthog.com","-assets.i.posthog.com")+"/static/array.js",(r=t.getElementsByTagName("script")[0]).parentNode.insertBefore(p,r);var u=e;for(void 0!==a?u=e[a]=[]:a="posthog",u.people=u.people||[],u.toString=function(t){var e="posthog";return"posthog"!==a&&(e+="."+a),t||(e+=" (stub)"),e},u.people.toString=function(){return u.toString(1)+" (stub)"},o="init me capture register register_once unregister getFeatureFlag isFeatureEnabled reloadFeatureFlags identify setPersonProperties group reset get_distinct_id alias".split(" "),n=0;n<o.length;n++)g(u,o[n]);e._i.push([i,s,a])},e.__SV=1)}(document,window.posthog||[]);
+  posthog.init('phc_m7qLNQ2LdaN9An76YEijEERZy4hqBWg9XLEgpoKEkkeq', {api_host: 'https://us.i.posthog.com', defaults: '2026-01-30'});
+</script>
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
   :root {
@@ -662,7 +666,7 @@
     <button id="gm-btn" class="gm-btn" onclick="submitGate()">Unlock my results</button>
     <p id="gm-error" style="display:none;font-size:12px;color:var(--red);margin-top:0.75rem;text-align:center;"></p>
     <p style="font-size:11px;color:#aaa8a3;margin-top:1rem;text-align:center;">No spam. Unsubscribe anytime.</p>
-    <button class="gm-skip" onclick="closeGate()">No thanks, I'll pass</button>
+    <button class="gm-skip" onclick="closeGate('skip')">No thanks, I'll pass</button>
   </div>
 </div>
 
@@ -757,9 +761,9 @@
     el.closest('.opts').querySelectorAll('.opt').forEach(o => o.className = 'opt');
     el.className = 'opt ' + color;
     A[qid] = color;
-    updateProgress();
-    // Refresh badge only when all 3 questions in the gate are answered
     const gn = Object.keys(gates).find(g => gates[g].includes(qid));
+    posthog.capture('leak_finder_question_answered', { question_id: qid, answer: color, gate: parseInt(gn) });
+    updateProgress();
     if (gates[gn].every(q => A[q])) refreshBadge(gn);
   }
 
@@ -776,7 +780,14 @@
     const n = Object.keys(A).length;
     document.getElementById('pfill').style.width = (n / 9 * 100) + '%';
     document.getElementById('pcount').textContent = n;
-    if (n === 9 && !gateShown) { gateShown = true; showGate(); }
+    if (n === 9 && !gateShown) {
+      gateShown = true;
+      var reds = Object.values(A).filter(function(v) { return v === 'r'; }).length;
+      var yellows = Object.values(A).filter(function(v) { return v === 'y'; }).length;
+      var greens = Object.values(A).filter(function(v) { return v === 'g'; }).length;
+      posthog.capture('leak_finder_all_questions_answered', { reds: reds, yellows: yellows, greens: greens });
+      showGate();
+    }
   }
 
   function resetAll() {
@@ -789,7 +800,8 @@
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
 
-  function closeGate() {
+  function closeGate(reason) {
+    posthog.capture('leak_finder_email_gate_dismissed', { reason: reason || 'x_button' });
     document.getElementById('gate-modal').classList.remove('show');
   }
 
@@ -798,6 +810,7 @@
       showResults();
       return;
     }
+    posthog.capture('leak_finder_email_gate_shown');
     document.getElementById('gate-modal').classList.add('show');
     setTimeout(function() { document.getElementById('gm-name').focus(); }, 50);
   }
@@ -826,6 +839,7 @@
       });
     } catch(e) {}
     localStorage.setItem('lf_submitted', '1');
+    posthog.capture('leak_finder_email_submitted', { reds: reds, yellows: yellows });
     document.getElementById('gate-modal').classList.remove('show');
     showResults(resultWindow);
   }
