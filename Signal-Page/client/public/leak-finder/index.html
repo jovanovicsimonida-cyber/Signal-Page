@@ -831,15 +831,18 @@
     var resultWindow = window.open('', '_blank');
     var reds = Object.values(A).filter(function(v) { return v === 'r'; }).length;
     var yellows = Object.values(A).filter(function(v) { return v === 'y'; }).length;
+    var gate1Tier = (diagnose(1) || {}).tier || null;
+    var gate2Tier = (diagnose(2) || {}).tier || null;
+    var gate3Tier = (diagnose(3) || {}).tier || null;
     try {
       await fetch('/api/subscribe-leak-finder', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ firstName: firstName, email: email, reds: reds, yellows: yellows })
+        body: JSON.stringify({ firstName: firstName, email: email, reds: reds, yellows: yellows, gate1Tier: gate1Tier, gate2Tier: gate2Tier, gate3Tier: gate3Tier })
       });
     } catch(e) {}
     localStorage.setItem('lf_submitted', '1');
-    posthog.capture('leak_finder_email_submitted', { reds: reds, yellows: yellows });
+    posthog.capture('leak_finder_email_submitted', { reds: reds, yellows: yellows, gate_1_tier: gate1Tier, gate_2_tier: gate2Tier, gate_3_tier: gate3Tier });
     document.getElementById('gate-modal').classList.remove('show');
     showResults(resultWindow);
   }
