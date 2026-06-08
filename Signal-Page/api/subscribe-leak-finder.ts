@@ -17,11 +17,16 @@ function getRatelimit(): Ratelimit | null {
   return ratelimit;
 }
 
+const tierEnum = z.enum(["g", "y", "r"]).nullable().optional();
+
 const schema = z.object({
   firstName: z.string().min(1).max(100),
   email: z.string().email().max(254),
   reds: z.number().int().min(0).max(9).optional(),
   yellows: z.number().int().min(0).max(9).optional(),
+  gate1Tier: tierEnum,
+  gate2Tier: tierEnum,
+  gate3Tier: tierEnum,
 });
 
 export default async function handler(req: Request): Promise<Response> {
@@ -53,7 +58,7 @@ export default async function handler(req: Request): Promise<Response> {
     return new Response("Invalid input", { status: 400 });
   }
 
-  const { firstName, email, reds, yellows } = parsed.data;
+  const { firstName, email, reds, yellows, gate1Tier, gate2Tier, gate3Tier } = parsed.data;
 
   const payload: Record<string, unknown> = {
     email,
@@ -61,6 +66,9 @@ export default async function handler(req: Request): Promise<Response> {
       name: firstName,
       ...(reds !== undefined && { leak_reds: reds }),
       ...(yellows !== undefined && { leak_yellows: yellows }),
+      ...(gate1Tier != null && { gate_1_tier: gate1Tier }),
+      ...(gate2Tier != null && { gate_2_tier: gate2Tier }),
+      ...(gate3Tier != null && { gate_3_tier: gate3Tier }),
     },
   };
 
