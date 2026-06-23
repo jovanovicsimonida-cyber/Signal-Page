@@ -5,8 +5,8 @@ import { motion } from "framer-motion";
 import { ArrowRight, User } from "lucide-react";
 import { Navigation } from "@/components/Navigation";
 import { Footer } from "@/components/Footer";
-import profilePhoto from "@assets/website-image.png";
-import catPhoto from "@assets/Ljubica.jpeg";
+import profilePhoto from "@assets/website-image.webp";
+import catPhoto from "@assets/Ljubica.webp";
 
 export default function About() {
   useEffect(() => {
