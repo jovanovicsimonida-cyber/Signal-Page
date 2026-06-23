@@ -666,7 +666,7 @@
     <button id="gm-btn" class="gm-btn" onclick="submitGate()">Unlock my results</button>
     <p id="gm-error" style="display:none;font-size:12px;color:var(--red);margin-top:0.75rem;text-align:center;"></p>
     <p style="font-size:11px;color:#aaa8a3;margin-top:1rem;text-align:center;">No spam. Unsubscribe anytime.</p>
-    <button class="gm-skip" onclick="closeGate('skip')">Skip - show me my results anyway</button>
+    <button class="gm-skip" onclick="closeGate('skip')">No thanks, I'll pass</button>
   </div>
 </div>
 
@@ -803,10 +803,6 @@
   function closeGate(reason) {
     posthog.capture('leak_finder_email_gate_dismissed', { reason: reason || 'x_button' });
     document.getElementById('gate-modal').classList.remove('show');
-    if (reason === 'skip') {
-      var w = window.open('', '_blank');
-      showResults(w);
-    }
   }
 
   function showGate() {
