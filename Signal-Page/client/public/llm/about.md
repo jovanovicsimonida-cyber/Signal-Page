@@ -1,4 +1,4 @@
-# About — Signal Lifecycle Email Strategy
+# About Signal Lifecycle Email Strategy
 
 ## The Job That Comes First
 

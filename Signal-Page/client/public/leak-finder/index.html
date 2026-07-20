@@ -8,8 +8,8 @@
 
 <!-- Open Graph -->
 <meta property="og:type" content="website" />
-<meta property="og:site_name" content="Signal — Lifecycle Email Strategy" />
-<meta property="og:title" content="Trial-to-Paid Leak Finder — Signal" />
+<meta property="og:site_name" content="Signal - Lifecycle Email Strategy" />
+<meta property="og:title" content="Trial-to-Paid Leak Finder - Signal" />
 <meta property="og:description" content="Find out where your trial-to-paid conversion is leaking. A free interactive tool by Signal." />
 <meta property="og:url" content="https://signallifecycle.com/leak-finder/" />
 <meta property="og:image" content="https://signallifecycle.com/og-image.png" />
@@ -18,7 +18,7 @@
 
 <!-- Twitter Card -->
 <meta name="twitter:card" content="summary_large_image" />
-<meta name="twitter:title" content="Trial-to-Paid Leak Finder — Signal" />
+<meta name="twitter:title" content="Trial-to-Paid Leak Finder - Signal" />
 <meta name="twitter:description" content="Find out where your trial-to-paid conversion is leaking. A free interactive tool by Signal." />
 <meta name="twitter:image" content="https://signallifecycle.com/og-image.png" />
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -531,7 +531,7 @@
       <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="2" y1="2" x2="14" y2="14"/><line x1="14" y1="2" x2="2" y2="14"/></svg>
     </button>
     <h2 style="font-family:'Playfair Display',serif;font-size:20px;font-weight:700;color:var(--black);margin-bottom:0.4rem;">Your results are ready</h2>
-    <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:1.5rem;">Enter your details and your full gate-by-gate diagnosis opens straight away. We may follow up with useful resources — no spam, ever.</p>
+    <p style="font-size:13px;color:var(--muted);line-height:1.55;margin-bottom:1.5rem;">Enter your details and your full gate-by-gate diagnosis opens straight away. We may follow up with useful resources, no spam, ever.</p>
     <label class="gm-label" for="gm-name">First name</label>
     <input id="gm-name" class="gm-input" type="text" placeholder="Jane" />
     <label class="gm-label" for="gm-email">Work email</label>
@@ -563,31 +563,31 @@
       if ((a1==='g'||a1==='y') && (a2==='r'||a2==='y')) return { combo:2, tier:'y' };
       // Combo 3: defined and measurable but value happens too late
       if ((a1==='g'||a1==='y') && (a2==='g'||a2==='y') && (a3==='r'||a3==='y')) return { combo:3, tier:'y' };
-      // Combo 4: solid — all three green, or definition+measurement green with timing green
+      // Combo 4: solid, all three green, or definition+measurement green with timing green
       if (a1==='g' && a2==='g' && a3==='g') return { combo:4, tier:'g' };
       // Fallback: any remaining mix with yellows = gaps exist
       return { combo:3, tier:'y' };
     }
 
     if (gn == 2) {
-      // Combo 1: nothing at all — no visibility into stall points
+      // Combo 1: nothing at all, no visibility into stall points
       if (r1==='r') return { combo: (r2==='r' && r3==='r') ? 1 : 2, tier: (r2==='r' && r3==='r') ? 'r' : 'y' };
       // Combo 3: know stall points (g/y), but help path or triggers are weak
       if ((r2==='r'||r2==='y'||r3==='r'||r3==='y')) return { combo:3, tier:'y' };
-      // Combo 4: solid — all three green
+      // Combo 4: solid, all three green
       if (r1==='g' && r2==='g' && r3==='g') return { combo:4, tier:'g' };
       // Fallback: remaining mixes = gaps exist
       return { combo:3, tier:'y' };
     }
 
     if (gn == 3) {
-      // Combo 1: nothing — no intent tracking and value/sequence both weak
+      // Combo 1: nothing, no intent tracking and value/sequence both weak
       if (u1==='r' && (u2==='r'||u2==='y') && (u3==='r'||u3==='y')) return { combo:1, tier:'r' };
       // Combo 2: intent not tracked but paid value is clear
       if ((u1==='r'||u1==='y') && u2==='g') return { combo:2, tier:'y' };
       // Combo 3: intent tracked but paid value fuzzy or sequence is generic
       if ((u2==='r'||u2==='y'||u3==='r'||u3==='y')) return { combo:3, tier:'y' };
-      // Combo 4: solid — all three green
+      // Combo 4: solid, all three green
       if (u1==='g' && u2==='g' && u3==='g') return { combo:4, tier:'g' };
       // Fallback: remaining mixes = gaps exist
       return { combo:3, tier:'y' };
@@ -629,7 +629,7 @@
            hint: 'Upgrades are happening by accident. The first fix is making the paid value proposition explicit before you ever ask anyone to upgrade.',
            body: 'You cannot see who is ready to buy, the paid value is not obvious inside the product, and your trial-end sequence is not tied to where users actually are. <strong>Upgrades are happening by accident.</strong> The first fix is making the paid value proposition explicit - users should feel the gap between free and paid before you ever ask them to upgrade.' },
       2: { title: 'Missing early buyers',
-           hint: 'Pricing page visits, usage limits hit, teammates invited — these are people raising their hand right now. Without tracking intent signals you are leaving early upgrades on the table.',
+           hint: 'Pricing page visits, usage limits hit, teammates invited: these are people raising their hand right now. Without tracking intent signals you are leaving early upgrades on the table.',
            body: 'You know what you are selling and you have a trial-end sequence - but you are missing the users who are ready to upgrade before the trial ends. Pricing page visits, usage limits hit, teammates invited: <strong>these are people raising their hand right now.</strong> Without tracking intent signals you are leaving early upgrades on the table.' },
       3: { title: 'Intent is there, conversion is not',
            hint: 'Matching the message to what the user has actually done in the product is what converts intent into payment.',
@@ -671,7 +671,7 @@
       if (!d) return '';
       var res = results[gn][d.combo];
       return '<div style="background:#fff;border:1px solid #e0ddd6;border-top:3px solid ' + tierBorder[d.tier] + ';border-radius:8px;padding:14px 16px">' +
-        '<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#888580;font-weight:600;margin-bottom:6px">Gate 0' + gn + ' — ' + gateNames[gn] + '</div>' +
+        '<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#888580;font-weight:600;margin-bottom:6px">Gate 0' + gn + ': ' + gateNames[gn] + '</div>' +
         '<div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:' + tierBg[d.tier] + ';color:' + tierColor[d.tier] + ';margin-bottom:8px">' + tierLabel[d.tier] + '</div>' +
         '<div style="font-size:13px;font-weight:700;color:#232323;line-height:1.4;margin-bottom:6px">' + res.title + '</div>' +
         '<div style="font-size:12px;color:#888580;line-height:1.55;font-style:italic">' + res.hint + '</div>' +
@@ -735,7 +735,7 @@
     if (!email || !email.includes('@')) { errEl.textContent = 'Please enter a valid email address.'; errEl.style.display = 'block'; return; }
     btn.textContent = 'Sending...';
     btn.disabled = true;
-    // Open the results window NOW — before any await — so the browser
+    // Open the results window NOW, before any await, so the browser
     // treats it as a direct response to the button click (popup blockers
     // fire if window.open is called after an async boundary).
     var resultWindow = window.open('', '_blank');
@@ -801,7 +801,7 @@
       }).join('');
 
       return '<div style="flex:1;background:#fff;border:1px solid #e0ddd6;border-top:3px solid ' + tierBorder[d.tier] + ';border-radius:8px;padding:16px 18px">' +
-        '<div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:#888580;font-weight:600;margin-bottom:8px">Gate ' + g.num + ' — ' + g.name + '</div>' +
+        '<div style="font-size:9px;text-transform:uppercase;letter-spacing:0.1em;color:#888580;font-weight:600;margin-bottom:8px">Gate ' + g.num + ': ' + g.name + '</div>' +
         '<div style="display:flex;gap:5px;margin-bottom:10px">' + pips + '</div>' +
         '<div style="display:inline-block;font-size:9px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:' + tierBg[d.tier] + ';color:' + tierColor[d.tier] + ';margin-bottom:10px">' + tierLabel[d.tier] + '</div>' +
         '<div style="font-size:12px;font-weight:700;color:#232323;margin-bottom:6px">' + res.title + '</div>' +
@@ -828,7 +828,7 @@
         '</div>';
     }).join('');
 
-    // Triangle SVG for PDF — inline with hardcoded values
+    // Triangle SVG for PDF: inline with hardcoded values
     var triSVG = '<svg viewBox="-10 -10 520 500" xmlns="http://www.w3.org/2000/svg" width="260">' +
       '<polygon points="250,38 30,430 470,430" fill="none" stroke="#ffd231" stroke-width="8" stroke-linejoin="round"/>' +
       '<polygon points="250,72 62,415 438,415" fill="none" stroke="#ffd231" stroke-width="1.5" stroke-linejoin="round" opacity="0.3"/>' +
@@ -858,7 +858,7 @@
     w.document.write('<div style="margin-top:16px;background:#232323;border-radius:10px;padding:16px 20px;display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:12px"><div><div style="font-family:Playfair Display,serif;font-size:16px;font-weight:700;color:#fff;margin-bottom:4px">Not sure what to do with this?</div><div style="font-size:11px;color:#888580;font-weight:300;max-width:400px;line-height:1.5">Book a quick call and we\'ll look at your results together. I\'ll tell you straight away whether this is something I can help with, and how.</div></div><a href="https://cal.com/simonida-jovanovic-fmzzfl/15min" target="_blank" onclick="window.opener && window.opener.posthog && window.opener.posthog.capture(\'leak_finder_fit_check_clicked\')" style="display:inline-flex;align-items:center;gap:8px;background:#ffd231;color:#232323;font-family:DM Sans,sans-serif;font-weight:700;font-size:12px;padding:10px 18px;border-radius:6px;text-decoration:none;white-space:nowrap;flex-shrink:0">Book a 15-min fit check &rarr;</a></div>');
     w.document.write('<div class="noprint" style="text-align:center;margin-bottom:12px"><button id="dl-btn" onclick="dlPDF()" style="background:#232323;color:#fff;border:2px solid #ffd231;border-radius:8px;padding:12px 28px;font-size:13px;font-weight:600;font-family:DM Sans,sans-serif;cursor:pointer">Download PDF</button></div>');
 
-    // Footer disclaimer — bottom of page
+    // Footer disclaimer: bottom of page
     w.document.write('<div style="border-top:1px solid #e0ddd6;margin-top:16px;padding-top:12px"><div style="font-size:11px;color:#aaa8a3">signal. lifecycle email &nbsp;&#183;&nbsp; This diagnostic is a self-assessment guide. Results reflect your own answers, not measured data. Use as a starting point for conversation, not a definitive audit.</div></div>');
 
     w.document.write('</div>');
