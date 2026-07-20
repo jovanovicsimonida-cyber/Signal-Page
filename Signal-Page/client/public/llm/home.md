@@ -1,4 +1,4 @@
-# Signal — Homepage
+# Signal Homepage
 
 ## Your trial-to-paid flow finally does what it was supposed to do.
 
@@ -24,7 +24,7 @@ No upgrade.
 
 You're left staring at the dashboard wondering what went wrong.
 
-Here's what's probably happening — **you're treating everyone the same.**
+Here's what's probably happening: **you're treating everyone the same.**
 
 The user who connected their Stripe and imported real data gets the same Day 3 email as the one who logged in once and never came back.
 
@@ -52,25 +52,25 @@ You get a system that knows where each user is, what they need next, and when to
 
 ---
 
-## The SIGNAL Framework — Six stages from signup to paid
+## The SIGNAL Framework: Six stages from signup to paid
 
 SIGNAL is the method behind the system.
 
-1. **Segment** — Your users aren't one group. Stop emailing them like they are. Segmentation means knowing who's where, and building cohorts you can actually do something with.
-2. **Interpret** — What are users telling you with their behavior? Which actions lead to upgrades? Where do good users get stuck? This stage turns raw event data into something you can use.
-3. **Generate** — Design the flow before you write the words. What triggers the first email? What stops it from sending if they already upgraded? What happens if they stall on day four?
-4. **Nurture** — Write like a human who wants them to succeed. Your emails finally sound like they came from a person who actually uses the product.
-5. **Automate** — Set the rules so the system runs itself. Triggers, suppressions, cooldowns, "stop if paid" logic — handled.
-6. **Learn** — Measure what matters and keep improving. Which cohorts convert best? Which nudges actually bring users back? What's worth testing next?
+1. **Segment**: Your users aren't one group. Stop emailing them like they are. Segmentation means knowing who's where, and building cohorts you can actually do something with.
+2. **Interpret**: What are users telling you with their behavior? Which actions lead to upgrades? Where do good users get stuck? This stage turns raw event data into something you can use.
+3. **Generate**: Design the flow before you write the words. What triggers the first email? What stops it from sending if they already upgraded? What happens if they stall on day four?
+4. **Nurture**: Write like a human who wants them to succeed. Your emails finally sound like they came from a person who actually uses the product.
+5. **Automate**: Set the rules so the system runs itself. Triggers, suppressions, cooldowns, "stop if paid" logic, all handled.
+6. **Learn**: Measure what matters and keep improving. Which cohorts convert best? Which nudges actually bring users back? What's worth testing next?
 
 ### REVERB Micro-Loops
 
 The save that fires before the trial dies. SIGNAL builds the path. REVERB keeps users on it when they drift.
 
-- **Trigger**: A stall signal fires — no key action taken, skipped step, repeated failure, drop in engagement.
+- **Trigger**: A stall signal fires: no key action taken, skipped step, repeated failure, drop in engagement.
 - **Nudge**: The user gets the next step in plain language. No fluff.
 - **Shortcut**: A template, example, quick-start guide, or "do this in 2 minutes" path reduces friction.
-- **Escalation**: If they're still stuck — reply-to support, concierge assist, or a quick call. Only when needed.
+- **Escalation**: If they're still stuck, reply-to support, concierge assist, or a quick call. Only when needed.
 - **Result**: Fewer silent trials. Faster time-to-value. More upgrades without discounts.
 
 ---

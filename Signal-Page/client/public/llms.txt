@@ -1,6 +1,6 @@
-# Signal — Lifecycle Email Strategy
+# Signal - Lifecycle Email Strategy
 
-> Signal helps SaaS companies turn trial signups into paying customers through lifecycle email strategy built on real user behavior — not guesswork.
+> Signal helps SaaS companies turn trial signups into paying customers through lifecycle email strategy built on real user behavior, not guesswork.
 
 ## About
 
@@ -17,23 +17,23 @@ Signal is a lifecycle email strategy consultancy founded by Simonida Jovanovic. 
 
 The SIGNAL framework is our proprietary methodology for building lifecycle email systems:
 
-- **S** — Segment by behavior, not demographics
-- **I** — Identify the job your product is hired to do
-- **G** — Guide users to their Aha moment
-- **N** — Nudge based on where each user actually is
-- **A** — Automate recovery loops for users who go dark
-- **L** — Layer in upgrade triggers at the right time
+- **S**: Segment by behavior, not demographics
+- **I**: Identify the job your product is hired to do
+- **G**: Guide users to their Aha moment
+- **N**: Nudge based on where each user actually is
+- **A**: Automate recovery loops for users who go dark
+- **L**: Layer in upgrade triggers at the right time
 
 ## Core Principles
 
 - Your users are always switching from something (competitor, spreadsheets, manual processes).
 - "Trying your tool" only turns into "using your tool" when they believe the switch is worth it.
-- A trial-to-paid sequence can't just educate — it has to reduce switching friction.
+- A trial-to-paid sequence can't just educate. It has to reduce switching friction.
 - No trial flow can rescue a product that doesn't deliver real value.
 
 ## Services
 
-**The Leak Audit** — A one-time deep dive into your trial-to-paid flow. We map your user journey, identify where conversions leak, and deliver a strategy to fix it. Investment: $5,000.
+**The Leak Audit**: A one-time deep dive into your trial-to-paid flow. We map your user journey, identify where conversions leak, and deliver a strategy to fix it. Investment: $5,000.
 
 ## Content (Markdown)
 

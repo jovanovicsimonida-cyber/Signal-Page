@@ -1,10 +1,10 @@
-# Signal — Services
+# Signal Services
 
 ## The Leak Audit
 
 **One session. Full clarity.**
 
-A 60-90 minute working session with your team — Product, Sales, and CS in the room.
+A 60-90 minute working session with your team: Product, Sales, and CS in the room.
 
 **Investment:** $5,000 (one-time)
 **Timeline:** Workshop + deliverable in 1-2 weeks
@@ -41,12 +41,12 @@ You get the full system designed. Your team implements it.
 - All the email copy
 - Reverb micro-cycles
 - Measurement plan
-- Everything documented — ready for your team to implement
+- Everything documented, ready for your team to implement
 - Ongoing support for A/B testing, iteration, and campaign strategy
 
 ### Build + Implement
 
-Same as Build — but the system gets wired directly into your tools. You end up with a live, running system.
+Same as Build, but the system gets wired directly into your tools. You end up with a live, running system.
 
 - Everything in Build, plus:
 - System wired directly into your tools
