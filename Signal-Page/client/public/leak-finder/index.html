@@ -716,6 +716,7 @@
 
   function showGate() {
     if (localStorage.getItem('lf_submitted')) {
+      posthog.capture('leak_finder_results_reopened');
       showResults();
       return;
     }
