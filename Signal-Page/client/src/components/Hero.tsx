@@ -1,6 +1,7 @@
 import { motion, animate, useMotionValue } from "framer-motion";
 import { useEffect, useState } from "react";
-import { Target, Search, Network, Heart, Zap, BarChart3 } from "lucide-react";
+import { Target, Search, Network, Heart, Zap, BarChart3, ArrowRight } from "lucide-react";
+import { usePostHog } from "@posthog/react";
 
 const steps = [
   { label: "Segment", icon: Target },
@@ -13,6 +14,12 @@ const steps = [
 
 export function Hero() {
   const [activeStep, setActiveStep] = useState(0);
+  const posthog = usePostHog();
+
+  const scrollToContact = () => {
+    posthog.capture("audit_cta_clicked", { location: "hero" });
+    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
+  };
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -38,6 +45,23 @@ export function Hero() {
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-wide text-balance text-primary">Your trial-to-paid flow finally converts</h1>
               <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">Users hit their AHA moments. Upgrades follow. The guesswork stops.</p>
+            </div>
+
+            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 sm:gap-6">
+              <a
+                href="/leak-finder/"
+                onClick={() => posthog.capture("leak_finder_cta_clicked", { location: "hero" })}
+                className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-sm text-sm font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-black/5 hover:-translate-y-0.5 font-sans"
+              >
+                Find your funnel leaks in 10 minutes
+                <ArrowRight className="w-4 h-4" />
+              </a>
+              <button
+                onClick={scrollToContact}
+                className="text-sm font-medium text-foreground/70 hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors font-sans py-3"
+              >
+                Or book The Leak Audit
+              </button>
             </div>
           </motion.div>
 
