@@ -1,6 +1,6 @@
 import fs from "fs";
 import path from "path";
-import { fileURLToPath } from "url";
+import { fileURLToPath, pathToFileURL } from "url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const resolve = (p) => path.resolve(__dirname, "..", p);
@@ -24,7 +24,9 @@ async function prerender() {
   console.log(`SSR bundle path: ${serverPath}`);
   console.log(`SSR bundle exists: ${fs.existsSync(serverPath)}`);
 
-  const { render } = await import(serverPath);
+  // Node's ESM loader needs a file:// URL, not a bare path. On Windows a raw
+  // path starts with a drive letter and is rejected as an unknown URL scheme.
+  const { render } = await import(pathToFileURL(serverPath).href);
   console.log(`render function loaded: ${typeof render}`);
 
   for (const url of routes) {
