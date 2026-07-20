@@ -76,5 +76,7 @@ Signal-Page/
 
 ## Git
 
-- Branch: `claude/general-session-KIGZe`
-- Always commit and push to this branch; never push to `main`.
+- **Never commit or push directly to `main`.**
+- Branch off `origin/main` for each piece of work, using a descriptive name (`fix/…`, `analytics/…`, `feat/…`). Push the branch and open a PR into `main`.
+- Always `git fetch` and branch from `origin/main`, not from local `main` — local `main` goes stale and diverges.
+- `claude/general-session-KIGZe` is **abandoned**. It sits ~78 commits behind `origin/main` and its head reverts the email gate design that main later replaced. Do not branch from it or push to it.
