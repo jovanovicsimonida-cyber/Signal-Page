@@ -16,11 +16,6 @@ export function Hero() {
   const [activeStep, setActiveStep] = useState(0);
   const posthog = usePostHog();
 
-  const scrollToContact = () => {
-    posthog.capture("audit_cta_clicked", { location: "hero" });
-    document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' });
-  };
-
   useEffect(() => {
     const interval = setInterval(() => {
       setActiveStep((prev) => (prev + 1) % steps.length);
@@ -47,7 +42,7 @@ export function Hero() {
               <p className="text-lg text-muted-foreground leading-relaxed max-w-2xl mx-auto lg:mx-0 font-sans">Users hit their AHA moments. Upgrades follow. The guesswork stops.</p>
             </div>
 
-            <div className="flex flex-col sm:flex-row items-center lg:items-start gap-4 sm:gap-6">
+            <div className="flex justify-center lg:justify-start">
               <a
                 href="/leak-finder/"
                 onClick={() => posthog.capture("leak_finder_cta_clicked", { location: "hero" })}
@@ -56,12 +51,6 @@ export function Hero() {
                 Find your funnel leaks in 10 minutes
                 <ArrowRight className="w-4 h-4" />
               </a>
-              <button
-                onClick={scrollToContact}
-                className="text-sm font-medium text-foreground/70 hover:text-foreground underline underline-offset-4 decoration-border hover:decoration-foreground transition-colors font-sans py-3"
-              >
-                Or book The Leak Audit
-              </button>
             </div>
           </motion.div>
 
