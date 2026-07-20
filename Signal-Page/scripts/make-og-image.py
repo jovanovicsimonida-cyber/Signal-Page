@@ -8,10 +8,16 @@ the Google Fonts repo into scripts/.font-cache/ and reused after that.
 
 Why this exists: the logo must be Playfair Display on every surface per
 CLAUDE.md, and Playfair is far wider than a geometric sans at the same
-point size. The layout is therefore measurement-driven -- the logo is
-fitted to a target width and everything else is positioned off its
-measured bounding box, so editing the tagline below cannot silently
-push text into the sparkle divider.
+point size. The layout is therefore measurement-driven -- everything is
+positioned off measured bounding boxes, so editing the copy below cannot
+silently push text out of frame.
+
+IMPORTANT -- the safe zone. LinkedIn and Facebook show the full 1200x630,
+but WhatsApp, Telegram and iMessage crop to a centered SQUARE thumbnail,
+keeping only x=285..915 and discarding both edges. So the composition is
+centered and constrained to that square: a wide left-to-right split
+renders as unreadable fragments in every chat app. The script asserts
+this at the end and fails if content escapes the safe zone.
 
 Colors are literal brand hex values because image files cannot use the
 CSS tokens (CLAUDE.md rule 7). Keep them in sync with index.css.
@@ -30,17 +36,18 @@ MUTED = "#232323"     # --primary
 LOGO = "signal."
 KICKER = "LIFECYCLE EMAIL"
 TAGLINE = [
-    "TURN BEHAVIORAL",
-    "SIGNALS INTO EMAILS",
-    "THAT PUSH USERS TO",
-    "THEIR NEXT “HELL YES”",
-    "MOMENT!",
+    "TURN BEHAVIORAL SIGNALS INTO",
+    "EMAILS THAT PUSH USERS TO THEIR",
+    "NEXT “HELL YES” MOMENT!",
 ]
 
 # --- Canvas ---
 W, H = 1200, 630      # standard OG dimensions; don't change casually
-MARGIN_X = 78
-LOGO_TARGET_W = 470   # keeps the logo clear of the tagline column
+LOGO_TARGET_W = 340   # must leave room inside the safe zone
+
+# Chat apps crop to a centered square. Content must stay inside it.
+SAFE_W = H            # 630px wide, centered
+SAFE_PAD = 24         # breathing room inside the crop edge
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 CACHE = os.path.join(HERE, ".font-cache")
@@ -107,56 +114,76 @@ def fit_logo(d, target_w):
     return f, size
 
 
+def draw_centered(d, cx, y, text, f, fill, tracking):
+    """Draw tracked text horizontally centered on cx. Returns (left, right)."""
+    w = tracked_width(d, text, f, tracking)
+    x = cx - w / 2
+    draw_tracked(d, (x, y), text, f, fill, tracking)
+    return x, x + w
+
+
 def main():
     img = Image.new("RGB", (W, H), BG)
     d = ImageDraw.Draw(img)
+    cx = W / 2
 
     logo_f, size = fit_logo(d, LOGO_TARGET_W)
-    kicker_f = font("dmsans.ttf", 30, 700, 40)
-    kicker_track = 5.0
-    gap = 26  # between logo descender and kicker cap
+    kicker_f = font("dmsans.ttf", 22, 700, 40)
+    tag_f = font("dmsans.ttf", 25, 500, 40)
+    kicker_track, tag_track = 6.0, 1.5
+    line_h = 34
 
-    # Measure the left block so it can be centered as a unit.
+    # Measure every row first so the whole stack can be centered as a unit.
     lx0, ly0, lx1, ly1 = d.textbbox((0, 0), LOGO, font=logo_f)
-    kx0, ky0, _, ky1 = d.textbbox((0, 0), KICKER, font=kicker_f)
-    block_h = (ly1 - ly0) + gap + (ky1 - ky0)
-    block_top = (H - block_h) / 2
+    _, ky0, _, ky1 = d.textbbox((0, 0), KICKER, font=kicker_f)
+    logo_h, kicker_h = ly1 - ly0, ky1 - ky0
 
-    # Offset by the bbox origin so ink lands where intended.
-    d.text((MARGIN_X - lx0, block_top - ly0), LOGO, font=logo_f, fill=INK)
-    logo_right = MARGIN_X + (lx1 - lx0)
+    gap_logo_kicker = 22
+    gap_kicker_rule = 40
+    gap_rule_tag = 40
+    tag_h = line_h * len(TAGLINE)
 
-    kicker_y = block_top + (ly1 - ly0) + gap - ky0
-    draw_tracked(d, (MARGIN_X, kicker_y), KICKER, kicker_f, INK, kicker_track)
+    stack_h = logo_h + gap_logo_kicker + kicker_h + gap_kicker_rule + gap_rule_tag + tag_h
+    y = (H - stack_h) / 2
 
-    # Tagline block, centered on the same axis as the left block.
-    tag_f = font("dmsans.ttf", 26, 600, 40)
-    tag_track, line_h = 3.0, 29
-    tag_w = max(tracked_width(d, l, tag_f, tag_track) for l in TAGLINE)
+    # Logo, offset by its bbox origin so the ink lands where intended.
+    d.text((cx - (lx1 - lx0) / 2 - lx0, y - ly0), LOGO, font=logo_f, fill=INK)
+    logo_l, logo_r = cx - (lx1 - lx0) / 2, cx + (lx1 - lx0) / 2
+    y += logo_h + gap_logo_kicker
 
-    sp_r, sp_gap = 16, 34
-    tag_x = logo_right + sp_gap + sp_r * 2 + sp_gap
-    tag_block_h = line_h * len(TAGLINE)
-    tag_y = (H - tag_block_h) / 2
+    kick_l, kick_r = draw_centered(d, cx, y - ky0, KICKER, kicker_f, INK, kicker_track)
+    y += kicker_h + gap_kicker_rule
 
-    for i, line in enumerate(TAGLINE):
-        draw_tracked(d, (tag_x, tag_y + i * line_h), line, tag_f, MUTED, tag_track)
+    # Sparkle divider: a hairline rule with a sparkle centered on it.
+    sp_r = 13
+    rule_half = 150
+    d.line([(cx - rule_half, y), (cx - sp_r - 14, y)], fill=MUTED, width=1)
+    d.line([(cx + sp_r + 14, y), (cx + rule_half, y)], fill=MUTED, width=1)
+    sparkle(d, cx, y, sp_r, INK)
+    y += gap_rule_tag
 
-    mid_y = tag_y + tag_block_h / 2
-    sparkle(d, logo_right + sp_gap + sp_r, mid_y, sp_r, INK)
-    sparkle(d, tag_x + tag_w + sp_gap + sp_r, mid_y, sp_r, INK)
+    tag_edges = [
+        draw_centered(d, cx, y + i * line_h, line, tag_f, MUTED, tag_track)
+        for i, line in enumerate(TAGLINE)
+    ]
 
-    right_edge = tag_x + tag_w + sp_gap + sp_r * 2
-    if right_edge > W - 20:
+    # --- Safe-zone assertion: everything must survive a centered square crop ---
+    left = min([logo_l, kick_l, cx - rule_half] + [e[0] for e in tag_edges])
+    right = max([logo_r, kick_r, cx + rule_half] + [e[1] for e in tag_edges])
+    safe_l, safe_r = (W - SAFE_W) / 2 + SAFE_PAD, (W + SAFE_W) / 2 - SAFE_PAD
+    if left < safe_l or right > safe_r:
         raise SystemExit(
-            f"Tagline overflows the canvas (right edge {right_edge:.0f} of {W}). "
-            "Shorten a line or reduce LOGO_TARGET_W."
+            f"Content escapes the square-crop safe zone.\n"
+            f"  content: {left:.0f}..{right:.0f}\n"
+            f"  safe:    {safe_l:.0f}..{safe_r:.0f}\n"
+            "Shorten a tagline line or reduce LOGO_TARGET_W."
         )
 
     out = os.path.normpath(OUT)
     img.save(out)
-    print(f"Logo fitted at {size}px, x:{MARGIN_X}-{logo_right:.0f}")
-    print(f"Tagline right edge: {right_edge:.0f} of {W}")
+    print(f"Logo fitted at {size}px")
+    print(f"Content spans {left:.0f}..{right:.0f}  (safe zone {safe_l:.0f}..{safe_r:.0f}) OK")
+    print(f"Stack height {stack_h:.0f} of {H}")
     print(f"Wrote {out}")
 
 
