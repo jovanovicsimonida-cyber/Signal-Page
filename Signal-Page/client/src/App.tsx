@@ -9,6 +9,7 @@ import PrivacyPolicy from "@/pages/PrivacyPolicy";
 import TermsOfService from "@/pages/TermsOfService";
 import About from "@/pages/About";
 import LeadMagnet from "@/pages/LeadMagnet";
+import Breakdown from "@/pages/Breakdown";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -19,7 +20,8 @@ function Router() {
       <Route path="/terms" component={TermsOfService} />
       <Route path="/about" component={About} />
       <Route path="/resources/reverb" component={LeadMagnet} />
-<Route component={NotFound} />
+      <Route path="/breakdown" component={Breakdown} />
+      <Route component={NotFound} />
     </Switch>
   );
 }

@@ -5,7 +5,7 @@ import { fileURLToPath, pathToFileURL } from "url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const resolve = (p) => path.resolve(__dirname, "..", p);
 
-const routes = ["/", "/about", "/privacy", "/terms"];
+const routes = ["/", "/about", "/privacy", "/terms", "/breakdown"];
 
 async function prerender() {
   const templatePath = resolve("dist/public/index.html");
