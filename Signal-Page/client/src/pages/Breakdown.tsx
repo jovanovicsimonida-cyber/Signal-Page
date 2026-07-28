@@ -13,6 +13,10 @@ import { useBreakdownClaim, type BreakdownClaimData } from "@/hooks/use-breakdow
 // A recorded reaction from the Supademo team to their onboarding breakdown.
 const SUPADEMO_RESPONSE_URL = "https://app.supademo.com/video/cmqi2gimi1zuvqmz3na32vjj1";
 
+// Public LinkedIn newsletter articles (already public companions to the private memos).
+const NAVATTIC_ARTICLE_URL = "https://www.linkedin.com/pulse/inside-navattics-freemium-onboarding-when-try-free-doesnt-jovanovic-dn7ee";
+const SUPADEMO_ARTICLE_URL = "https://www.linkedin.com/pulse/onboarding-saas-supademos-updated-trial-flow-simonida-jovanovic-w0ngf";
+
 // Testimonials come from the offer proposal PDF. Each is placed next to the
 // section it proves. Add the Supademo quote here once its text is confirmed.
 const quotes = {
@@ -284,10 +288,54 @@ export default function Breakdown() {
                 </div>
               ))}
             </div>
+            {/* Anonymized excerpt: real memo format, all client details removed. */}
+            <div className="mt-10">
+              <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">
+                A sample from a breakdown
+              </p>
+              <div className="rounded-2xl border border-border overflow-hidden">
+                <div className="border-b border-border bg-secondary px-6 py-3 flex items-center gap-2.5">
+                  <span className="w-2.5 h-2.5 rounded-full bg-accent flex-shrink-0" />
+                  <span className="font-display text-primary font-semibold text-sm">Extended Diagnostic Memo, excerpt</span>
+                </div>
+                <div className="p-6 md:p-8 font-sans">
+                  <h4 className="font-bold text-primary">Behavior-triggered nudge, day 1</h4>
+                  <p className="text-muted-foreground text-sm mt-1 mb-5">
+                    Trigger: signed up, but has not completed the first key action.
+                  </p>
+                  <div className="space-y-4 text-sm leading-relaxed">
+                    <p className="text-muted-foreground">
+                      <span className="font-semibold text-foreground">Works.</span> This is the strongest email in the sequence. It is behavior-triggered, it reflects the user's real state, and it offers a guided path to the next step. Most SaaS companies never get this far.
+                    </p>
+                    <p className="text-muted-foreground">
+                      <span className="font-semibold text-foreground">Does not work.</span> It is sent from a generic team address. This is the first email that says "we noticed you," so it is the moment to introduce a human. The "we" should have a name.
+                    </p>
+                    <div>
+                      <p className="font-semibold text-foreground mb-2">What I would change</p>
+                      <ul className="space-y-2">
+                        {[
+                          "Switch the sender to a named person on your team. Same copy, new from-name.",
+                          "Add one line introducing their role, so later emails read as one continuing relationship.",
+                          "Include a one-click “reply with what is blocking you” prompt, so the email doubles as a feedback loop.",
+                        ].map((line) => (
+                          <li key={line} className="flex items-start gap-2.5 text-muted-foreground">
+                            <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 mt-2" />
+                            <span>{line}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <p className="text-muted-foreground/70 font-sans text-xs mt-3">
+                A representative excerpt in the real format. Client names and identifying details are removed.
+              </p>
+            </div>
+
             <div className="mt-10">
               <Testimonial q={quotes.usedIt} />
             </div>
-            {/* TODO: drop 1-2 anonymized deliverable screenshots here once provided. */}
           </div>
         </section>
 
@@ -377,7 +425,30 @@ export default function Breakdown() {
             <p className="text-muted-foreground/70 font-sans text-xs mt-6">
               Testimonials have been lightly edited for clarity where needed.
             </p>
-            {/* TODO: add a link to the LinkedIn onboarding newsletter once the exact URL is provided. */}
+
+            <div className="mt-10">
+              <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">
+                Read a full public breakdown
+              </p>
+              <div className="grid sm:grid-cols-2 gap-4">
+                {[
+                  { url: NAVATTIC_ARTICLE_URL, label: "Inside Navattic's Freemium Onboarding", source: "navattic" },
+                  { url: SUPADEMO_ARTICLE_URL, label: "Supademo's Updated Trial Flow", source: "supademo" },
+                ].map((a) => (
+                  <a
+                    key={a.source}
+                    href={a.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={() => posthog.capture("breakdown_public_article_clicked", { article: a.source })}
+                    className="group flex items-center justify-between gap-3 bg-secondary border border-border rounded-xl px-5 py-4 hover:border-accent transition-colors"
+                  >
+                    <span className="font-semibold text-foreground font-sans text-sm">{a.label}</span>
+                    <ArrowRight className="w-4 h-4 text-primary flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+                  </a>
+                ))}
+              </div>
+            </div>
           </div>
         </section>
 
