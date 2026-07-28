@@ -122,7 +122,8 @@ export default function Breakdown() {
 
   useEffect(() => {
     window.scrollTo(0, 0);
-  }, []);
+    posthog.capture("breakdown_page_viewed");
+  }, [posthog]);
 
   const form = useForm<BreakdownClaimData>({
     resolver: zodResolver(claimSchema),
