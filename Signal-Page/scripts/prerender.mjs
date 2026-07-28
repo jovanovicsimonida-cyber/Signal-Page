@@ -30,18 +30,28 @@ async function prerender() {
   console.log(`render function loaded: ${typeof render}`);
 
   for (const url of routes) {
-    const appHtml = render(url);
-    console.log(`Rendered ${url}: ${appHtml.length} chars`);
+    const { html: appHtml, head } = render(url);
+    console.log(`Rendered ${url}: ${appHtml.length} chars, head ${head.length} chars`);
 
     if (appHtml.length === 0) {
       console.warn(`WARNING: Empty render for ${url}`);
       continue;
     }
 
-    const html = template.replace(
+    let html = template.replace(
       '<div id="root"></div>',
       `<div id="root">${appHtml}</div>`
     );
+
+    // Replace the homepage-default head with this route's own head tags.
+    // Use a function replacer so `$` in descriptions is not treated specially.
+    if (head && head.trim()) {
+      const before = html;
+      html = html.replace(/<!--ssr-head-->[\s\S]*?<!--\/ssr-head-->/, () => head);
+      if (html === before) {
+        console.warn(`WARNING: ssr-head markers not found for ${url}; head not injected`);
+      }
+    }
 
     if (url === "/") {
       fs.writeFileSync(templatePath, html);
