@@ -22,8 +22,8 @@ const quotes = {
     quote: "The feedback was actionable, matched what we have been discussing internally, and was clear. If you only sit in your own echo chamber, you will miss a lot of opportunities and fixes.",
     name: "Jay Desai", title: "Growth Lead", company: "Navattic",
   },
-  emailByEmail: {
-    quote: "I loved the specific email-by-email breakdown, not just the messaging, but who the target audience should be, what it did well, and where it can be improved.",
+  natalie: {
+    quote: "You're so in the weeds of your own product. It's helpful to have a third-party opinion come in and look at it.",
     name: "Natalie Marcotullio", title: "Head of Growth & Operations", company: "Navattic",
   },
   usedIt: {
@@ -184,8 +184,17 @@ export default function Breakdown() {
                 See your onboarding through the eyes of a real trial user
               </h1>
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed font-sans">
-                A private review of your signup-to-upgrade journey, showing where users may hesitate, stall, or leave before reaching value.
+                Know where trial users lose momentum on the way to paid, and what to fix first so more of them convert.
               </p>
+
+              <figure className="border-l-2 border-l-accent pl-4">
+                <blockquote className="text-foreground/90 font-sans leading-relaxed">
+                  &ldquo;{quotes.natalie.quote}&rdquo;
+                </blockquote>
+                <figcaption className="mt-2 text-sm text-muted-foreground font-sans">
+                  {quotes.natalie.name}, {quotes.natalie.title}, {quotes.natalie.company}
+                </figcaption>
+              </figure>
 
               <div className="pt-2">
                 <button
@@ -237,9 +246,6 @@ export default function Breakdown() {
                   <span className="text-foreground font-sans">{area}</span>
                 </div>
               ))}
-            </div>
-            <div className="mt-10">
-              <Testimonial q={quotes.emailByEmail} />
             </div>
           </div>
         </section>
@@ -317,7 +323,7 @@ export default function Breakdown() {
         {/* Investment */}
         <section id="investment" className="py-16">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Investment</h2>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Find what's costing you upgrades</h2>
             <div className="rounded-2xl border-2 border-accent bg-white p-8">
               <div className="flex items-baseline gap-2">
                 <span className="text-4xl font-bold text-primary font-sans">$1,500</span>
@@ -409,12 +415,12 @@ export default function Breakdown() {
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-[5fr,7fr] gap-10 lg:gap-14 items-start">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Request a private breakdown</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Walk away knowing exactly what to fix first</h2>
                 <p className="text-muted-foreground font-sans leading-relaxed mb-6">
-                  Submit your trial link and a few details about your product. I will confirm whether the breakdown is a good fit, then send an invoice to get started.
+                  You walk away with a recorded walkthrough of your trial from a first-time user's point of view, and a prioritized list of what to fix first to convert more of them.
                 </p>
                 <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">What I need from you</h3>
-                <ul className="space-y-3 mb-8">
+                <ul className="space-y-3 mb-6">
                   {whatINeed.map((n) => (
                     <li key={n} className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
@@ -422,6 +428,9 @@ export default function Breakdown() {
                     </li>
                   ))}
                 </ul>
+                <p className="text-muted-foreground/80 font-sans text-sm leading-relaxed mb-8">
+                  Submit your trial link and a few details about your product. I confirm fit, then send an invoice to get started.
+                </p>
                 <Testimonial q={quotes.validation} />
               </div>
 
