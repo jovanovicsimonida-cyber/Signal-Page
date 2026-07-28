@@ -68,15 +68,15 @@ field before sending a test):
 Hi {$name},
 
 Thanks for requesting a Private Trial-to-Paid Breakdown. Your details are in,
-and I have what I need to take a first look.
+and I have what I need to get started.
 
 Here is what happens next:
 
 1. I review fit. I check that your trial or freemium motion is a match for this
    kind of outside-in review. This usually takes a day or two.
-2. If it is a good fit, I send a short intake form and a Payoneer invoice.
-3. Once the invoice is settled and I have trial access, I begin the review over
-   a window of up to 14 days.
+2. If it is a good fit, I send a Payoneer invoice.
+3. Once the invoice is settled, I begin the review over a window of up to 14
+   days, using the trial access and context you already shared.
 4. You receive your recorded walkthrough and written findings after the review
    window closes.
 
