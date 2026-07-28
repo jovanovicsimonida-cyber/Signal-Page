@@ -10,6 +10,9 @@ import { usePostHog } from "@posthog/react";
 import { Footer } from "@/components/Footer";
 import { useBreakdownClaim, type BreakdownClaimData } from "@/hooks/use-breakdown-claim";
 
+// A recorded reaction from the Supademo team to their onboarding breakdown.
+const SUPADEMO_RESPONSE_URL = "https://app.supademo.com/video/cmqi2gimi1zuvqmz3na32vjj1";
+
 // Testimonials come from the offer proposal PDF. Each is placed next to the
 // section it proves. Add the Supademo quote here once its text is confirmed.
 const quotes = {
@@ -346,9 +349,30 @@ export default function Breakdown() {
             <p className="text-muted-foreground font-sans mb-10 leading-relaxed max-w-2xl">
               These breakdowns have helped SaaS teams spot lifecycle gaps they were too close to see internally, from email timing and sender logic to plan positioning, stall recovery, and post-trial follow-up.
             </p>
-            <div className="grid md:grid-cols-2 gap-5">
+
+            <a
+              href={SUPADEMO_RESPONSE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              onClick={() => posthog.capture("breakdown_supademo_response_clicked")}
+              className="group flex items-center gap-5 bg-white border-2 border-accent rounded-2xl p-6 hover:-translate-y-0.5 transition-transform duration-300"
+            >
+              <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
+                <PlayCircle className="w-7 h-7 text-primary" />
+              </div>
+              <div className="flex-grow">
+                <span className="block font-bold text-primary font-sans">
+                  Watch the Supademo team respond to their breakdown
+                </span>
+                <span className="block text-muted-foreground font-sans text-sm mt-1">
+                  A recorded reaction from a real SaaS team to one of these onboarding teardowns.
+                </span>
+              </div>
+              <ArrowRight className="w-5 h-5 text-primary flex-shrink-0 group-hover:translate-x-1 transition-transform" />
+            </a>
+
+            <div className="mt-5">
               <Testimonial q={quotes.insightful} />
-              <Testimonial q={quotes.validation} />
             </div>
             <p className="text-muted-foreground/70 font-sans text-xs mt-6">
               Testimonials have been lightly edited for clarity where needed.
