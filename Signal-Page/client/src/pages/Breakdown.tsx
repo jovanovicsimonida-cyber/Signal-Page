@@ -38,6 +38,10 @@ const quotes = {
     quote: "Simonida's analysis gave me the validation I needed to get started working on the email layer properly.",
     name: "Viktorijan Mucunski", title: "Client Operations", company: "HeyReach",
   },
+  supademo: {
+    quote: "This breakdown was super detailed, and it's given our team a lot to think about. Our ongoing goal now is activation, and the biggest focus is converting the people already coming through, so I definitely appreciate how detailed everything was.",
+    name: "Ryan Carruthers", title: "Growth", company: "Supademo",
+  },
 } as const;
 
 type Quote = (typeof quotes)[keyof typeof quotes];
@@ -113,8 +117,8 @@ export default function Breakdown() {
     mutation.mutate(data, { onSuccess: () => form.reset() });
   };
 
-  const scrollToClaim = () => {
-    posthog.capture("breakdown_claim_cta_clicked");
+  const scrollToClaim = (location: string) => {
+    posthog.capture("breakdown_claim_cta_clicked", { location });
     document.getElementById("claim")?.scrollIntoView({ behavior: "smooth" });
   };
 
@@ -185,10 +189,10 @@ export default function Breakdown() {
 
               <div className="pt-2">
                 <button
-                  onClick={scrollToClaim}
+                  onClick={() => scrollToClaim("hero")}
                   className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-sm text-sm font-semibold hover:bg-accent/90 transition-all duration-300 shadow-lg shadow-black/5 hover:-translate-y-0.5 font-sans"
                 >
-                  Request a private breakdown
+                  See where your trial users stall
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
@@ -322,6 +326,15 @@ export default function Breakdown() {
               <p className="mt-3 text-muted-foreground font-sans leading-relaxed">
                 A private breakdown of your trial-to-paid journey, delivered as a recorded walkthrough and a written findings document.
               </p>
+              <div className="mt-6">
+                <button
+                  onClick={() => scrollToClaim("investment")}
+                  className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-sm text-sm font-semibold hover:bg-accent/90 transition-all duration-300 shadow-lg shadow-black/5 hover:-translate-y-0.5 font-sans"
+                >
+                  Get your breakdown
+                  <ArrowRight className="w-4 h-4" />
+                </button>
+              </div>
             </div>
 
             <div className="mt-8 rounded-2xl bg-secondary border border-border p-7">
@@ -345,13 +358,17 @@ export default function Breakdown() {
               These breakdowns have helped SaaS teams spot lifecycle gaps they were too close to see internally, from email timing and sender logic to plan positioning, stall recovery, and post-trial follow-up.
             </p>
 
-            <div>
+            <div className="grid md:grid-cols-2 gap-5">
+              <Testimonial q={quotes.supademo} />
               <Testimonial q={quotes.insightful} />
             </div>
 
             <div className="mt-10">
-              <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">
-                Read a full public breakdown
+              <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-2">
+                See how I think
+              </p>
+              <p className="text-muted-foreground font-sans text-sm mb-5 max-w-2xl leading-relaxed">
+                These are public breakdowns from my newsletter. Your private breakdown goes deeper, through every onboarding step and every email in your own flow.
               </p>
               <div className="grid sm:grid-cols-2 gap-4">
                 {[
@@ -394,7 +411,7 @@ export default function Breakdown() {
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Request a private breakdown</h2>
                 <p className="text-muted-foreground font-sans leading-relaxed mb-6">
-                  Submit your trial link and a few details about your product. I will confirm whether the breakdown is a good fit before you book, then send a short intake form and invoice.
+                  Submit your trial link and a few details about your product. I will confirm whether the breakdown is a good fit, then send an invoice to get started.
                 </p>
                 <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">What I need from you</h3>
                 <ul className="space-y-3 mb-8">
@@ -457,7 +474,7 @@ export default function Breakdown() {
                         Sending...
                       </>
                     ) : (
-                      "Request my breakdown"
+                      "Get my breakdown"
                     )}
                   </button>
                   <p className="text-muted-foreground/70 font-sans text-xs text-center">
