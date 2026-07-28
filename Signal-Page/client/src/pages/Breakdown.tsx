@@ -16,6 +16,7 @@ const SUPADEMO_RESPONSE_URL = "https://app.supademo.com/video/cmqi2gimi1zuvqmz3n
 // Public LinkedIn newsletter articles (already public companions to the private memos).
 const NAVATTIC_ARTICLE_URL = "https://www.linkedin.com/pulse/inside-navattics-freemium-onboarding-when-try-free-doesnt-jovanovic-dn7ee";
 const SUPADEMO_ARTICLE_URL = "https://www.linkedin.com/pulse/onboarding-saas-supademos-updated-trial-flow-simonida-jovanovic-w0ngf";
+const NEWSLETTER_URL = "https://www.linkedin.com/build-relation/newsletter-follow?entityUrn=7443246887220019200";
 
 // Testimonials come from the offer proposal PDF. Each is placed next to the
 // section it proves. Add the Supademo quote here once its text is confirmed.
@@ -448,6 +449,18 @@ export default function Breakdown() {
                   </a>
                 ))}
               </div>
+              <p className="text-muted-foreground font-sans text-sm mt-4">
+                New teardowns publish in the Onboarding Breakdowns for SaaS newsletter.{" "}
+                <a
+                  href={NEWSLETTER_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() => posthog.capture("breakdown_newsletter_subscribe_clicked")}
+                  className="font-semibold text-primary underline underline-offset-4 decoration-accent hover:decoration-primary transition-colors"
+                >
+                  Subscribe on LinkedIn
+                </a>
+              </p>
             </div>
           </div>
         </section>
