@@ -10,9 +10,6 @@ import { usePostHog } from "@posthog/react";
 import { Footer } from "@/components/Footer";
 import { useBreakdownClaim, type BreakdownClaimData } from "@/hooks/use-breakdown-claim";
 
-// A recorded reaction from the Supademo team to their onboarding breakdown.
-const SUPADEMO_RESPONSE_URL = "https://app.supademo.com/video/cmqi2gimi1zuvqmz3na32vjj1";
-
 // Public LinkedIn newsletter articles (already public companions to the private memos).
 const NAVATTIC_ARTICLE_URL = "https://www.linkedin.com/pulse/inside-navattics-freemium-onboarding-when-try-free-doesnt-jovanovic-dn7ee";
 const SUPADEMO_ARTICLE_URL = "https://www.linkedin.com/pulse/onboarding-saas-supademos-updated-trial-flow-simonida-jovanovic-w0ngf";
@@ -77,25 +74,6 @@ const deliverables = [
   "Screenshots and examples from the experience",
   "Copy, UX, and lifecycle recommendations",
   "Clear next steps ranked by likely impact and effort",
-] as const;
-
-const breakdownIncludes = [
-  "Based on the experience of a real first-time trial user",
-  "No analytics access required",
-  "No team workshop",
-  "Signup, onboarding, activation path, lifecycle emails, and upgrade prompts",
-  "Recorded walkthrough plus written prioritized findings",
-  "Delivered privately",
-] as const;
-
-const auditIncludes = [
-  "Based on the customer experience and your internal data",
-  "Product and conversion data reviewed",
-  "Existing lifecycle sequences reviewed",
-  "JTBD and Aha-event mapping",
-  "Team working session",
-  "Trigger, segment, and flow specifications",
-  "Prioritized implementation plan",
 ] as const;
 
 const whatINeed = [
@@ -205,19 +183,10 @@ export default function Breakdown() {
                 A private review of your signup-to-upgrade journey, showing where users may hesitate, stall, or leave before reaching value.
               </p>
 
-              <div className="flex flex-wrap items-center gap-3 font-sans">
-                <span className="text-sm font-semibold text-secondary-foreground bg-secondary border border-border rounded-full px-4 py-1.5">
-                  $1,500
-                </span>
-                <span className="text-sm font-medium text-muted-foreground">
-                  A limited number of breakdowns each month
-                </span>
-              </div>
-
               <div className="pt-2">
                 <button
                   onClick={scrollToClaim}
-                  className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-sm text-sm font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-black/5 hover:-translate-y-0.5 font-sans"
+                  className="inline-flex items-center gap-2 bg-accent text-accent-foreground px-6 py-3 rounded-sm text-sm font-semibold hover:bg-accent/90 transition-all duration-300 shadow-lg shadow-black/5 hover:-translate-y-0.5 font-sans"
                 >
                   Request a private breakdown
                   <ArrowRight className="w-4 h-4" />
@@ -341,42 +310,18 @@ export default function Breakdown() {
           </div>
         </section>
 
-        {/* The boundary: breakdown vs full audit */}
-        <section className="py-16">
-          <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Where the breakdown ends and the Audit begins</h2>
-            <p className="text-muted-foreground font-sans mb-10 leading-relaxed max-w-2xl">
-              The breakdown reads your customer-facing trial experience. The full Signal Audit adds your internal data and your team.
-            </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="rounded-2xl border-2 border-accent bg-white p-7">
-                <div className="flex items-baseline justify-between mb-5">
-                  <h3 className="font-bold text-primary text-lg font-sans">Private breakdown</h3>
-                  <span className="font-bold text-primary font-sans">$1,500</span>
-                </div>
-                <ul className="space-y-3">
-                  {breakdownIncludes.map((b) => (
-                    <li key={b} className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
-                      <span className="text-muted-foreground font-sans text-sm leading-relaxed">{b}</span>
-                    </li>
-                  ))}
-                </ul>
+        {/* Investment */}
+        <section id="investment" className="py-16">
+          <div className="max-w-3xl mx-auto px-6 lg:px-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Investment</h2>
+            <div className="rounded-2xl border-2 border-accent bg-white p-8">
+              <div className="flex items-baseline gap-2">
+                <span className="text-4xl font-bold text-primary font-sans">$1,500</span>
+                <span className="text-muted-foreground font-sans">one-time</span>
               </div>
-              <div className="rounded-2xl border border-border bg-secondary p-7">
-                <div className="flex items-baseline justify-between mb-5">
-                  <h3 className="font-bold text-primary text-lg font-sans">Full Signal Audit</h3>
-                  <span className="font-bold text-primary font-sans">$5,000</span>
-                </div>
-                <ul className="space-y-3">
-                  {auditIncludes.map((a) => (
-                    <li key={a} className="flex items-start gap-3">
-                      <Check className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-1" />
-                      <span className="text-muted-foreground font-sans text-sm leading-relaxed">{a}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
+              <p className="mt-3 text-muted-foreground font-sans leading-relaxed">
+                A private breakdown of your trial-to-paid journey, delivered as a recorded walkthrough and a written findings document.
+              </p>
             </div>
 
             <div className="mt-8 rounded-2xl bg-secondary border border-border p-7">
@@ -400,33 +345,9 @@ export default function Breakdown() {
               These breakdowns have helped SaaS teams spot lifecycle gaps they were too close to see internally, from email timing and sender logic to plan positioning, stall recovery, and post-trial follow-up.
             </p>
 
-            <a
-              href={SUPADEMO_RESPONSE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => posthog.capture("breakdown_supademo_response_clicked")}
-              className="group flex items-center gap-5 bg-white border-2 border-accent rounded-2xl p-6 hover:-translate-y-0.5 transition-transform duration-300"
-            >
-              <div className="w-14 h-14 rounded-full bg-accent/20 flex items-center justify-center flex-shrink-0">
-                <PlayCircle className="w-7 h-7 text-primary" />
-              </div>
-              <div className="flex-grow">
-                <span className="block font-bold text-primary font-sans">
-                  Watch the Supademo team respond to their breakdown
-                </span>
-                <span className="block text-muted-foreground font-sans text-sm mt-1">
-                  A recorded reaction from a real SaaS team to one of these onboarding teardowns.
-                </span>
-              </div>
-              <ArrowRight className="w-5 h-5 text-primary flex-shrink-0 group-hover:translate-x-1 transition-transform" />
-            </a>
-
-            <div className="mt-5">
+            <div>
               <Testimonial q={quotes.insightful} />
             </div>
-            <p className="text-muted-foreground/70 font-sans text-xs mt-6">
-              Testimonials have been lightly edited for clarity where needed.
-            </p>
 
             <div className="mt-10">
               <p className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">
@@ -473,7 +394,7 @@ export default function Breakdown() {
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Request a private breakdown</h2>
                 <p className="text-muted-foreground font-sans leading-relaxed mb-6">
-                  I take on a limited number of breakdowns each month. Submit your trial link and a few details about your product. I will confirm whether the breakdown is a good fit before you book, then send a short intake form and invoice.
+                  Submit your trial link and a few details about your product. I will confirm whether the breakdown is a good fit before you book, then send a short intake form and invoice.
                 </p>
                 <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">What I need from you</h3>
                 <ul className="space-y-3 mb-8">
