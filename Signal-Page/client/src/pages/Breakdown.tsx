@@ -5,54 +5,95 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { motion } from "framer-motion";
-import {
-  ArrowLeft,
-  ArrowRight,
-  Loader2,
-  Check,
-  Search,
-  Mail,
-  Layers,
-  AlertTriangle,
-  TrendingUp,
-  LifeBuoy,
-  MousePointerClick,
-} from "lucide-react";
+import { ArrowLeft, ArrowRight, Loader2, Check, PlayCircle } from "lucide-react";
 import { usePostHog } from "@posthog/react";
 import { Footer } from "@/components/Footer";
 import { useBreakdownClaim, type BreakdownClaimData } from "@/hooks/use-breakdown-claim";
 
+// Testimonials come from the offer proposal PDF. Each is placed next to the
+// section it proves. Add the Supademo quote here once its text is confirmed.
+const quotes = {
+  echoChamber: {
+    quote: "The feedback was actionable, matched what we have been discussing internally, and was clear. If you only sit in your own echo chamber, you will miss a lot of opportunities and fixes.",
+    name: "Jay Desai", title: "Growth Lead", company: "Navattic",
+  },
+  emailByEmail: {
+    quote: "I loved the specific email-by-email breakdown, not just the messaging, but who the target audience should be, what it did well, and where it can be improved.",
+    name: "Natalie Marcotullio", title: "Head of Growth & Operations", company: "Navattic",
+  },
+  usedIt: {
+    quote: "We actually used parts of your recommendations to shape out a post-trial follow-up.",
+    name: "Emily Dickson", title: "CMO", company: "Crystal Knows",
+  },
+  insightful: {
+    quote: "Loved the analysis you conducted on the Zendesk trial experience. It was very insightful.",
+    name: "Paddy O'Grady", title: "Marketing", company: "Zendesk",
+  },
+  validation: {
+    quote: "Simonida's analysis gave me the validation I needed to get started working on the email layer properly.",
+    name: "Viktorijan Mucunski", title: "Client Operations", company: "HeyReach",
+  },
+} as const;
+
+type Quote = (typeof quotes)[keyof typeof quotes];
+
+function Testimonial({ q }: { q: Quote }) {
+  return (
+    <figure className="bg-secondary border border-border border-l-2 border-l-accent rounded-2xl p-6">
+      <blockquote className="text-secondary-foreground font-sans leading-relaxed">
+        &ldquo;{q.quote}&rdquo;
+      </blockquote>
+      <figcaption className="mt-4 pt-3 border-t border-border">
+        <span className="block font-semibold text-foreground font-sans text-sm">{q.name}</span>
+        <span className="block text-muted-foreground font-sans text-sm">{q.title}, {q.company}</span>
+      </figcaption>
+    </figure>
+  );
+}
+
 const reviewAreas = [
-  { icon: MousePointerClick, area: "Signup flow", look: "Whether the user understands what to do next and why it matters" },
-  { icon: Layers, area: "First-run onboarding", look: "Whether the product guides the user toward a meaningful first win" },
-  { icon: Mail, area: "Email sequence", look: "Whether emails match the user state, timing, and intent" },
-  { icon: TrendingUp, area: "Trial or freemium positioning", look: "Whether the user understands what they get now, what paid unlocks, and why the upgrade matters" },
-  { icon: AlertTriangle, area: "Stall points", look: "Where users may stop before completing the next important action" },
-  { icon: ArrowRight, area: "Upgrade path", look: "Whether the product creates enough belief before asking for payment" },
-  { icon: LifeBuoy, area: "Recovery moments", look: "Where a nudge, shortcut, or human check-in could bring the user back" },
+  "Signup and account creation",
+  "First-run experience",
+  "Time to first meaningful value",
+  "Setup friction",
+  "Empty states and product guidance",
+  "Onboarding emails",
+  "Activation nudges",
+  "Upgrade prompts",
+  "Trial expiration and recovery messaging",
 ] as const;
 
 const deliverables = [
-  "A detailed written breakdown of the trial-to-paid journey",
-  "Screenshots and examples from the actual user experience",
-  "Diagnosis of the signup flow, onboarding path, email sequence, and upgrade path",
-  "Notes on likely stall points and missed recovery moments",
-  "Practical recommendations ranked by what I would fix first",
-  "A clear distinction between what I observed from the outside and what your internal data should validate",
+  "A recorded walkthrough of the complete trial journey",
+  "A written, prioritized list of conversion and activation friction",
+  "Screenshots and examples from the experience",
+  "Copy, UX, and lifecycle recommendations",
+  "Clear next steps ranked by likely impact and effort",
 ] as const;
 
-const testimonials = [
-  { quote: "I loved the specific email-by-email breakdown, not just the messaging, but who the target audience should be, what it did well, and where it can be improved.", name: "Natalie Marcotullio", title: "Head of Growth & Operations", company: "Navattic" },
-  { quote: "The feedback was actionable, matched what we have been discussing internally, and was clear. If you only sit in your own echo chamber, you will miss a lot of opportunities and fixes.", name: "Jay Desai", title: "Growth Lead", company: "Navattic" },
-  { quote: "We actually used parts of your recommendations to shape out a post-trial follow-up.", name: "Emily Dickson", title: "CMO", company: "Crystal Knows" },
-  { quote: "Loved the analysis you conducted on the Zendesk trial experience. It was very insightful.", name: "Paddy O'Grady", title: "Marketing", company: "Zendesk" },
-  { quote: "Simonida's analysis gave me the validation I needed to get started working on the email layer properly.", name: "Viktorijan Mucunski", title: "Client Operations", company: "HeyReach" },
+const breakdownIncludes = [
+  "Based on the experience of a real first-time trial user",
+  "No analytics access required",
+  "No team workshop",
+  "Signup, onboarding, activation path, lifecycle emails, and upgrade prompts",
+  "Recorded walkthrough plus written prioritized findings",
+  "Delivered privately",
+] as const;
+
+const auditIncludes = [
+  "Based on the customer experience and your internal data",
+  "Product and conversion data reviewed",
+  "Existing lifecycle sequences reviewed",
+  "JTBD and Aha-event mapping",
+  "Team working session",
+  "Trigger, segment, and flow specifications",
+  "Prioritized implementation plan",
 ] as const;
 
 const whatINeed = [
-  "Trial access or a clear way to create a test account",
+  "Your trial link or a clear way to create a test account",
   "Your website, pricing page, and current trial or freemium offer",
-  "Any onboarding emails you specifically want reviewed, if they are not triggered during the review window",
+  "Any onboarding emails you specifically want reviewed",
   "A short note on your ideal customer and the conversion goal you care about most",
 ] as const;
 
@@ -96,26 +137,26 @@ export default function Breakdown() {
         <title>Private Trial-to-Paid Breakdown - Signal</title>
         <meta
           name="description"
-          content="A paid outside-in diagnostic of your SaaS trial experience, onboarding emails, and upgrade path. I map where your trial-to-paid journey loses users and what I would fix first. Investment: $1,500."
+          content="A private, outside-in review of your SaaS signup-to-upgrade journey from the eyes of a real first-time trial user. Recorded walkthrough plus prioritized written findings. Investment: $1,500."
         />
         <link rel="canonical" href="https://signallifecycle.com/breakdown" />
         <meta property="og:type" content="website" />
         <meta property="og:title" content="Private Trial-to-Paid Breakdown - Signal" />
-        <meta property="og:description" content="An outside-in review of your SaaS trial experience, onboarding emails, and upgrade path. See where the journey loses users before they reach enough value to convert." />
+        <meta property="og:description" content="See your onboarding through the eyes of a real trial user. A private review of your signup-to-upgrade journey, showing where users hesitate, stall, or leave before reaching value." />
         <meta property="og:url" content="https://signallifecycle.com/breakdown" />
         <meta property="og:image" content="https://signallifecycle.com/og-image.png" />
         <meta name="twitter:card" content="summary_large_image" />
         <meta name="twitter:title" content="Private Trial-to-Paid Breakdown - Signal" />
-        <meta name="twitter:description" content="An outside-in diagnostic of your SaaS trial-to-paid journey. Investment: $1,500, credited toward the full SIGNAL Audit if you move forward within 14 days." />
+        <meta name="twitter:description" content="A private review of your signup-to-upgrade journey. $1,500, credited toward the full Signal Audit if you move forward within 14 days." />
         <meta name="twitter:image" content="https://signallifecycle.com/og-image.png" />
         <script type="application/ld+json">{`
           {
             "@context": "https://schema.org",
             "@type": "Service",
             "name": "Private Trial-to-Paid Breakdown",
-            "serviceType": "SaaS trial-to-paid diagnostic",
+            "serviceType": "SaaS trial-to-paid onboarding diagnostic",
             "provider": { "@type": "Organization", "name": "Signal Lifecycle", "url": "https://signallifecycle.com" },
-            "description": "An outside-in review of a SaaS trial experience, onboarding emails, and upgrade path, delivered as a written diagnostic. Review window up to 14 days.",
+            "description": "A private, outside-in review of a SaaS signup-to-upgrade journey from the perspective of a real first-time trial user, delivered as a recorded walkthrough with prioritized written findings.",
             "offers": { "@type": "Offer", "price": "1500", "priceCurrency": "USD", "url": "https://signallifecycle.com/breakdown" }
           }
         `}</script>
@@ -146,21 +187,22 @@ export default function Breakdown() {
               className="flex flex-col gap-6"
             >
               <span className="inline-block self-start px-3 py-1 bg-black/5 rounded-full text-xs font-bold tracking-wider uppercase text-primary/80 font-sans">
-                Paid Diagnostic Offer
+                Private Trial-to-Paid Breakdown
               </span>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.1] tracking-wide text-primary">
-                Private Trial-to-Paid Breakdown
+                See your onboarding through the eyes of a real trial user
               </h1>
               <p className="text-lg lg:text-xl text-muted-foreground leading-relaxed font-sans">
-                An outside-in review of your SaaS trial experience, onboarding emails, and upgrade path.
+                A private review of your signup-to-upgrade journey, showing where users may hesitate, stall, or leave before reaching value.
               </p>
 
-              <div className="flex flex-wrap gap-3 font-sans">
-                {["Built for B2B SaaS teams", "Review window up to 14 days", "$1,500"].map((b) => (
-                  <span key={b} className="text-sm font-semibold text-secondary-foreground bg-secondary border border-border rounded-full px-4 py-1.5">
-                    {b}
-                  </span>
-                ))}
+              <div className="flex flex-wrap items-center gap-3 font-sans">
+                <span className="text-sm font-semibold text-secondary-foreground bg-secondary border border-border rounded-full px-4 py-1.5">
+                  $1,500
+                </span>
+                <span className="text-sm font-medium text-muted-foreground">
+                  A limited number of breakdowns each month
+                </span>
               </div>
 
               <div className="pt-2">
@@ -168,159 +210,164 @@ export default function Breakdown() {
                   onClick={scrollToClaim}
                   className="inline-flex items-center gap-2 bg-primary text-primary-foreground px-6 py-3 rounded-sm text-sm font-semibold hover:bg-primary/90 transition-all duration-300 shadow-lg shadow-black/5 hover:-translate-y-0.5 font-sans"
                 >
-                  Claim your spot
+                  Request a private breakdown
                   <ArrowRight className="w-4 h-4" />
                 </button>
               </div>
             </motion.div>
+          </div>
+        </section>
 
-            <div className="mt-14 space-y-5 text-lg text-muted-foreground font-sans leading-relaxed">
+        {/* The problem */}
+        <section className="py-16 bg-white border-y border-border">
+          <div className="max-w-3xl mx-auto px-6 lg:px-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 leading-tight">
+              Your team knows the product too well to experience onboarding like a first-time user.
+            </h2>
+            <div className="space-y-5 text-lg text-muted-foreground font-sans leading-relaxed">
+              <div className="space-y-1">
+                <p>You know what every button means.</p>
+                <p>You know which step matters.</p>
+                <p>You know what users should do next.</p>
+                <p className="text-foreground font-medium">A new trial user does not.</p>
+              </div>
               <p>
-                <span className="text-foreground font-medium">Most trial-to-paid problems do not start at the final upgrade email.</span>{" "}
-                They start earlier, when a user signs up, looks around, misses the first meaningful win, and never builds enough reason to pay.
+                I sign up without an internal playbook and document the points where the journey becomes unclear, demanding, or disconnected from the value you promised.
               </p>
-              <p>
-                The Private Trial-to-Paid Breakdown shows what that journey looks like from the user side. I go through your signup flow, onboarding path, trial emails, upgrade prompts, and visible recovery moments over a review window of up to 14 days. Then I map where the experience creates momentum, where users may stall, and what I would fix first.
-              </p>
-              <p className="text-base border-l-2 border-l-accent pl-4 py-1">
-                This is a paid diagnostic asset built to stand on its own, so no call is included.
-              </p>
+            </div>
+            <div className="mt-10">
+              <Testimonial q={quotes.echoChamber} />
             </div>
           </div>
         </section>
 
-        {/* What I Review */}
-        <section className="py-16 bg-white border-y border-border">
+        {/* What I review */}
+        <section className="py-16">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">What I review</h2>
             <p className="text-muted-foreground font-sans mb-10 leading-relaxed">
-              I review what a trial user sees, receives, and is asked to do during the first 7 to 14 days of the journey.
+              Everything a trial user sees, receives, and is asked to do on the way from signup to upgrade.
             </p>
-            <div className="divide-y divide-border">
-              {reviewAreas.map(({ icon: Icon, area, look }) => (
-                <motion.div
-                  key={area}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                  className="flex items-start gap-4 py-5"
-                >
-                  <div className="w-9 h-9 rounded-lg bg-accent/15 border border-accent flex items-center justify-center flex-shrink-0 mt-0.5">
-                    <Icon className="w-4 h-4 text-primary" />
-                  </div>
-                  <div>
-                    <h3 className="font-semibold text-foreground font-sans">{area}</h3>
-                    <p className="text-muted-foreground font-sans text-sm mt-1 leading-relaxed">{look}</p>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        {/* What You Get */}
-        <section className="py-16">
-          <div className="max-w-3xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">What you get</h2>
-            <p className="text-muted-foreground font-sans mb-10 leading-relaxed">
-              A detailed written teardown of your trial-to-paid journey your team can discuss internally.
-            </p>
-            <div className="grid sm:grid-cols-2 gap-4">
-              {deliverables.map((d) => (
-                <div key={d} className="flex items-start gap-3 bg-secondary border border-border rounded-xl p-5">
-                  <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                  <span className="text-secondary-foreground font-sans text-sm leading-relaxed">{d}</span>
+            <div className="grid sm:grid-cols-2 gap-x-8 gap-y-4">
+              {reviewAreas.map((area) => (
+                <div key={area} className="flex items-start gap-3 border-b border-border pb-4">
+                  <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 mt-2.5" />
+                  <span className="text-foreground font-sans">{area}</span>
                 </div>
               ))}
             </div>
+            <div className="mt-10">
+              <Testimonial q={quotes.emailByEmail} />
+            </div>
           </div>
         </section>
 
-        {/* Review window + best fit */}
+        {/* What they receive */}
         <section className="py-16 bg-white border-y border-border">
-          <div className="max-w-3xl mx-auto px-6 lg:px-8 grid md:grid-cols-2 gap-6">
-            <div className="rounded-2xl border border-border p-7">
-              <h3 className="font-bold text-primary text-lg mb-3 font-sans">Review window</h3>
-              <p className="text-muted-foreground font-sans text-sm leading-relaxed">
-                The review window is up to 14 days, because most SaaS trials run between 7 and 14 days. If your trial is shorter, I review the full trial period. If your lifecycle sequence extends beyond 14 days, I review what appears during the agreed window and flag anything outside scope.
-              </p>
-            </div>
-            <div className="rounded-2xl border border-border p-7">
-              <h3 className="font-bold text-primary text-lg mb-3 font-sans">Best fit</h3>
-              <p className="text-muted-foreground font-sans text-sm leading-relaxed">
-                This is a good fit if you have a free trial or freemium motion and want a sharper view of what happens between signup and paid conversion. It is especially useful when trial starts and paid conversions are visible, but the middle of the journey feels less clear.
-              </p>
-            </div>
-          </div>
-        </section>
-
-        {/* What this is not */}
-        <section className="py-16">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">What this is not</h2>
-            <p className="text-muted-foreground font-sans leading-relaxed">
-              This is not a full SIGNAL Audit. It does not include internal analytics review, customer interviews, team workshops, full JTBD mapping, complete trigger specs, copywriting for the full lifecycle sequence, or implementation inside your tools.
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">What you receive</h2>
+            <p className="text-muted-foreground font-sans mb-10 leading-relaxed">
+              A recorded walkthrough of the journey, backed by a written findings document your team can act on.
             </p>
-            <p className="text-muted-foreground font-sans leading-relaxed mt-4">
-              This is an outside-in diagnostic. I show you what the journey looks like from the user side, where the experience may lose momentum, and what I would fix first. Your internal data should always be used to validate or challenge the diagnosis.
+            <div className="space-y-4">
+              {deliverables.map((d, i) => (
+                <div key={d} className="flex items-start gap-3 bg-secondary border border-border rounded-xl p-5">
+                  {i === 0 ? (
+                    <PlayCircle className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  ) : (
+                    <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                  )}
+                  <span className="text-secondary-foreground font-sans leading-relaxed">{d}</span>
+                </div>
+              ))}
+            </div>
+            <div className="mt-10">
+              <Testimonial q={quotes.usedIt} />
+            </div>
+            {/* TODO: drop 1-2 anonymized deliverable screenshots here once provided. */}
+          </div>
+        </section>
+
+        {/* The boundary: breakdown vs full audit */}
+        <section className="py-16">
+          <div className="max-w-4xl mx-auto px-6 lg:px-8">
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Where the breakdown ends and the Audit begins</h2>
+            <p className="text-muted-foreground font-sans mb-10 leading-relaxed max-w-2xl">
+              The breakdown reads your customer-facing trial experience. The full Signal Audit adds your internal data and your team.
+            </p>
+            <div className="grid md:grid-cols-2 gap-6">
+              <div className="rounded-2xl border-2 border-accent bg-white p-7">
+                <div className="flex items-baseline justify-between mb-5">
+                  <h3 className="font-bold text-primary text-lg font-sans">Private breakdown</h3>
+                  <span className="font-bold text-primary font-sans">$1,500</span>
+                </div>
+                <ul className="space-y-3">
+                  {breakdownIncludes.map((b) => (
+                    <li key={b} className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
+                      <span className="text-muted-foreground font-sans text-sm leading-relaxed">{b}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+              <div className="rounded-2xl border border-border bg-secondary p-7">
+                <div className="flex items-baseline justify-between mb-5">
+                  <h3 className="font-bold text-primary text-lg font-sans">Full Signal Audit</h3>
+                  <span className="font-bold text-primary font-sans">$5,000</span>
+                </div>
+                <ul className="space-y-3">
+                  {auditIncludes.map((a) => (
+                    <li key={a} className="flex items-start gap-3">
+                      <Check className="w-4 h-4 text-muted-foreground flex-shrink-0 mt-1" />
+                      <span className="text-muted-foreground font-sans text-sm leading-relaxed">{a}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div className="mt-8 rounded-2xl bg-secondary border border-border p-7">
+              <h3 className="font-bold text-primary font-sans mb-3">What this breakdown does not include</h3>
+              <p className="text-muted-foreground font-sans text-sm leading-relaxed">
+                This review uses the customer-facing trial experience. It does not include product analytics, customer interviews, internal conversion data, event architecture, or team workshops. Companies that need those receive the full Signal Audit.
+              </p>
+            </div>
+
+            <p className="mt-6 text-sm text-foreground font-sans border-l-2 border-l-accent pl-4 py-1">
+              If you move into the full Signal Audit within 14 days of receiving the breakdown, the $1,500 is credited toward the Audit.
             </p>
           </div>
         </section>
 
-        {/* Testimonials */}
+        {/* Focus + remaining proof */}
         <section className="py-16 bg-white border-y border-border">
           <div className="max-w-4xl mx-auto px-6 lg:px-8">
-            <div className="max-w-2xl mb-10">
-              <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Proof from previous breakdowns</h2>
-              <p className="text-muted-foreground font-sans leading-relaxed">
-                These breakdowns have helped SaaS teams spot lifecycle gaps they were too close to see internally, from email timing and sender logic to plan positioning, stall recovery, and post-trial follow-up.
-              </p>
-            </div>
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Focused on PLG trial-to-paid conversion</h2>
+            <p className="text-muted-foreground font-sans mb-10 leading-relaxed max-w-2xl">
+              These breakdowns have helped SaaS teams spot lifecycle gaps they were too close to see internally, from email timing and sender logic to plan positioning, stall recovery, and post-trial follow-up.
+            </p>
             <div className="grid md:grid-cols-2 gap-5">
-              {testimonials.map((t) => (
-                <motion.figure
-                  key={t.name + t.quote.slice(0, 12)}
-                  initial={{ opacity: 0, y: 12 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.4 }}
-                  className="flex flex-col bg-secondary border border-border rounded-2xl p-6"
-                >
-                  <blockquote className="text-secondary-foreground font-sans leading-relaxed flex-grow">
-                    &ldquo;{t.quote}&rdquo;
-                  </blockquote>
-                  <figcaption className="mt-5 pt-4 border-t border-border">
-                    <span className="block font-semibold text-foreground font-sans text-sm">{t.name}</span>
-                    <span className="block text-muted-foreground font-sans text-sm">{t.title}, {t.company}</span>
-                  </figcaption>
-                </motion.figure>
-              ))}
+              <Testimonial q={quotes.insightful} />
+              <Testimonial q={quotes.validation} />
             </div>
             <p className="text-muted-foreground/70 font-sans text-xs mt-6">
               Testimonials have been lightly edited for clarity where needed.
             </p>
+            {/* TODO: add a link to the LinkedIn onboarding newsletter once the exact URL is provided. */}
           </div>
         </section>
 
-        {/* Claim / intake */}
+        {/* Final CTA / claim */}
         <section id="claim" className="py-20">
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
-            <div className="rounded-2xl bg-accent/15 border border-accent px-6 py-5 mb-10 flex items-start gap-3">
-              <Search className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-              <p className="text-foreground font-sans text-sm leading-relaxed">
-                <span className="font-semibold">Investment: $1,500.</span> If you move into the full SIGNAL Audit within 14 days of receiving the breakdown, the $1,500 is credited toward the Audit.
-              </p>
-            </div>
-
             <div className="grid lg:grid-cols-[5fr,7fr] gap-10 lg:gap-14 items-start">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Claim your spot</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Request a private breakdown</h2>
                 <p className="text-muted-foreground font-sans leading-relaxed mb-6">
-                  Send the details below. I review fit, then send a short intake form and invoice. Once I have trial access and basic context, I begin the review, and you receive the finished breakdown after the review window closes.
+                  I take on a limited number of breakdowns each month. Submit your trial link and a few details about your product. I will confirm whether the breakdown is a good fit before you book, then send a short intake form and invoice.
                 </p>
                 <h3 className="text-sm font-bold uppercase tracking-widest text-muted-foreground font-sans mb-4">What I need from you</h3>
-                <ul className="space-y-3">
+                <ul className="space-y-3 mb-8">
                   {whatINeed.map((n) => (
                     <li key={n} className="flex items-start gap-3">
                       <Check className="w-4 h-4 text-primary flex-shrink-0 mt-1" />
@@ -328,6 +375,7 @@ export default function Breakdown() {
                     </li>
                   ))}
                 </ul>
+                <Testimonial q={quotes.validation} />
               </div>
 
               <motion.div
@@ -379,7 +427,7 @@ export default function Breakdown() {
                         Sending...
                       </>
                     ) : (
-                      "Claim my spot"
+                      "Request my breakdown"
                     )}
                   </button>
                   <p className="text-muted-foreground/70 font-sans text-xs text-center">
