@@ -14,15 +14,16 @@ created when the form first went live, so there is nothing to add here. If a
 submission ever arrives with those blank, recreate the fields with those exact
 keys under Subscribers -> Fields.
 
-## 2. Create (or confirm) the group
+## 2. The group is already wired
 
-Subscribers -> Groups. Create a group named **Audit Requests** if you do not
-already have one for this form.
+The form already feeds an existing group (currently named **Contact Form
+Leads**), and `MAILERLITE_CONTACT_GROUP_ID` is already set to its ID. New
+submissions land there automatically, which is what the automation triggers on.
+No setup needed here.
 
-Copy its ID from the URL and set it in Vercel as `MAILERLITE_CONTACT_GROUP_ID`,
-then redeploy. Every contact submission then lands in this group, which is what
-the automation triggers on. Without it, subscribers are still created but stay
-ungrouped, and the automation below will not fire.
+If you want to rename it to **Audit Requests**, do it under Subscribers ->
+Groups. A rename does not change the group ID, so the env var keeps working and
+no redeploy is needed.
 
 ## 3. Build the confirmation automation
 
