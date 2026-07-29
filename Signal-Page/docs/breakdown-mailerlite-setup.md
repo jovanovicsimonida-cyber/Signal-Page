@@ -89,7 +89,7 @@ Signal Lifecycle
 signallifecycle.com
 
 You're receiving this because you requested a Private Trial-to-Paid Breakdown
-at signallifecycle.com.
+on the Signal website.
 ```
 
 Send yourself a test through the automation preview and check that `{$name}`

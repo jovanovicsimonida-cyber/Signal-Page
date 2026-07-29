@@ -64,7 +64,7 @@ Simonida
 Signal Lifecycle
 signallifecycle.com
 
-You're receiving this because you got in touch through signallifecycle.com.
+You're receiving this because you got in touch through the Signal website.
 ```
 
 Send yourself a test through the automation preview and confirm `{$name}`
