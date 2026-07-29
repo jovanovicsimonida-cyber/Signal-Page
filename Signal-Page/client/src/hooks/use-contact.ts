@@ -27,8 +27,10 @@ export function useCreateContact() {
     },
     onSuccess: () => {
       toast({
-        title: "Message Sent",
-        description: "We've received your inquiry and will be in touch shortly.",
+        variant: "accent",
+        title: "Got it, thanks!",
+        description:
+          "I'll take a look at what you shared and get back to you within 48 hours to set up a short call :)",
       });
     },
     onError: (error: Error) => {
