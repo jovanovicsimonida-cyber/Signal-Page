@@ -16,7 +16,7 @@ keys under Subscribers -> Fields.
 
 ## 2. Create (or confirm) the group
 
-Subscribers -> Groups. Create a group named **Contact Requests** if you do not
+Subscribers -> Groups. Create a group named **Audit Requests** if you do not
 already have one for this form.
 
 Copy its ID from the URL and set it in Vercel as `MAILERLITE_CONTACT_GROUP_ID`,
@@ -28,7 +28,7 @@ ungrouped, and the automation below will not fire.
 
 Automations -> Create automation.
 
-- **Trigger:** When subscriber joins a group -> **Contact Requests**
+- **Trigger:** When subscriber joins a group -> **Audit Requests**
 - **Action:** Send email (copy below)
 
 Turn it on. New contact submissions now receive it automatically.
