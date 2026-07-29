@@ -46,10 +46,10 @@ export function Offer() {
             First, we need to do an Audit
           </h2>
           <p className="text-lg text-white/80 leading-relaxed font-sans mb-4">
-            Yeah, I know it's a weird way to sell a service. But here's the thing.
+            Yeah, it's a weird way to sell a service.
           </p>
           <p className="text-lg text-white/80 leading-relaxed font-sans mb-4">
-            Without understanding your product, your users, and what "value" actually looks like for them, any system is just a guess. And a guess with triggers attached is still a guess.
+            But without understanding your product, your users, and what "value" actually looks like for them, any system is just a guess. And a guess with triggers attached is still a guess.
           </p>
           <p className="text-lg text-white/80 leading-relaxed font-sans">
             The Audit means you get someone who shows up to the build knowing exactly what's broken. And you're not paying for something based on assumptions.
