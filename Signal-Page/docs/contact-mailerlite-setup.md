@@ -63,7 +63,14 @@ Talk soon,
 Simonida
 Signal Lifecycle
 signallifecycle.com
+
+You're receiving this because you got in touch through the Signal website.
 ```
 
 Send yourself a test through the automation preview and confirm `{$name}`
 resolves before turning it on.
+
+MailerLite appends your physical address and an unsubscribe link automatically
+(set the address under your account compliance settings). The line above is a
+courtesy, not a legal requirement, since this fires right after someone submits
+the form.
