@@ -28,8 +28,10 @@ export function useBreakdownClaim() {
     },
     onSuccess: () => {
       toast({
-        title: "Claim received",
-        description: "I'll review fit and send over a short intake form and invoice shortly.",
+        variant: "accent",
+        title: "You're in!",
+        description:
+          "I'll take a look at your website and trial offer myself and get back to you within a day or two. Keep an eye on your inbox for a confirmation :)",
       });
     },
     onError: (error: Error) => {
