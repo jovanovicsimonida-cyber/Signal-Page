@@ -30,11 +30,17 @@ export default async function handler(req: Request): Promise<Response> {
     return new Response("Method Not Allowed", { status: 405 });
   }
 
-  const rl = getRatelimit();
-  if (rl) {
-    const ip = (req.headers as Headers).get("x-forwarded-for")?.split(",")[0].trim() ?? "anonymous";
-    const { success } = await rl.limit(ip);
-    if (!success) return new Response("Too Many Requests", { status: 429, headers: { "Retry-After": "3600" } });
+  try {
+    const rl = getRatelimit();
+    if (rl) {
+      const ip = (req.headers as Headers).get("x-forwarded-for")?.split(",")[0].trim() ?? "anonymous";
+      const { success } = await rl.limit(ip);
+      if (!success) return new Response("Too Many Requests", { status: 429, headers: { "Retry-After": "3600" } });
+    }
+  } catch (err) {
+    // Rate limiter unavailable (e.g. Upstash unreachable). Fail open so the
+    // form still works rather than hard-crashing the function.
+    console.error("Ratelimit unavailable, allowing request:", err);
   }
 
   const apiKey = process.env.MAILERLITE_API_KEY;
