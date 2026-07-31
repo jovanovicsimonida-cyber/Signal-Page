@@ -30,11 +30,11 @@ const quotes = {
     name: "Jay Desai", title: "Growth Lead", company: "Navattic",
   },
   natalie: {
-    quote: "You're so in the weeds of your own product. It's helpful to have a third-party opinion come in and look at it.",
+    quote: "This kind of outside review can be so useful for SaaS teams with trial-to-paid onboarding. You're so in the weeds of your own product, it's helpful to have a 3rd party opinion come in and look at it.",
     name: "Natalie Marcotullio", title: "Head of Growth & Operations", company: "Navattic",
   },
   usedIt: {
-    quote: "We actually used parts of your recommendations to shape out a post-trial follow-up.",
+    quote: "We used parts of Simonida's recommendations to shape out a post-trial follow-up.",
     name: "Emily Dickson", title: "CMO", company: "Crystal Knows",
   },
   insightful: {
@@ -104,6 +104,15 @@ const deliverables = [
     item: "Clear next steps ranked by likely impact and effort",
     why: "You start with the fix that returns the most for the least work.",
   },
+] as const;
+
+// Short recap next to the form. Deliberately terser than `deliverables`, since
+// by this point the reader has already seen the full version twice.
+const recap = [
+  "A recorded walkthrough of your full trial journey",
+  "A written, prioritized list of what is costing you upgrades",
+  "The screen or email behind every finding",
+  "Clear next steps ranked by impact and effort",
 ] as const;
 
 // Rendered on the page and emitted as FAQPage structured data from this same
@@ -257,10 +266,10 @@ export default function Breakdown() {
 
               <figure className="border-l-2 border-l-accent pl-4">
                 <blockquote className="text-foreground/90 font-sans leading-relaxed">
-                  &ldquo;{quotes.usedIt.quote}&rdquo;
+                  &ldquo;{quotes.natalie.quote}&rdquo;
                 </blockquote>
                 <figcaption className="mt-2 text-sm text-muted-foreground font-sans">
-                  {quotes.usedIt.name}, {quotes.usedIt.title}, {quotes.usedIt.company}
+                  {quotes.natalie.name}, {quotes.natalie.title}, {quotes.natalie.company}
                 </figcaption>
               </figure>
 
@@ -286,8 +295,12 @@ export default function Breakdown() {
             </h2>
             <div className="space-y-5 text-lg text-muted-foreground font-sans leading-relaxed">
               <p>
-                Here is how it usually shows up. Signups are fine. Traffic is fine. But activation has been flat for two quarters, and when someone asks why, the honest answer is that nobody knows. You have theories. You have a backlog of onboarding tickets nobody has prioritized. What you do not have is a specific answer.
+                Your signups are fine, the traffic looks healthy, but activation has been flat for two quarters.
               </p>
+              <p>
+                You have some theories on why + a backlog of onboarding tickets nobody has prioritized.
+              </p>
+              <p>What you don't have is an answer.</p>
               <div className="space-y-1">
                 <p>You know what every button means.</p>
                 <p>You know which step matters.</p>
@@ -295,13 +308,15 @@ export default function Breakdown() {
                 <p className="text-foreground font-medium">A new trial user does not.</p>
               </div>
               <p>
-                So the trial keeps leaking in the same places, and the people best positioned to notice are the people least able to see it. That is not a skill problem. You cannot un-know your own product. Every time you open it you bring context a first-time user will never have.
+                Your trial keeps leaking in the same places, and the people best positioned to notice are the people least able to see it - this is not a skill problem.
+              </p>
+              <p>
+                You cannot un-know your own product. Every time you open it you bring context a first-time user will never have.
               </p>
               <ul className="space-y-3">
                 {[
                   "Users sign up, look around, and never come back, and no one can say which screen lost them.",
-                  "Onboarding emails go out on a schedule nobody has revisited since launch.",
-                  "The upgrade prompt gets blamed, changed, and blamed again.",
+                  "Onboarding emails go out on a schedule nobody has revisited since launch. The upgrade prompt gets blamed, changed, and blamed again.",
                   "Everyone has an opinion about what to fix first, and none of them are based on watching it happen.",
                 ].map((line) => (
                   <li key={line} className="flex items-start gap-3">
@@ -311,11 +326,11 @@ export default function Breakdown() {
                 ))}
               </ul>
               <p className="text-foreground font-medium">
-                You do not need another opinion from inside the building. You need someone outside it to go through the whole thing and write down exactly what happened.
+                What you need is someone with an outside perspective to go through the whole thing and write down exactly what happened.
               </p>
             </div>
             <div className="mt-10">
-              <Testimonial q={quotes.natalie} />
+              <Testimonial q={quotes.echoChamber} />
             </div>
           </div>
         </section>
@@ -364,7 +379,7 @@ export default function Breakdown() {
               })}
             </div>
             <div className="mt-10">
-              <Testimonial q={quotes.supademo} />
+              <Testimonial q={quotes.usedIt} />
             </div>
           </div>
         </section>
@@ -375,15 +390,21 @@ export default function Breakdown() {
         <section className="py-12 sm:py-16">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Why you can trust what comes back</h2>
-            <p className="text-muted-foreground font-sans mb-8 leading-relaxed">
-              You are not paying for an hour of clicking around. Your trial gets lived at the speed it actually runs, so if your trial is fourteen days, your breakdown takes fourteen days. The email that lands on day nine decides as much as the screen someone sees in the first minute, and you only see that by waiting for it. Anything faster is a skim.
+            <p className="text-muted-foreground font-sans mb-5 leading-relaxed">
+              You are not paying for an hour of clicking around.
+            </p>
+            <p className="text-muted-foreground font-sans mb-5 leading-relaxed">
+              Your trial gets a walk-through at the speed it actually runs, if your trial is fourteen days, your breakdown takes fourteen days. Every onboarding step and email get the same attention.
+            </p>
+            <p className="text-muted-foreground font-sans mb-5 leading-relaxed">
+              What's costing you upgrades gets named instead of guessed at, every finding reaches you with the screen it happened on and the change worth making, written the way your team already works.
             </p>
             <p className="text-muted-foreground font-sans mb-10 leading-relaxed">
-              You also get someone who does nothing else. Trial-to-paid conversion for PLG SaaS is the whole job, and these journeys get broken down publicly, one product at a time. Some of those teams come back for the full private version afterward. So what is costing you upgrades gets named instead of guessed at, and every finding reaches you with the screen it happened on and the change worth making, written the way your team already works.
+              You also get someone who does nothing else. Trial-to-paid conversion for PLG SaaS is my whole job, I even run a newsletter about it.
             </p>
 
             <div className="grid md:grid-cols-2 gap-5">
-              <Testimonial q={quotes.echoChamber} />
+              <Testimonial q={quotes.supademo} />
               <Testimonial q={quotes.insightful} />
             </div>
 
@@ -434,31 +455,10 @@ export default function Breakdown() {
           </div>
         </section>
 
-        {/* Dream state. Answers "where will I go if I believe you", and has to
-            land before the price so the price is judged against the outcome. */}
-        <section className="py-12 sm:py-16 bg-secondary border-y border-border">
-          <div className="max-w-3xl mx-auto px-6 lg:px-8">
-            <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6 leading-tight">
-              Picture the version of this where you actually know
-            </h2>
-            <div className="space-y-5 text-lg text-muted-foreground font-sans leading-relaxed">
-              <p>
-                Two weeks from now, the guessing is over. You know the exact screen where most of your trial users quietly give up, and you know it because you watched it happen. The onboarding backlog is no longer a list of opinions. It is ranked, and the thing at the top is there for a reason you can explain to anyone who asks.
-              </p>
-              <p>
-                Your next lifecycle email goes out because it fixes something specific, not because it was due. When activation moves, you know which change moved it. And the signups you are already paying for start turning into accounts you get to keep.
-              </p>
-              <p className="text-foreground font-medium">
-                Same traffic. Same product. Far fewer people falling out of it on the way to paid.
-              </p>
-            </div>
-          </div>
-        </section>
-
         {/* Investment. Value first, then price at a size that does not shout,
             then the credit, then the upgrade path framed as more rather than
             as a list of what the buyer is not getting. */}
-        <section id="investment" className="py-12 sm:py-16 scroll-mt-16">
+        <section id="investment" className="py-12 sm:py-16 scroll-mt-16 bg-secondary border-y border-border">
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-8">Find what's costing you upgrades</h2>
 
@@ -495,7 +495,7 @@ export default function Breakdown() {
               </div>
             </div>
 
-            <div className="mt-8 rounded-2xl bg-secondary border border-border p-6 sm:p-7">
+            <div className="mt-8 rounded-2xl bg-white border border-border p-6 sm:p-7">
               <h3 className="font-bold text-primary font-sans mb-3">If you want to go further</h3>
               <p className="text-muted-foreground font-sans text-sm leading-relaxed mb-4">
                 The breakdown works from your customer-facing trial, which is what a real user sees. If you want me inside the numbers as well, the full Signal Audit adds:
@@ -528,7 +528,15 @@ export default function Breakdown() {
           <div className="max-w-5xl mx-auto px-6 lg:px-8">
             <div className="grid lg:grid-cols-[5fr,7fr] gap-10 lg:gap-14 items-start">
               <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-4">Convert more of the trial users you already have</h2>
+                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">Here is what you walk away with</h2>
+                <ul className="space-y-3 mb-8">
+                  {recap.map((line) => (
+                    <li key={line} className="flex items-start gap-3">
+                      <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
+                      <span className="text-foreground font-sans leading-relaxed">{line}</span>
+                    </li>
+                  ))}
+                </ul>
                 <p className="text-muted-foreground font-sans leading-relaxed mb-6">
                   Not every product is a fit for this. Put your name and work email in, and your product and your trial get a proper look before anything else happens. If there is real money to find in your trial, you will hear what I noticed. If there is not, you will hear that instead.
                 </p>
