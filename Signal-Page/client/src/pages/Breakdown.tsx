@@ -502,7 +502,7 @@ export default function Breakdown() {
                 ))}
               </ul>
               <p className="text-foreground font-sans text-sm leading-relaxed mt-5 border-l-2 border-l-accent pl-4 py-1">
-                And if you go that route within 14 days, the $1,500 you spent here comes off the price. So the worst case is you get the breakdown. The best case is you get all of it and pay nothing extra for the start.
+                And if you go that route within 14 days, the $1,500 you spent here is credited toward the Audit.
               </p>
             </div>
           </div>
