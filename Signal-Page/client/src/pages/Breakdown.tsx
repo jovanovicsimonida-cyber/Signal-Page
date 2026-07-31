@@ -106,15 +106,6 @@ const deliverables = [
   },
 ] as const;
 
-// Short recap next to the form. Deliberately terser than `deliverables`, since
-// by this point the reader has already seen the full version twice.
-const recap = [
-  "A recorded walkthrough of your full trial journey",
-  "A written, prioritized list of what is costing you upgrades",
-  "The screen or email behind every finding",
-  "Clear next steps ranked by impact and effort",
-] as const;
-
 // Rendered on the page and emitted as FAQPage structured data from this same
 // array, so the two can never drift apart.
 const faqs = [
@@ -480,10 +471,6 @@ export default function Breakdown() {
                 <span className="text-muted-foreground font-sans text-sm">for the complete breakdown</span>
               </div>
 
-              <p className="mt-4 text-sm text-foreground font-sans border-l-2 border-l-accent pl-4 py-1 leading-relaxed">
-                If you move into the full Signal Audit within 14 days, the whole $1,500 comes off the price of the Audit.
-              </p>
-
               <div className="mt-6">
                 <button
                   onClick={() => scrollToClaim("investment")}
@@ -514,7 +501,7 @@ export default function Breakdown() {
                   </li>
                 ))}
               </ul>
-              <p className="text-foreground font-sans text-sm leading-relaxed mt-4">
+              <p className="text-foreground font-sans text-sm leading-relaxed mt-5 border-l-2 border-l-accent pl-4 py-1">
                 And if you go that route within 14 days, the $1,500 you spent here comes off the price. So the worst case is you get the breakdown. The best case is you get all of it and pay nothing extra for the start.
               </p>
             </div>
@@ -525,34 +512,20 @@ export default function Breakdown() {
             required here; they are homework, and they are now asked for after
             I confirm fit rather than before anyone has committed to anything. */}
         <section id="claim" className="py-14 sm:py-20 scroll-mt-16">
-          <div className="max-w-5xl mx-auto px-6 lg:px-8">
-            <div className="grid lg:grid-cols-[5fr,7fr] gap-10 lg:gap-14 items-start">
-              <div>
-                <h2 className="text-3xl md:text-4xl font-bold text-primary mb-6">Here is what you walk away with</h2>
-                <ul className="space-y-3 mb-8">
-                  {recap.map((line) => (
-                    <li key={line} className="flex items-start gap-3">
-                      <Check className="w-5 h-5 text-primary flex-shrink-0 mt-0.5" />
-                      <span className="text-foreground font-sans leading-relaxed">{line}</span>
-                    </li>
-                  ))}
-                </ul>
-                <p className="text-muted-foreground font-sans leading-relaxed mb-6">
-                  Not every product is a fit for this. Put your name and work email in, and your product and your trial get a proper look before anything else happens. If there is real money to find in your trial, you will hear what I noticed. If there is not, you will hear that instead.
-                </p>
-                <p className="text-muted-foreground font-sans leading-relaxed mb-8">
-                  Nothing to prepare, nothing to pay, no call to book. Two fields.
-                </p>
-                <Testimonial q={quotes.validation} />
-              </div>
+          <div className="max-w-2xl mx-auto px-6 lg:px-8">
+            <Testimonial q={quotes.validation} />
 
-              <motion.div
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5 }}
-                className="bg-white p-6 sm:p-7 md:p-9 rounded-2xl shadow-xl shadow-black/5 border border-border border-l-2 border-l-accent"
-              >
+            <h2 className="text-3xl md:text-4xl font-bold text-primary mt-10 mb-6">
+              Fill in a few details to get started
+            </h2>
+
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.5 }}
+              className="bg-white p-6 sm:p-7 md:p-9 rounded-2xl shadow-xl shadow-black/5 border border-border border-l-2 border-l-accent"
+            >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-semibold text-foreground font-sans uppercase tracking-wider">Name</label>
@@ -592,8 +565,7 @@ export default function Breakdown() {
                     No payment now. You hear whether it is a fit before anything else happens.
                   </p>
                 </form>
-              </motion.div>
-            </div>
+            </motion.div>
           </div>
         </section>
 
