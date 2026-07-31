@@ -17,12 +17,12 @@ function getRatelimit(): Ratelimit | null {
   return ratelimit;
 }
 
+// Trial link and product URL are no longer collected up front. They are asked
+// for once fit is confirmed, so the form stays at two required fields.
 const schema = z.object({
   name: z.string().min(1).max(100),
   email: z.string().email().max(254),
-  website: z.string().min(1).max(300),
-  trialAccess: z.string().min(1).max(500),
-  goal: z.string().min(1).max(1000),
+  goal: z.string().max(1000).optional(),
 });
 
 export default async function handler(req: Request): Promise<Response> {
@@ -60,15 +60,13 @@ export default async function handler(req: Request): Promise<Response> {
     return new Response("Invalid input", { status: 400 });
   }
 
-  const { name, email, website, trialAccess, goal } = parsed.data;
+  const { name, email, goal } = parsed.data;
 
   const payload: Record<string, unknown> = {
     email,
     fields: {
       name,
-      website,
-      trial_access: trialAccess,
-      goal,
+      ...(goal ? { goal } : {}),
     },
   };
 

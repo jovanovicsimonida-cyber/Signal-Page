@@ -4,9 +4,7 @@ import { useToast } from "@/hooks/use-toast";
 export interface BreakdownClaimData {
   name: string;
   email: string;
-  website: string;
-  trialAccess: string;
-  goal: string;
+  goal?: string;
 }
 
 export function useBreakdownClaim() {
