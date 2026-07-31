@@ -16,7 +16,7 @@
 | `--secondary` | `#ece9e2` | Card backgrounds |
 | `--secondary-foreground` | `#1A1A1A` | Text on cards |
 | `--muted` | `#e0ddd6` | Dividers |
-| `--muted-foreground` | `#888580` | Muted/secondary text |
+| `--muted-foreground` | `#696763` | Muted/secondary text (WCAG AA on both `--background` and white) |
 | `--accent` | `#ffd231` | Brand yellow — borders and decorative accents only |
 | `--accent-foreground` | `#232323` | Text placed on yellow backgrounds |
 | `--border` | `#e0ddd6` | Warm gray borders |

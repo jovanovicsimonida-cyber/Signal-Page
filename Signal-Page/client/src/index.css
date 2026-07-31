@@ -17,7 +17,7 @@
   --secondary-foreground: 0 0% 10%;
 
   --muted: 42 14% 86%;             /* #e0ddd6 - Borders/dividers */
-  --muted-foreground: 38 3% 52%;   /* #888580 - Muted text */
+  --muted-foreground: 38 3% 40%;   /* #696763 - Muted text (WCAG AA: 4.9:1 on background, 5.6:1 on white) */
 
   --accent: 47 100% 60%;           /* #ffd231 - Brand yellow (borders only) */
   --accent-foreground: 0 0% 14%;   /* #232323 - Dark text on yellow */
