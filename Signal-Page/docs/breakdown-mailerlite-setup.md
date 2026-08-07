@@ -11,16 +11,21 @@ confirmation email goes out.
 
 ## 1. Create the custom fields
 
-Subscribers -> Fields -> Create field. Add three text fields with these exact
-keys, or MailerLite will discard the values:
+Subscribers -> Fields -> Create field. Add one text field with this exact key,
+or MailerLite will discard the value:
 
 | Field name | Key |
 |---|---|
-| Website | `website` |
-| Trial access | `trial_access` |
 | Goal | `goal` |
 
 The `name` and `email` fields already exist by default.
+
+The form asks for name, work email, and one optional question ("What do you
+want to improve?"), which lands in `goal`. It no longer collects a product
+website or trial access. Those were cut to reduce friction on a cold-traffic
+form, and are collected by reply once fit is confirmed. Submissions made
+before 31 July 2026 may still carry `website` and `trial_access` values from
+the old five-field form.
 
 ## 2. Create the group
 
@@ -72,16 +77,17 @@ and I have what I need to get started.
 
 Here is what happens next:
 
-1. I review fit. I check that your trial or freemium motion is a match for this
-   kind of outside-in review. This usually takes a day or two.
+1. I take a look at your product and your trial myself, and check it is a match
+   for this kind of outside-in review. This usually takes a day or two.
 2. If it is a good fit, I send a Payoneer invoice.
-3. Once the invoice is settled, I begin the review over a window of up to 14
-   days, using the trial access and context you already shared.
+3. Once the invoice is settled, I begin the review. It runs for as long as your
+   trial runs, because the emails that arrive on day nine matter as much as the
+   first screen someone sees.
 4. You receive your recorded walkthrough and written findings after the review
    window closes.
 
-If there is a specific onboarding email or upgrade prompt you want me to look
-at, reply to this email and let me know.
+To save a step, reply to this email with your trial link (or how to create a
+test account), and anything specific you want me to look at.
 
 Talk soon,
 Simonida
