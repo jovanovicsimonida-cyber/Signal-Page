@@ -67,18 +67,19 @@ function Testimonial({ q }: { q: Quote }) {
   );
 }
 
-// Each review area carries the reason it matters, so the list reads as value
-// rather than as a checklist of things I happen to look at.
+// Each line says what actually gets examined in that area. An earlier version
+// gave the reason the area matters instead, which read as nine general truths
+// about SaaS rather than nine things this review does.
 const reviewAreas = [
-  { area: "Signup and account creation", why: "The first place motivated users quietly give up." },
-  { area: "First-run experience", why: "What users see before they have any reason to trust you." },
-  { area: "Time to first meaningful value", why: "The single strongest predictor of whether a trial converts." },
-  { area: "Setup friction", why: "Every required step is a place to postpone, and postponed trials expire." },
-  { area: "Empty states and product guidance", why: "Where users decide the product is either obvious or too much work." },
-  { area: "Onboarding emails", why: "Your only way to reach users who left and have not come back." },
-  { area: "Activation nudges", why: "The difference between a user who pokes around and one who commits." },
-  { area: "Upgrade prompts", why: "Asked too early they annoy, too late they never get seen." },
-  { area: "Trial expiration and recovery messaging", why: "The last chance to convert someone who already wanted it." },
+  { area: "Signup and account creation", why: "Every field, verification step, and dead end between clicking signup and being inside." },
+  { area: "First-run experience", why: "What the first screen asks you to do, and whether that is the thing worth doing first." },
+  { area: "Time to first meaningful value", why: "How many steps, and how many minutes, before the product does something useful." },
+  { area: "Setup friction", why: "Which steps are genuinely required, and which could wait until someone is already hooked." },
+  { area: "Empty states and product guidance", why: "What a blank dashboard tells a new user to do next, if it tells them anything." },
+  { area: "Onboarding emails", why: "Every email in the sequence: what triggers it, when it lands, and whether it earns the open." },
+  { area: "Activation nudges", why: "The prompts, tooltips, and checklists, and whether they point at real value or at features." },
+  { area: "Upgrade prompts", why: "Where the paywall appears, what it says, and whether it arrives before there is a reason to care." },
+  { area: "Trial expiration and recovery messaging", why: "What happens on the last day, and what arrives after, if anything does." },
 ] as const;
 
 const deliverableIcons = [PlayCircle, ListChecks, ImageIcon, PenLine, ListOrdered] as const;
@@ -332,7 +333,7 @@ export default function Breakdown() {
           <div className="max-w-3xl mx-auto px-6 lg:px-8">
             <h2 className="text-3xl md:text-4xl font-bold text-primary mb-3">Every step that stands between signup and paid</h2>
             <p className="text-muted-foreground font-sans mb-10 leading-relaxed">
-              Everything a trial user sees, receives, and is asked to do on the way from signup to upgrade, and why each one decides whether they stay.
+              Everything a trial user sees, receives, and is asked to do on the way from signup to upgrade.
             </p>
             <div className="grid sm:grid-cols-2 gap-x-8 gap-y-5">
               {reviewAreas.map(({ area, why }) => (
@@ -484,16 +485,18 @@ export default function Breakdown() {
 
             <div className="mt-8 rounded-2xl bg-white border border-border p-6 sm:p-7">
               <h3 className="font-bold text-primary font-sans mb-3">If you want to go further</h3>
+              {/* Sourced from the Audit section on the home page. If the Audit
+                  changes there, this has to change with it. */}
               <p className="text-muted-foreground font-sans text-sm leading-relaxed mb-4">
-                The breakdown works from your customer-facing trial, which is what a real user sees. If you want me inside the numbers as well, the full Signal Audit adds:
+                The breakdown works from your customer-facing trial, which is what a real user sees. The full Signal Audit works from the inside: your conversion data, your product analytics, and your existing email sequences, then a 60 to 90 minute working session with Product, Sales, and CS in the room. You come out of that with:
               </p>
               <ul className="space-y-2.5">
                 {[
-                  "Product analytics, so findings are backed by what users actually did",
-                  "Customer interviews with people who churned and people who converted",
-                  "Your internal conversion data, segmented properly",
-                  "Event architecture review, so you can trust what you are measuring",
-                  "Team workshops to get the fixes shipped, not just documented",
+                  "A JTBD and Aha moment map, with measurable Aha events for each path",
+                  "Your value path from signup to paid, with the stall points diagnosed",
+                  "A “why not us” email template: trigger, copy, and response handling",
+                  "A prioritized action plan, with effort and impact estimates",
+                  "Implementation specs for triggers, segments, and flow logic",
                 ].map((line) => (
                   <li key={line} className="flex items-start gap-2.5">
                     <span className="w-1.5 h-1.5 rounded-full bg-accent flex-shrink-0 mt-2" />
