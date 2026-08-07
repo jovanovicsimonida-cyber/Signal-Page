@@ -60,46 +60,63 @@ Turn the automation on. New submissions now receive it automatically.
 
 ### Confirmation email copy
 
+**This is a record of what is live in MailerLite, as of 7 August 2026.** The
+email itself lives in the MailerLite automation, not in this repo, so editing
+this file changes nothing on its own. If you change the email there, change it
+here too. The two drifting apart is what caused the earlier version to thank
+people for trial access they had never been asked for.
+
 Subject:
 
 ```
 Your breakdown request is in
 ```
 
-Body (uses the MailerLite merge tag `{$name}`; confirm it matches your Name
-field before sending a test):
+Body (uses the MailerLite merge tag `{$name}`; the numbered steps are rendered
+by MailerLite as a styled list, so the plain text below is the wording only):
 
 ```
 Hi {$name},
 
-Thanks for requesting a Private Trial-to-Paid Breakdown. Your details are in,
-and I have what I need to get started.
+Thanks for requesting a Private Trial-to-Paid Breakdown! Your details are in,
+and I have what I need to take a first look.
 
-Here is what happens next:
+Here's what happens next:
 
-1. I take a look at your product and your trial myself, and check it is a match
-   for this kind of outside-in review. This usually takes a day or two.
-2. If it is a good fit, I send a Payoneer invoice.
-3. Once the invoice is settled, I begin the review. It runs for as long as your
-   trial runs, because the emails that arrive on day nine matter as much as the
-   first screen someone sees.
-4. You receive your recorded walkthrough and written findings after the review
-   window closes.
+1. I'll check that your trial or freemium motion is a match for this kind of
+   outside-in review - this usually takes a day or two.
+2. If it is a good fit, I'll send you an email and a Payoneer invoice.
+3. Once the invoice is settled and I have trial access, I'll begin the review
+   over a window of up to 14 days.
+4. You'll receive your recorded walkthrough and written findings so you can
+   start converting more of your trial users.
 
-To save a step, reply to this email with your trial link (or how to create a
-test account), and anything specific you want me to look at.
+If there is a specific onboarding step, email, or upgrade prompt you want me to
+look at, just reply to this email and let me know. I read every reply
+personally :)
 
 Talk soon,
 Simonida
-Signal Lifecycle
-signallifecycle.com
-
-You're receiving this because you requested a Private Trial-to-Paid Breakdown
-on the Signal website.
 ```
 
 Send yourself a test through the automation preview and check that `{$name}`
 resolves and the steps read cleanly before it goes live.
+
+### Open improvements to this email
+
+Not applied, noted so they are not lost:
+
+- **It never asks for the trial link.** Step 3 mentions needing trial access
+  but nothing prompts them to send it, so collecting it still depends on a
+  separate email later. A line after step 4 would do it: "To save a step, reply
+  now with your trial link, or how to create a test account. I'll need it
+  before I start."
+- **It does not say what happens if it is not a fit.** Step 2 opens with "if it
+  is a good fit" and the other branch is left hanging, though the sales page
+  promises they hear either way. "Either way, I'll let you know" closes step 1.
+- **Timing wording differs from the page.** This email says "a window of up to
+  14 days"; the page says the review runs as long as the trial runs. Those
+  agree for a 14-day trial and diverge for a 30-day one.
 
 MailerLite appends your physical address and an unsubscribe link automatically
 (set the address under your account compliance settings). The line above is a
