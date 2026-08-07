@@ -1,6 +1,7 @@
 import { z } from "zod";
 import { Ratelimit } from "@upstash/ratelimit";
 import { Redis } from "@upstash/redis";
+import { notifySubmission } from "./_notify";
 
 export const config = { runtime: "edge" };
 
@@ -88,6 +89,12 @@ export default async function handler(req: Request): Promise<Response> {
     console.error("MailerLite error:", mlRes.status);
     return new Response("Failed to submit", { status: 502 });
   }
+
+  await notifySubmission("Breakdown request", [
+    { label: "Name", value: name },
+    { label: "Email", value: email },
+    { label: "Wants to improve", value: goal },
+  ]);
 
   return new Response(JSON.stringify({ ok: true }), {
     status: 200,
