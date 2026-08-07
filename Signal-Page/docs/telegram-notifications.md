@@ -14,7 +14,10 @@ to go and look up.
 | `/breakdown` | Breakdown request | Name, email, what they want to improve |
 | Contact (Audit) | Audit enquiry | Name, email, conversion rate, ESP / tool |
 | Leak Finder | Leak Finder result claimed | Name, email, reds, yellows |
-| Newsletter | Newsletter subscriber | Name, email |
+| Reverb template (`/resources/reverb`) | Reverb template download | Name, email |
+
+There is no newsletter form on the site. The newsletter lives on LinkedIn and
+the footer link sends people straight there, so there is nothing to notify on.
 
 Notification is best effort. MailerLite stays the system of record. If the
 token is missing, Telegram is down, or the request hangs for more than three

@@ -84,7 +84,10 @@ export default async function handler(req: Request): Promise<Response> {
     return new Response("Failed to subscribe", { status: 502 });
   }
 
-  await notifySubmission("Newsletter subscriber", [
+  // This endpoint serves the Reverb template download on /resources/reverb.
+  // It is not the newsletter: the newsletter lives on LinkedIn and the footer
+  // link goes straight there, so nothing on this site captures a subscriber.
+  await notifySubmission("Reverb template download", [
     { label: "Name", value: firstName },
     { label: "Email", value: email },
   ]);
