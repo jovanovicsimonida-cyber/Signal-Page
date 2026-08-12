@@ -19,6 +19,17 @@ Production:
 
 Both come from the Upstash console, under your Redis database -> REST API.
 
+Two traps worth knowing:
+
+- **Env vars only reach new deployments.** Vercel bakes them in at build time,
+  so setting them does nothing to the deployment already live. Redeploy after
+  adding or changing either value.
+- **Check which environments they are set for.** If they exist in Production
+  only, every preview deployment runs with no rate limit and no duplicate
+  check. A preview will happily accept the same email twice and look broken
+  when it is only unconfigured. Add them to Preview as well if you want to test
+  there.
+
 To confirm it is actually live, submit the breakdown form twice with the same
 email. The second attempt should return 409 and show "Already got it". If the
 second attempt succeeds, Upstash is not connected.
