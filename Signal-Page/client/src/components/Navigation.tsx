@@ -39,6 +39,12 @@ export function Navigation() {
               Start Here
             </button>
             <Link
+              href="/breakdown"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
+            >
+              Trial Breakdown
+            </Link>
+            <Link
               href="/about"
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
             >
@@ -79,6 +85,13 @@ export function Navigation() {
           >
             Start Here
           </button>
+          <Link
+            href="/breakdown"
+            onClick={() => setMobileOpen(false)}
+            className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans py-2"
+          >
+            Trial Breakdown
+          </Link>
           <Link
             href="/about"
             onClick={() => setMobileOpen(false)}

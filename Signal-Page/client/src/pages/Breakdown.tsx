@@ -53,6 +53,15 @@ const quotes = {
 
 type Quote = (typeof quotes)[keyof typeof quotes];
 
+// Only the engagements that were actually paid are emitted as Review structured
+// data. The others stay on the page as commentary: marking them up as customer
+// reviews would assert a client relationship that did not exist.
+const reviewQuotes = [quotes.echoChamber, quotes.natalie, quotes.supademo] as const;
+
+// One canonical id for the service node, so the reviews below can point at the
+// same entity instead of restating it.
+const SERVICE_ID = "https://signallifecycle.com/breakdown#service";
+
 function Testimonial({ q }: { q: Quote }) {
   return (
     <figure className="bg-white border border-border border-l-2 border-l-accent rounded-2xl p-6">
@@ -195,6 +204,7 @@ export default function Breakdown() {
             "@graph": [
               {
                 "@type": "Service",
+                "@id": SERVICE_ID,
                 name: "Private Trial-to-Paid Breakdown",
                 serviceType: "SaaS trial-to-paid onboarding diagnostic",
                 provider: {
@@ -211,6 +221,17 @@ export default function Breakdown() {
                   url: "https://signallifecycle.com/breakdown",
                 },
               },
+              ...reviewQuotes.map((q) => ({
+                "@type": "Review",
+                itemReviewed: { "@id": SERVICE_ID },
+                reviewBody: q.quote,
+                author: {
+                  "@type": "Person",
+                  name: q.name,
+                  jobTitle: q.title,
+                  worksFor: { "@type": "Organization", name: q.company },
+                },
+              })),
               {
                 "@type": "FAQPage",
                 mainEntity: faqs.map(({ q, a }) => ({

@@ -17,12 +17,12 @@ Signal is a lifecycle email strategy consultancy founded by Simonida Jovanovic. 
 
 The SIGNAL framework is our proprietary methodology for building lifecycle email systems:
 
-- **S**: Segment by behavior, not demographics
-- **I**: Identify the job your product is hired to do
-- **G**: Guide users to their Aha moment
-- **N**: Nudge based on where each user actually is
-- **A**: Automate recovery loops for users who go dark
-- **L**: Layer in upgrade triggers at the right time
+- **S** Segment: Your users signed up for different reasons. Group them that way, by the job they hired the product for, not by plan tier or signup date.
+- **I** Interpret: Connect in-product behavior to outcomes, so you know which actions predict upgrades and where good users stall.
+- **G** Generate: Map states, triggers, and suppression rules before writing a single email. The logic comes first, the copy comes after.
+- **N** Nurture: Write like someone who actually wants the user to succeed. Every message has a reason to exist and a clear next step.
+- **A** Automate: Set the triggers, suppressions, cooldowns, and exit logic so the system runs itself across every channel.
+- **L** Learn: Measure which cohorts convert and which nudges pull users back, so the system compounds instead of going stale.
 
 ## Core Principles
 
@@ -33,7 +33,9 @@ The SIGNAL framework is our proprietary methodology for building lifecycle email
 
 ## Services
 
-**The Leak Audit**: A one-time deep dive into your trial-to-paid flow. We map your user journey, identify where conversions leak, and deliver a strategy to fix it. Investment: $5,000.
+**Private Trial-to-Paid Breakdown**: A private, outside-in review of your SaaS signup-to-upgrade journey, done from the eyes of a real first-time trial user. It runs for as long as your trial runs, because the email that arrives on day nine decides as much as the first screen. You get a recorded walkthrough of the whole journey, a prioritized written list of conversion and activation friction, screenshots tied to each finding, copy/UX/lifecycle recommendations, and next steps ranked by impact and effort. Investment: $1,500, credited toward the Leak Audit if you move forward within 14 days. Details: https://signallifecycle.com/breakdown
+
+**The Leak Audit**: A 60-90 minute working session with your team, Product, Sales and CS in the room, preceded by a review of your conversion data, product analytics, and existing email sequences. Together we define the jobs your users hire the product for, the Aha moment for each job, the value path from signup to paid, and where users stall. You walk away with a documented JTBD + Aha map, prioritized stall points, and a clear picture of what to build next. Investment: $5,000 one-time. Timeline: workshop plus deliverable in 1-2 weeks.
 
 ## Content (Markdown)
 
@@ -47,6 +49,7 @@ For clean, readable versions of each page:
 
 - Website: https://signallifecycle.com
 - About: https://signallifecycle.com/about
+- Private Trial-to-Paid Breakdown: https://signallifecycle.com/breakdown
 - LinkedIn: https://www.linkedin.com/in/simonida-jovanovic-29778244
 
 ## Contact
