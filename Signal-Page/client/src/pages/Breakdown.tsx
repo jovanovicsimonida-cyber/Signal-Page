@@ -149,6 +149,9 @@ const claimSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Enter a valid email"),
   goal: z.string().optional(),
+  // Honeypot. Hidden from real users, so a filled value means automation. The
+  // server decides what to do with it; the client just carries it through.
+  website: z.string().optional(),
 });
 
 const inputClass =
@@ -566,6 +569,24 @@ export default function Breakdown() {
               className="bg-white p-6 sm:p-7 md:p-9 rounded-2xl shadow-xl shadow-black/5 border border-border border-l-2 border-l-accent"
             >
                 <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-5">
+                  {/*
+                    Honeypot. Positioned off-screen rather than display:none,
+                    because some bots skip hidden inputs. aria-hidden and
+                    tabIndex keep it away from screen readers and keyboard
+                    users, and autoComplete="off" stops browsers filling it in
+                    for a real visitor.
+                  */}
+                  <div aria-hidden="true" className="absolute left-[-9999px] top-auto w-px h-px overflow-hidden">
+                    <label htmlFor="website">Website</label>
+                    <input
+                      {...form.register("website")}
+                      id="website"
+                      type="text"
+                      tabIndex={-1}
+                      autoComplete="off"
+                    />
+                  </div>
+
                   <div className="space-y-2">
                     <label htmlFor="name" className="text-sm font-semibold text-foreground font-sans uppercase tracking-wider">Name</label>
                     <input {...form.register("name")} id="name" className={inputClass} placeholder="Jane Doe" />
