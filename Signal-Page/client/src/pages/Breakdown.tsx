@@ -53,6 +53,15 @@ const quotes = {
 
 type Quote = (typeof quotes)[keyof typeof quotes];
 
+// Only the engagements that were actually paid are emitted as Review structured
+// data. The others stay on the page as commentary: marking them up as customer
+// reviews would assert a client relationship that did not exist.
+const reviewQuotes = [quotes.echoChamber, quotes.natalie, quotes.supademo] as const;
+
+// One canonical id for the service node, so the reviews below can point at the
+// same entity instead of restating it.
+const SERVICE_ID = "https://signallifecycle.com/breakdown#service";
+
 function Testimonial({ q }: { q: Quote }) {
   return (
     <figure className="bg-white border border-border border-l-2 border-l-accent rounded-2xl p-6">
@@ -195,6 +204,7 @@ export default function Breakdown() {
             "@graph": [
               {
                 "@type": "Service",
+                "@id": SERVICE_ID,
                 name: "Private Trial-to-Paid Breakdown",
                 serviceType: "SaaS trial-to-paid onboarding diagnostic",
                 provider: {
@@ -211,6 +221,17 @@ export default function Breakdown() {
                   url: "https://signallifecycle.com/breakdown",
                 },
               },
+              ...reviewQuotes.map((q) => ({
+                "@type": "Review",
+                itemReviewed: { "@id": SERVICE_ID },
+                reviewBody: q.quote,
+                author: {
+                  "@type": "Person",
+                  name: q.name,
+                  jobTitle: q.title,
+                  worksFor: { "@type": "Organization", name: q.company },
+                },
+              })),
               {
                 "@type": "FAQPage",
                 mainEntity: faqs.map(({ q, a }) => ({
@@ -507,6 +528,21 @@ export default function Breakdown() {
               <p className="text-foreground font-sans text-sm leading-relaxed mt-5 border-l-2 border-l-accent pl-4 py-1">
                 And if you go that route within 14 days, the $1,500 you spent here is credited toward the Audit.
               </p>
+              {/* Deliberately a text link, not a button. This card describes the
+                  Audit and used to end without a way to reach it, and the page
+                  has no nav to fall back on. A second CTA next to the breakdown
+                  button would put a $5,000 decision in front of someone who came
+                  to make a $1,500 one, so this stays quiet enough to ignore.
+                  Plain anchor rather than wouter Link: a full load lets the
+                  browser handle the #audit hash itself. */}
+              <a
+                href="/#audit"
+                onClick={() => posthog.capture("breakdown_audit_link_clicked", { location: "go_further_card" })}
+                className="inline-flex items-center gap-1.5 mt-5 text-sm font-sans font-medium text-muted-foreground underline underline-offset-4 decoration-border hover:text-foreground hover:decoration-foreground transition-colors"
+              >
+                See what the full Audit covers
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </section>

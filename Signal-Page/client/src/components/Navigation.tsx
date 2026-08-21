@@ -25,18 +25,24 @@ export function Navigation() {
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             <button
               onClick={() => scrollToSection('framework')}
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
             >
               Framework
             </button>
+            <Link
+              href="/breakdown"
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
+            >
+              Trial Breakdown
+            </Link>
             <button
               onClick={() => scrollToSection('audit')}
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
             >
-              Start Here
+              The Leak Audit
             </button>
             <Link
               href="/about"
@@ -73,11 +79,18 @@ export function Navigation() {
           >
             Framework
           </button>
+          <Link
+            href="/breakdown"
+            onClick={() => setMobileOpen(false)}
+            className="block text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans py-2"
+          >
+            Trial Breakdown
+          </Link>
           <button
             onClick={() => scrollToSection('audit')}
             className="block w-full text-left text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans py-2"
           >
-            Start Here
+            The Leak Audit
           </button>
           <Link
             href="/about"
