@@ -25,18 +25,12 @@ export function Navigation() {
           </div>
 
           {/* Desktop nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6 lg:gap-8">
             <button
               onClick={() => scrollToSection('framework')}
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
             >
               Framework
-            </button>
-            <button
-              onClick={() => scrollToSection('audit')}
-              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
-            >
-              Start Here
             </button>
             <Link
               href="/breakdown"
@@ -44,6 +38,12 @@ export function Navigation() {
             >
               Trial Breakdown
             </Link>
+            <button
+              onClick={() => scrollToSection('audit')}
+              className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
+            >
+              The Leak Audit
+            </button>
             <Link
               href="/about"
               className="text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans"
@@ -79,12 +79,6 @@ export function Navigation() {
           >
             Framework
           </button>
-          <button
-            onClick={() => scrollToSection('audit')}
-            className="block w-full text-left text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans py-2"
-          >
-            Start Here
-          </button>
           <Link
             href="/breakdown"
             onClick={() => setMobileOpen(false)}
@@ -92,6 +86,12 @@ export function Navigation() {
           >
             Trial Breakdown
           </Link>
+          <button
+            onClick={() => scrollToSection('audit')}
+            className="block w-full text-left text-sm font-medium text-foreground/80 hover:text-foreground transition-colors font-sans py-2"
+          >
+            The Leak Audit
+          </button>
           <Link
             href="/about"
             onClick={() => setMobileOpen(false)}
