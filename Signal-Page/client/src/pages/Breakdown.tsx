@@ -528,6 +528,21 @@ export default function Breakdown() {
               <p className="text-foreground font-sans text-sm leading-relaxed mt-5 border-l-2 border-l-accent pl-4 py-1">
                 And if you go that route within 14 days, the $1,500 you spent here is credited toward the Audit.
               </p>
+              {/* Deliberately a text link, not a button. This card describes the
+                  Audit and used to end without a way to reach it, and the page
+                  has no nav to fall back on. A second CTA next to the breakdown
+                  button would put a $5,000 decision in front of someone who came
+                  to make a $1,500 one, so this stays quiet enough to ignore.
+                  Plain anchor rather than wouter Link: a full load lets the
+                  browser handle the #audit hash itself. */}
+              <a
+                href="/#audit"
+                onClick={() => posthog.capture("breakdown_audit_link_clicked", { location: "go_further_card" })}
+                className="inline-flex items-center gap-1.5 mt-5 text-sm font-sans font-medium text-muted-foreground underline underline-offset-4 decoration-border hover:text-foreground hover:decoration-foreground transition-colors"
+              >
+                See what the full Audit covers
+                <ArrowRight className="w-3.5 h-3.5" />
+              </a>
             </div>
           </div>
         </section>
