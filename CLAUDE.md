@@ -53,12 +53,26 @@ The `signal.` text logo **must always use Playfair Display** (the display/serif 
 
 `leak-finder/index.html` (and any future static tool pages) use `w.document.write('...')` with **single-quoted** JS strings. Inserting single quotes inside those strings breaks the JavaScript entirely — a silent parse error that kills all interactivity on the page (clicks stop working, nothing runs).
 
+This is not hypothetical. It shipped in `c7a7307` (23 March 2026), where a quoted
+font name ended a `document.write` string early and left the live leak finder with
+dead answer buttons until it was spotted.
+
+### The build enforces this now
+
+`scripts/check-inline-scripts.mjs` compiles every inline script in `dist/public`
+and parses every JSON-LD block. `npm run build` fails if any of them are broken,
+so this class of bug can no longer reach production. Run it on its own with
+`npm run check:html` (needs a build first).
+
+The rules below still apply. A red build is slower than writing it correctly, and
+the check is a backstop rather than a substitute for knowing the hazard.
+
 ### Rules
 
 1. **Never use single quotes inside a `w.document.write('...')` call.** This includes CSS values like `font-family:'Playfair Display',serif`.
 2. **Multi-word font names in these strings** must be written without quotes: `font-family:Playfair Display,serif`. CSS parsers accept this in inline `style` attributes.
 3. **Before editing any line inside a `document.write()`**, check the outer quote style (single or double) and ensure your additions don't use the same quote character unescaped.
-4. **After any edit to a static HTML file with JS**, mentally trace whether the change touches a JS string literal and could introduce a mismatched quote.
+4. **After any edit to a static HTML file with JS**, run `npm run check:html` rather than reading the change back and hoping.
 
 ---
 
