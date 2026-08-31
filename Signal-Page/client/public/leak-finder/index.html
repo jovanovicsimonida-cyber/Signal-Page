@@ -332,7 +332,7 @@
   <!-- INTRO SPLIT -->
   <!-- INTRO VIDEO -->
   <div class="intro-video">
-    <video src="leak_finder_intro.mp4" poster="leak_finder_thumbnail.png" controls playsinline style="width:100%;height:100%;display:block;"></video>
+    <video id="intro-video" src="leak_finder_intro.mp4" poster="leak_finder_thumbnail.png" controls playsinline style="width:100%;height:100%;display:block;"></video>
   </div>
 
   <!-- HOW TO -->
@@ -355,7 +355,7 @@
       <div class="how-num">3</div>
       <div class="how-text">
         <strong>Read your result</strong>
-        <span>Your score unlocks a gate-by-gate breakdown at the bottom.</span>
+        <span id="how-step-3-copy">Your score unlocks a gate-by-gate breakdown at the bottom.</span>
       </div>
     </div>
   </div>
@@ -509,8 +509,8 @@
     <div style="background:var(--white);border:1px solid var(--border);border-radius:10px;padding:1.25rem 1.5rem;display:flex;flex-direction:column;align-items:center;gap:0.75rem;text-align:center;">
       <p style="font-size:15px;font-weight:700;color:var(--black);font-family:'Playfair Display',serif;">Get the full gate-by-gate breakdown</p>
       <p style="font-size:13px;color:var(--muted);font-weight:300;max-width:420px;line-height:1.55;">Detailed diagnosis and specific next steps for each gate, formatted to save and share with your team.</p>
-      <button onclick="showGate()" style="background:var(--black);color:var(--off-white);border:none;border-radius:8px;padding:13px 32px;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Get my full breakdown &rarr;</button>
-      <p style="font-size:11px;color:#aaa8a3;">No spam. Unsubscribe anytime.</p>
+      <button id="rp-cta" onclick="showGate()" style="background:var(--black);color:var(--off-white);border:none;border-radius:8px;padding:13px 32px;font-size:14px;font-weight:700;font-family:'DM Sans',sans-serif;cursor:pointer;transition:opacity 0.15s;" onmouseover="this.style.opacity='0.85'" onmouseout="this.style.opacity='1'">Get my full breakdown &rarr;</button>
+      <p id="rp-microcopy" style="font-size:11px;color:#aaa8a3;">No spam. Unsubscribe anytime.</p>
     </div>
   </div>
 
@@ -545,6 +545,24 @@
   const A = {};
   var gateShown = false;
   const gates = { 1:['a1','a2','a3'], 2:['r1','r2','r3'], 3:['u1','u2','u3'] };
+
+  // OUTREACH VARIANT
+  // Cold outreach email 3 links here with ?k=<key>. Those readers already gave
+  // me their address, so the email gate has nothing left to collect and only
+  // costs a step. The key also swaps the intro video for a cut that says why
+  // there is no gate. Everything else is shared with the public page, so the
+  // questions, the scoring and the diagnoses cannot drift between audiences.
+  // Obscurity, not access control: the plain URL stays gated, but the source
+  // of this page is readable either way. That is fine for what it protects.
+  var OUTREACH_KEY = 'invited-7k2f';
+  // Point these two at the outreach cut once it is recorded. Until then the
+  // link works and simply plays the existing intro.
+  var OUTREACH_VIDEO = 'leak_finder_intro.mp4';
+  var OUTREACH_POSTER = 'leak_finder_thumbnail.png';
+  var isOutreach = false;
+  try {
+    isOutreach = new URLSearchParams(window.location.search).get('k') === OUTREACH_KEY;
+  } catch (e) {}
 
   // ── COMBINATION-BASED SCORING ──────────────────────────────────────────────
   // Each gate returns an object: { combo, tier }
@@ -715,6 +733,11 @@
   }
 
   function showGate() {
+    if (isOutreach) {
+      posthog.capture('leak_finder_results_opened_ungated');
+      showResults();
+      return;
+    }
     if (localStorage.getItem('lf_submitted')) {
       posthog.capture('leak_finder_results_reopened');
       showResults();
@@ -867,6 +890,31 @@
     w.document.write('</body></html>');
     w.document.close();
   }
+
+  // Runs last, once every element above exists. Kept in one block so the
+  // difference between the two audiences is readable in one place rather
+  // than hidden across the markup.
+  (function applyVariant() {
+    // Stamped on every event from this session, so outreach traffic can be
+    // split out in PostHog instead of muddying the public tool's numbers.
+    posthog.register({ lf_variant: isOutreach ? 'outreach' : 'organic' });
+    if (!isOutreach) return;
+
+    var video = document.getElementById('intro-video');
+    if (video) {
+      video.src = OUTREACH_VIDEO;
+      video.poster = OUTREACH_POSTER;
+    }
+    // Nothing is unlocked on this version, so the instruction should not say so.
+    var step3 = document.getElementById('how-step-3-copy');
+    if (step3) step3.textContent = 'Your full breakdown opens straight away. No email needed.';
+    var microcopy = document.getElementById('rp-microcopy');
+    if (microcopy) microcopy.style.display = 'none';
+    var cta = document.getElementById('rp-cta');
+    if (cta) cta.innerHTML = 'Open my full breakdown &rarr;';
+
+    posthog.capture('leak_finder_outreach_visit');
+  })();
 </script>
 </body>
 </html>
