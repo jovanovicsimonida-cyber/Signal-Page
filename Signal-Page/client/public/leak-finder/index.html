@@ -585,109 +585,115 @@
     isOutreach = new URLSearchParams(window.location.search).get('k') === OUTREACH_KEY;
   } catch (e) {}
 
-  // ── COMBINATION-BASED SCORING ──────────────────────────────────────────────
-  // Each gate returns an object: { combo, tier }
-  // tier: 'g' = solid, 'y' = gaps, 'r' = needs work  (used for badge + card color)
-  // combo: 1-4 maps to a specific diagnosis
-
+  // -- DEPENDENCY-CHAIN SCORING -----------------------------------------------
+  // Each gate is a chain: you cannot measure an Aha you have not defined, and
+  // you cannot trigger on a stall point you cannot see. The diagnosis is keyed
+  // to the FIRST link that is not green, so it only ever asserts things the
+  // visitor actually said.
+  //
+  // The previous version fell through to a catch-all combo, which told 28 of
+  // the 81 gate outcomes something they had contradicted in their own answers.
+  // Gate 2 was worst: someone answering no to behavior-based triggers was told
+  // "you can reach them when it happens" in 19 of 27 cases.
+  //
+  // link: 1-3 = first non-green question, 0 = all green.
+  // tier: worst answer in the gate, so the badge still reflects severity.
   function diagnose(gn) {
-    const a1=A.a1, a2=A.a2, a3=A.a3;
-    const r1=A.r1, r2=A.r2, r3=A.r3;
-    const u1=A.u1, u2=A.u2, u3=A.u3;
-
-    if (gn == 1) {
-      // Combo 1: no definition at all
-      if (a1 === 'r') return { combo:1, tier:'r' };
-      // Combo 2: definition exists (g/y) but measurement is weak
-      if ((a1==='g'||a1==='y') && (a2==='r'||a2==='y')) return { combo:2, tier:'y' };
-      // Combo 3: defined and measurable but value happens too late
-      if ((a1==='g'||a1==='y') && (a2==='g'||a2==='y') && (a3==='r'||a3==='y')) return { combo:3, tier:'y' };
-      // Combo 4: solid, all three green, or definition+measurement green with timing green
-      if (a1==='g' && a2==='g' && a3==='g') return { combo:4, tier:'g' };
-      // Fallback: any remaining mix with yellows = gaps exist
-      return { combo:3, tier:'y' };
-    }
-
-    if (gn == 2) {
-      // Combo 1: nothing at all, no visibility into stall points
-      if (r1==='r') return { combo: (r2==='r' && r3==='r') ? 1 : 2, tier: (r2==='r' && r3==='r') ? 'r' : 'y' };
-      // Combo 3: know stall points (g/y), but help path or triggers are weak
-      if ((r2==='r'||r2==='y'||r3==='r'||r3==='y')) return { combo:3, tier:'y' };
-      // Combo 4: solid, all three green
-      if (r1==='g' && r2==='g' && r3==='g') return { combo:4, tier:'g' };
-      // Fallback: remaining mixes = gaps exist
-      return { combo:3, tier:'y' };
-    }
-
-    if (gn == 3) {
-      // Combo 1: nothing, no intent tracking and value/sequence both weak
-      if (u1==='r' && (u2==='r'||u2==='y') && (u3==='r'||u3==='y')) return { combo:1, tier:'r' };
-      // Combo 2: intent not tracked but paid value is clear
-      if ((u1==='r'||u1==='y') && u2==='g') return { combo:2, tier:'y' };
-      // Combo 3: intent tracked but paid value fuzzy or sequence is generic
-      if ((u2==='r'||u2==='y'||u3==='r'||u3==='y')) return { combo:3, tier:'y' };
-      // Combo 4: solid, all three green
-      if (u1==='g' && u2==='g' && u3==='g') return { combo:4, tier:'g' };
-      // Fallback: remaining mixes = gaps exist
-      return { combo:3, tier:'y' };
-    }
+    var qs = gates[gn];
+    for (var i = 0; i < qs.length; i++) if (!A[qs[i]]) return null;
+    var link = 0;
+    for (var j = 0; j < qs.length; j++) { if (A[qs[j]] !== 'g') { link = j + 1; break; } }
+    var vals = qs.map(function(q) { return A[q]; });
+    var tier = vals.indexOf('r') > -1 ? 'r' : (vals.indexOf('y') > -1 ? 'y' : 'g');
+    return { link: link, tier: tier };
   }
 
-  // ── RESULT COPY ────────────────────────────────────────────────────────────
-  const results = {
+  // One block per question, so a visitor gets steps for every link that is weak,
+  // in dependency order, and never for one that is already fine.
+  const stepBlocks = {
     1: {
-      1: { title: 'No value path defined',
-           hint: 'Everything downstream is guesswork until you define what Aha actually looks like for your users and which 2-5 actions predict payment.',
-           body: 'You do not have a defined Aha moment and you cannot measure whether users are reaching value at all. Your emails are firing without a map. <strong>This is the root problem - everything downstream is guesswork until you define what Aha actually looks like for your users</strong> and which 2-5 actions predict payment.',
-           steps: ['Write one sentence describing what a user has achieved when your product has worked for them.', 'List the 2 to 5 in-product actions that sentence requires. Those are your Aha events.', 'Instrument those events before you touch a single email.'] },
-      2: { title: 'Defined but not measurable',
-           hint: 'Until you can measure Aha completion and timing, you will not know if your sequence changes are doing anything.',
-           body: 'You have a sense of what value looks like but you cannot see whether users are actually reaching it, or when. You are optimising based on assumption. <strong>Until you can measure Aha completion and timing, you will not know if your sequence changes are doing anything.</strong>',
-           steps: ['Turn your Aha definition into tracked events, one per required action.', 'Timestamp the first completion of each, so you can measure how long value takes to arrive.', 'Pull 90 days of trials, split them by whether they hit Aha, and compare conversion. That gap is your baseline.'] },
-      3: { title: 'Value path is clear but too slow',
-           hint: 'The problem is not your emails. The path to value is too long or too hard.',
-           body: 'You know what Aha looks like and you can track it - but most users are not reaching it until late in the trial, or not at all. <strong>The problem is not your emails. The path to value is too long or too hard.</strong> Shortening the route to Aha will do more than any sequence rewrite.',
-           steps: ['Write down every step between signup and Aha, in order.', 'Mark which steps are required before a user can get value and which could wait until after.', 'Move or cut the ones that can wait, then measure time to Aha again in two weeks.'] },
-      4: { title: 'Value path is solid',
-           hint: 'That is the foundation everything builds on. If conversion is still soft, the leak is downstream.',
-           body: 'Your Aha path is defined, measurable, and happening early. <strong>That is the foundation everything builds on.</strong> If conversion is still soft, the leak is downstream - check stall recovery and upgrade moment.',
-           steps: ['Keep measuring time to Aha as onboarding changes. If it slips, you will see it here before you see it in conversion.'] },
+      1: ['Write one sentence describing what a user has achieved when your product has worked for them.',
+          'List the 2 to 5 in-product actions that sentence requires. Those are your Aha events.'],
+      2: ['Turn your Aha definition into tracked events, one per required action.',
+          'Timestamp the first completion of each, so you can measure how long value takes to arrive.',
+          'Pull 90 days of trials, split them by whether they hit Aha, and compare conversion. That gap is your baseline.'],
+      3: ['Write down every step between signup and Aha, in order.',
+          'Mark which steps are required before a user can get value and which could wait until after.',
+          'Move or cut the ones that can wait, then measure time to Aha again in two weeks.'],
+      0: ['Keep measuring time to Aha as onboarding changes. If it slips, you will see it here before you see it in conversion.']
     },
     2: {
-      1: { title: 'No recovery layer at all',
-           hint: 'Start here before anything else: identify your top 2-3 stall points. That is the foundation everything else builds on.',
-           body: 'You do not know where users drop off, you cannot trigger anything based on behavior, and when someone stalls there is nothing waiting for them. <strong>Start here before anything else: identify your top 2-3 stall points.</strong> That is the foundation everything else builds on.',
-           steps: ['Take your last 100 trials and find the 2 or 3 steps where most users stop.', 'Set one trigger on the biggest one: started the step, did not finish within X hours.', 'Send one message to that trigger. One action, one link, one reply-to address.'] },
-      2: { title: 'Tooling without a map',
-           hint: 'Your recovery sequences are guessing at the right moment. Map your stall points first, then your existing tooling will actually work.',
-           body: 'You have the capability to send behavior-based messages and you have a help path - but you are firing them without knowing where users actually stall. <strong>Your recovery sequences are guessing at the right moment.</strong> Map your stall points first, then your existing tooling will actually work.',
-           steps: ['Pull your stall points from product analytics before you touch the sequences.', 'Rewire your existing messages to fire from those stall points instead of from day counts.', 'Suppress anyone who has already completed the step. A wrong-moment message costs more than silence.'] },
-      3: { title: 'Users are nudged but not rescued',
-           hint: 'The fix is in the message itself: one specific action, a shortcut or template, and a way to get human help if they are still stuck.',
-           body: 'You know where users drop off and you can reach them when it happens - but when the message arrives, the next step is not clear or easy enough. <strong>The fix is in the message itself:</strong> one specific action, a shortcut or template, and a way to get human help if they are still stuck.',
-           steps: ['Rewrite each nudge so it names exactly one action.', 'Add the shortest path to that action: a template, a sample project, a prefilled example.', 'Give people who are still stuck after the shortcut a way to reach a human.'] },
-      4: { title: 'Stall recovery is working',
-           hint: 'If conversion is still soft, the issue is likely upstream in your Aha path, or downstream in the upgrade moment.',
-           body: 'You know where users drop off, you have behavior-based triggers, and there is a help path when they stall. <strong>If conversion is still soft, the issue is likely upstream in your Aha path, or downstream in the upgrade moment.</strong>',
-           steps: ['Watch whether your stall points move as the product changes. Recovery built for friction from last quarter stops working without telling you.'] },
+      1: ['Take your last 100 trials and find the 2 or 3 steps where most users start something and do not finish it.',
+          'Write those stall points down in order of how many users they cost you.'],
+      2: ['Set a trigger on your biggest stall point: started the step, did not finish within X hours.',
+          'Suppress anyone who has already completed the step. A wrong-moment message costs more than silence.'],
+      3: ['Rewrite each nudge so it names exactly one action.',
+          'Add the shortest path to that action: a template, a sample project, a prefilled example.',
+          'Give people who are still stuck after the shortcut a way to reach a human.'],
+      0: ['Watch whether your stall points move as the product changes. Recovery built for friction from last quarter stops working without telling you.']
     },
     3: {
-      1: { title: 'Upgrade mechanism is missing',
-           hint: 'Upgrades are happening by accident. The first fix is making the paid value proposition explicit before you ever ask anyone to upgrade.',
-           body: 'You cannot see who is ready to buy, the paid value is not obvious inside the product, and your trial-end sequence is not tied to where users actually are. <strong>Upgrades are happening by accident.</strong> The first fix is making the paid value proposition explicit - users should feel the gap between free and paid before you ever ask them to upgrade.',
-           steps: ['Write what a paid account does that a trial cannot, in one sentence, in the words your users use.', 'Put that difference in front of users at the moment they hit the limit.', 'Ship one trial-end sequence before you build anything else.'] },
-      2: { title: 'Missing early buyers',
-           hint: 'Pricing page visits, usage limits hit, teammates invited: these are people raising their hand right now. Without tracking intent signals you are leaving early upgrades on the table.',
-           body: 'You know what you are selling and you have a trial-end sequence - but you are missing the users who are ready to upgrade before the trial ends. Pricing page visits, usage limits hit, teammates invited: <strong>these are people raising their hand right now.</strong> Without tracking intent signals you are leaving early upgrades on the table.',
-           steps: ['Track three intent signals: pricing page visits, usage limits hit, teammates invited.', 'Trigger an upgrade path the moment one fires, rather than waiting for trial end.', 'Reference what they were doing when it fired. Intent messages convert when they are specific.'] },
-      3: { title: 'Intent is there, conversion is not',
+      1: ['Track three intent signals: pricing page visits, usage limits hit, teammates invited.',
+          'Trigger an upgrade path the moment one fires, rather than waiting for trial end.'],
+      2: ['Write what a paid account does that a trial cannot, in one sentence, in the words your users use.',
+          'Put that difference in front of users at the moment they hit the limit.'],
+      3: ['Split your trial-end sequence by whether the user reached Aha.',
+          'For users who reached value, lead with what they lose. For users who did not, lead with getting them there.',
+          'Reference the specific thing they built or achieved in the trial. Generic renewal copy reads as a bill.'],
+      0: ['Keep the trial-end split tied to real behavior as your activation path changes.']
+    }
+  };
+
+  function stepsFor(gn) {
+    var qs = gates[gn], out = [];
+    qs.forEach(function(q, i) { if ((A[q] || 'g') !== 'g') out = out.concat(stepBlocks[gn][i + 1]); });
+    return out.length ? out : stepBlocks[gn][0];
+  }
+
+  // -- RESULT COPY ------------------------------------------------------------
+  // Keyed by first broken link, so nothing here can contradict the answers.
+  const results = {
+    1: {
+      1: { title: 'Aha is not defined clearly enough',
+           hint: 'Everything downstream is guesswork until you can say what a user has achieved when your product has worked for them.',
+           body: 'You cannot yet say, in one sentence, what a user has achieved when your product has worked for them. <strong>Everything downstream is guesswork until that sentence exists</strong>, because your emails are firing without a map of where they are meant to lead.' },
+      2: { title: 'Defined but not measurable',
+           hint: 'Until you can measure Aha completion and timing, you will not know if your sequence changes are doing anything.',
+           body: 'You have a sense of what value looks like but you cannot see whether users are reaching it, or when. You are optimising based on assumption. <strong>Until you can measure Aha completion and timing, you will not know if your sequence changes are doing anything.</strong>' },
+      3: { title: 'Value path is clear but too slow',
+           hint: 'The path to value is too long or too hard. Shortening it will do more than any sequence rewrite.',
+           body: 'You know what Aha looks like and you can track it, but most users are not reaching it until late in the trial, or at all. <strong>The path to value is too long or too hard.</strong> Shortening the route to Aha will do more than any sequence rewrite.' },
+      0: { title: 'Value path is solid',
+           hint: 'That is the foundation everything builds on. If conversion is still soft, the leak is downstream.',
+           body: 'Your Aha path is defined, measurable, and happening early. <strong>That is the foundation everything builds on.</strong> If conversion is still soft, the leak is downstream, in stall recovery or the upgrade moment.' }
+    },
+    2: {
+      1: { title: 'You cannot see where users stop',
+           hint: 'Start here before anything else. Recovery built without stall points is aimed at nothing in particular.',
+           body: 'You cannot name the specific steps where users start something and do not finish it. <strong>Start here before anything else.</strong> Any recovery you build without knowing your stall points is aimed at nothing in particular.' },
+      2: { title: 'You know where users stall but cannot act on it',
+           hint: 'The map is there and the mechanism is missing. Behavior triggers are what turn a stall point into a recovery.',
+           body: 'You know where users drop off, but you cannot fire a message from that behavior. <strong>The map is there and the mechanism is missing.</strong> Behavior triggers are what turn a stall point into a recovery.' },
+      3: { title: 'Users are nudged but not rescued',
+           hint: 'The fix is in the message itself: one specific action, a shortcut or template, and a way to get human help if they are still stuck.',
+           body: 'You know where users drop off and you can reach them when it happens, but when the message arrives the next step is not clear or easy enough. <strong>The fix is in the message itself:</strong> one specific action, a shortcut or template, and a way to get human help if they are still stuck.' },
+      0: { title: 'Stall recovery is working',
+           hint: 'If conversion is still soft, the issue is likely upstream in your Aha path, or downstream in the upgrade moment.',
+           body: 'You know where users drop off, you have behavior-based triggers, and there is a help path when they stall. <strong>If conversion is still soft, the issue is likely upstream in your Aha path, or downstream in the upgrade moment.</strong>' }
+    },
+    3: {
+      1: { title: 'Upgrade intent is invisible',
+           hint: 'Pricing page visits, usage limits hit, teammates invited: these are people raising their hand right now.',
+           body: 'You cannot see who is ready to buy. Pricing page visits, usage limits hit, teammates invited: <strong>these are people raising their hand right now</strong>, and without tracking them you are leaving early upgrades on the table.' },
+      2: { title: 'Paid value is not obvious enough to close',
+           hint: 'Users should feel the gap between free and paid before you ever ask them to upgrade.',
+           body: 'You can see who is ready to buy, but what they get by paying is not obvious when they arrive at the decision. <strong>Users should feel the gap between free and paid before you ever ask them to upgrade.</strong>' },
+      3: { title: 'Your trial-end sequence treats everyone the same',
            hint: 'Matching the message to what the user has actually done in the product is what converts intent into payment.',
-           body: 'You can see who is ready to buy but the conversion mechanism is not tight enough to close them. Either the paid value is not obvious enough when they arrive at the decision, or your trial-end sequence treats everyone the same. <strong>Matching the message to what the user has actually done in the product</strong> is what converts intent into payment.',
-           steps: ['Split your trial-end sequence by whether the user reached Aha.', 'For users who reached value, lead with what they lose. For users who did not, lead with getting them there.', 'Reference the specific thing they built or achieved in the trial. Generic renewal copy reads as a bill.'] },
-      4: { title: 'Upgrade moment is clean',
+           body: 'You can see who is ready to buy and your paid value is clear, but everyone reaches the end of the trial to the same message. <strong>Matching the message to what the user has actually done in the product</strong> is what converts intent into payment.' },
+      0: { title: 'Upgrade moment is clean',
            hint: 'If conversion is still lower than it should be, the upstream gates are likely where the problem lives.',
-           body: 'Intent signals are tracked, paid value is clear, and your trial-end sequence is contextual. <strong>If conversion is still lower than it should be, the upstream gates are likely where the problem lives.</strong>',
-           steps: ['Keep the trial-end split tied to real behavior as your activation path changes.'] },
+           body: 'Intent signals are tracked, paid value is clear, and your trial-end sequence is contextual. <strong>If conversion is still lower than it should be, the upstream gates are likely where the problem lives.</strong>' }
     }
   };
 
@@ -720,7 +726,7 @@
     var html = [1,2,3].map(function(gn) {
       var d = diagnose(gn);
       if (!d) return '';
-      var res = results[gn][d.combo];
+      var res = results[gn][d.link];
       return '<div style="background:#fff;border:1px solid #e0ddd6;border-top:3px solid ' + tierBorder[d.tier] + ';border-radius:8px;padding:14px 16px">' +
         '<div style="font-size:10px;text-transform:uppercase;letter-spacing:0.1em;color:#888580;font-weight:600;margin-bottom:6px">Gate 0' + gn + ': ' + gateNames[gn] + '</div>' +
         '<div style="display:inline-block;font-size:10px;font-weight:700;letter-spacing:0.06em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:' + tierBg[d.tier] + ';color:' + tierColor[d.tier] + ';margin-bottom:8px">' + tierLabel[d.tier] + '</div>' +
@@ -843,7 +849,7 @@
       var gn = i + 1;
       var d = diagnose(gn);
       if (!d) return '';
-      var res = results[gn][d.combo];
+      var res = results[gn][d.link];
       var tierLabel = { g:'Solid', y:'Gaps exist', r:'Needs work' };
       var tierBg = { g:'#e8f5ee', y:'#fffbe6', r:'#fdeee8' };
       var tierColor = { g:'#2d6a4f', y:'#b89200', r:'#b5451b' };
@@ -873,9 +879,9 @@
       var gn = i + 1;
       var d = diagnose(gn);
       if (!d) return '';
-      var res = results[gn][d.combo];
+      var res = results[gn][d.link];
       var accent = { g:'#4caf82', y:'#ffd231', r:'#e05252' };
-      var items = (res.steps || []).map(function(step, n) {
+      var items = stepsFor(gn).map(function(step, n) {
         return '<li style="display:flex;gap:10px;margin-bottom:9px;align-items:flex-start">' +
           '<div style="flex-shrink:0;width:17px;height:17px;border-radius:50%;background:#232323;color:#fff;font-size:9px;font-weight:700;display:flex;align-items:center;justify-content:center;line-height:1">' + (n + 1) + '</div>' +
           '<div style="font-size:11px;color:#4a4845;line-height:1.55">' + step + '</div>' +
