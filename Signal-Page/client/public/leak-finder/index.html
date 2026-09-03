@@ -555,9 +555,12 @@
   // Obscurity, not access control: the plain URL stays gated, but the source
   // of this page is readable either way. That is fine for what it protects.
   var OUTREACH_KEY = 'invited-7k2f';
-  // Point these two at the outreach cut once it is recorded. Until then the
-  // link works and simply plays the existing intro.
-  var OUTREACH_VIDEO = 'leak_finder_intro.mp4';
+  // The outreach cut. Same 1200px container as the public video, so it is
+  // encoded at 1080p: the 4K master is three times wider than anything the
+  // page can display, and would only cost the viewer bandwidth.
+  // The poster is the shared brand card rather than a frame grab, because
+  // that is what the public video uses and a still would look out of place.
+  var OUTREACH_VIDEO = 'leak_finder_intro_ungated.mp4';
   var OUTREACH_POSTER = 'leak_finder_thumbnail.png';
   var isOutreach = false;
   try {
